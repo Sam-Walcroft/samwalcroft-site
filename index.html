@@ -11,45 +11,204 @@
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   :root{
     --paper:#f4efe4;
-    --ink:#1a1712;
-    --ink-soft:#4a453d;
+    --ink:#100e0c;
     --serif:'Libre Caslon Display', Georgia, serif;
     --sans:'Inter Tight', system-ui, sans-serif;
   }
-  html,body{height:100%;}
+  html{scroll-behavior:smooth;}
   body{
-    background:var(--paper); color:var(--ink); font-family:var(--sans);
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+
+  .grain{
+    position:fixed; inset:0; z-index:80; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* full-page liquid fill overlays, one per identity */
+  .page-fill{
+    position:fixed; inset:0; z-index:5; pointer-events:none;
+    clip-path:circle(0px at var(--mx,50%) var(--my,50%));
+    transition:clip-path 1s cubic-bezier(.16,1,.3,1);
+  }
+  .page-fill.active{ clip-path:circle(160vmax at var(--mx,50%) var(--my,50%)); }
+  .fill-narrative{ background:radial-gradient(circle at 30% 30%, #c17158, #5a2333 78%); }
+  .fill-commercial{ background:radial-gradient(circle at 70% 70%, #b7c191, #454f34 78%); }
+
+  /* ===== SECTION 1: NAME ===== */
+  .intro{
+    height:130vh; position:relative;
+  }
+  .intro-inner{
+    position:sticky; top:0; height:100vh;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:32px;
+    text-align:center; z-index:2;
   }
-  .name{font-family:var(--serif); font-size:clamp(2.4rem,7vw,4.2rem); letter-spacing:0.02em;}
-  .sub{margin:14px 0 64px; color:var(--ink-soft); font-size:0.95rem; letter-spacing:0.04em;}
-  .doors{display:flex; gap:24px; flex-wrap:wrap; justify-content:center;}
-  .door{
-    width:260px; padding:40px 28px; border:1px solid rgba(26,23,18,0.2);
-    display:flex; flex-direction:column; gap:10px; align-items:center;
-    transition:background 0.25s, border-color 0.25s;
+  .intro-inner::before{
+    content:''; position:absolute; inset:0; z-index:-1;
+    background:radial-gradient(circle at 50% 45%, rgba(193,113,88,0.10), transparent 60%);
   }
-  .door:hover{background:var(--ink); border-color:var(--ink);}
-  .door:hover .door-title, .door:hover .door-desc{color:var(--paper);}
-  .door-title{font-family:var(--serif); font-style:italic; font-size:1.4rem; transition:color 0.25s;}
-  .door-desc{font-size:0.82rem; color:var(--ink-soft); transition:color 0.25s;}
-  footer{margin-top:64px; font-size:0.75rem; color:var(--ink-soft);}
+  .intro-name{
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2.6rem, 9vw, 6.5rem); letter-spacing:0.01em;
+    will-change:transform, opacity;
+  }
+  .intro-sub{
+    margin-top:18px; font-size:0.76rem; letter-spacing:0.34em; text-transform:uppercase; opacity:0.55;
+    will-change:transform, opacity;
+  }
+  .scroll-cue{
+    position:absolute; bottom:48px; font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase;
+    opacity:0.45; animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(9px);} }
+
+  /* ===== SECTION 2: CHOICE ===== */
+  .choice-wrap{
+    position:relative; z-index:6; min-height:70vh;
+    display:flex; align-items:center; justify-content:center;
+    background:transparent;
+    padding:40px 24px;
+  }
+  .choice{
+    display:flex; gap:6vw; flex-wrap:wrap; justify-content:center; align-items:center;
+  }
+
+  .btn{
+    position:relative;
+    width:min(38vw, 380px); height:min(46vw, 440px);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; text-decoration:none; color:inherit;
+    will-change:transform, opacity;
+  }
+  .btn-ring{
+    position:absolute; inset:0; border-radius:6px;
+    border:1px solid rgba(26,23,18,0.22);
+    transition:border-color 0.4s ease, background 0.4s ease;
+  }
+  .btn:hover .btn-ring{ border-color:rgba(26,23,18,0.5); background:rgba(26,23,18,0.03); }
+
+  .btn-content{ position:relative; z-index:10; text-align:center; padding:32px; }
+  .btn-eyebrow{ font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; opacity:0.55; margin-bottom:18px; }
+  .btn-title{ font-family:var(--serif); font-style:italic; font-size:clamp(1.7rem,3.4vw,2.4rem); line-height:1.2; margin-bottom:16px; }
+  .btn-desc{
+    font-size:0.86rem; line-height:1.65; opacity:0; max-height:0; overflow:hidden;
+    transition:opacity 0.4s ease 0.3s, max-height 0.4s ease 0.3s;
+  }
+  .btn:hover .btn-desc{ opacity:0.92; max-height:120px; }
+  .btn-cta{
+    display:inline-block; margin-top:20px; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
+    border-bottom:1px solid currentColor; padding-bottom:3px; opacity:0.9;
+  }
+
+  footer{
+    position:relative; z-index:10;
+    text-align:center; padding:26px; font-size:0.63rem; letter-spacing:0.16em; text-transform:uppercase; opacity:0.45;
+    background:transparent;
+  }
+
+  @media(max-width:760px){
+    .choice{ flex-direction:column; gap:28px; }
+    .btn{ width:82vw; height:66vw; max-height:380px; }
+  }
 </style>
 </head>
 <body>
-  <div class="name">Sam Walcroft</div>
-  <div class="sub">Film Director &amp; Artist &nbsp;·&nbsp; Videographer &amp; Marketer</div>
-  <div class="doors">
-    <a class="door" href="/director/">
-      <div class="door-title">Narrative Work</div>
-      <div class="door-desc">Film direction, writing &amp; artistic practice</div>
+
+<div class="grain"></div>
+<div class="page-fill fill-narrative" id="fillNarrative"></div>
+<div class="page-fill fill-commercial" id="fillCommercial"></div>
+
+<section class="intro">
+  <div class="intro-inner">
+    <div class="intro-name" id="introName">Sam Walcroft</div>
+    <div class="intro-sub" id="introSub">Brisbane, Australia</div>
+    <div class="scroll-cue">Scroll ↓</div>
+  </div>
+</section>
+
+<section class="choice-wrap">
+  <div class="choice">
+    <a class="btn" href="/director/" id="btnNarrative">
+      <div class="btn-ring"></div>
+      <div class="btn-content">
+        <div class="btn-eyebrow">Narrative</div>
+        <div class="btn-title">Film Director<br>&amp; Artist</div>
+        <div class="btn-desc">Directing, writing, and cinematography across genre film, music video, and poetry.</div>
+        <div class="btn-cta">Enter →</div>
+      </div>
     </a>
-    <a class="door" href="/commercial/">
-      <div class="door-title">Commercial &amp; Marketing Work</div>
-      <div class="door-desc">Videography, social media &amp; client projects</div>
+    <a class="btn" href="/commercial/" id="btnCommercial">
+      <div class="btn-ring"></div>
+      <div class="btn-content">
+        <div class="btn-eyebrow">Commercial</div>
+        <div class="btn-title">Videographer<br>&amp; Marketer</div>
+        <div class="btn-desc">Video production, social strategy, and brand-building for clients and businesses.</div>
+        <div class="btn-cta">Enter →</div>
+      </div>
     </a>
   </div>
-  <footer>Brisbane, Australia</footer>
+</section>
+
+<footer>Choose a world to enter</footer>
+
+<script>
+  const introSection = document.querySelector('.intro');
+  const introName = document.getElementById('introName');
+  const introSub = document.getElementById('introSub');
+  const choiceWrap = document.querySelector('.choice-wrap');
+  const buttons = document.querySelectorAll('.btn');
+
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  function onScroll(){
+    // name grows and lifts away over the intro section's scroll range
+    const introRect = introSection.getBoundingClientRect();
+    const introRange = introSection.offsetHeight - window.innerHeight;
+    const introProgress = clamp(-introRect.top / introRange, 0, 1);
+
+    const scale = 1 + introProgress * 1.6;
+    const lift = introProgress * -220;
+    const fade = 1 - clamp(introProgress * 1.3, 0, 1);
+    introName.style.transform = `translateY(${lift}px) scale(${scale})`;
+    introName.style.opacity = fade;
+    introSub.style.transform = `translateY(${lift * 0.6}px)`;
+    introSub.style.opacity = fade;
+
+    // buttons grow from small to full size as the choice section arrives
+    const choiceRect = choiceWrap.getBoundingClientRect();
+    const choiceProgress = clamp((window.innerHeight - choiceRect.top) / (window.innerHeight * 0.9), 0, 1);
+    const btnScale = 0.55 + choiceProgress * 0.45;
+    buttons.forEach(btn => {
+      btn.style.transform = `scale(${btnScale})`;
+      btn.style.opacity = choiceProgress;
+    });
+
+    requestAnimationFrame(onScroll);
+  }
+  requestAnimationFrame(onScroll);
+
+  // liquid fill covers the WHOLE PAGE, originating from the cursor
+  function wireFill(btn, fillEl){
+    btn.addEventListener('mousemove', (e) => {
+      fillEl.style.setProperty('--mx', e.clientX + 'px');
+      fillEl.style.setProperty('--my', e.clientY + 'px');
+    });
+    btn.addEventListener('mouseenter', (e) => {
+      fillEl.style.setProperty('--mx', e.clientX + 'px');
+      fillEl.style.setProperty('--my', e.clientY + 'px');
+      fillEl.classList.add('active');
+    });
+    btn.addEventListener('mouseleave', () => {
+      fillEl.classList.remove('active');
+    });
+  }
+  wireFill(document.getElementById('btnNarrative'), document.getElementById('fillNarrative'));
+  wireFill(document.getElementById('btnCommercial'), document.getElementById('fillCommercial'));
+</script>
+
 </body>
 </html>
