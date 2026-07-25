@@ -240,20 +240,20 @@
   <div class="reel-hint">Scroll to browse</div>
 
   <div class="reel-stage-item active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
-    <video autoplay muted loop playsinline src="videos/good-intns-club.mp4"></video>
+    <video autoplay muted loop playsinline preload="auto" poster="images/good-intns-club.webp" src="videos/good-intns-club.mp4"></video>
   </div>
-  <div class="reel-stage-item" data-idx="1" style="background:linear-gradient(160deg,#3f6b52,#152820);">
-    <video autoplay muted loop playsinline src="videos/tpd.mp4"></video>
+  <div class="reel-stage-item" data-idx="1" style="background-image:url('images/tpd.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/tpd.webp" src="videos/tpd.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="2" style="background-image:url('images/wine.webp');">
-    <video autoplay muted loop playsinline src="videos/wine.mp4"></video>
+    <video autoplay muted loop playsinline preload="auto" poster="images/wine.webp" src="videos/wine.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);"></div>
-  <div class="reel-stage-item" data-idx="4" style="background:linear-gradient(160deg,#2d6b74,#0f2a30);">
-    <video autoplay muted loop playsinline src="videos/fingertips.mp4"></video>
+  <div class="reel-stage-item" data-idx="4" style="background-image:url('images/fingertips.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/fingertips.webp" src="videos/fingertips.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="5" style="background-image:url('images/nffcc.webp');">
-    <video autoplay muted loop playsinline src="videos/nffcc.mp4"></video>
+    <video autoplay muted loop playsinline preload="auto" poster="images/nffcc.webp" src="videos/nffcc.mp4"></video>
   </div>
 
   <div class="reel-stage-info">
@@ -268,7 +268,7 @@
       <div class="film-thumb is-active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
         <div class="film-thumb-cap"><div class="fnum">I</div><div class="fname">The Good Intns Club</div><div class="fcat">Ads &amp; Commercial</div></div>
       </div>
-      <div class="film-thumb" data-idx="1" style="background:linear-gradient(160deg,#3f6b52,#152820);">
+      <div class="film-thumb" data-idx="1" style="background-image:url('images/tpd.webp');">
         <div class="film-thumb-cap"><div class="fnum">II</div><div class="fname">TPD Claim Support</div><div class="fcat">Ads &amp; Commercial</div></div>
       </div>
       <div class="film-thumb" data-idx="2" style="background-image:url('images/wine.webp');">
@@ -277,7 +277,7 @@
       <div class="film-thumb" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);">
         <div class="film-thumb-cap"><div class="fnum">IV</div><div class="fname">Live Orchestra EP</div><div class="fcat">Music Video</div></div>
       </div>
-      <div class="film-thumb" data-idx="4" style="background:linear-gradient(160deg,#2d6b74,#0f2a30);">
+      <div class="film-thumb" data-idx="4" style="background-image:url('images/fingertips.webp');">
         <div class="film-thumb-cap"><div class="fnum">V</div><div class="fname">Fingertips</div><div class="fcat">Music Video</div></div>
       </div>
       <div class="film-thumb" data-idx="5" style="background-image:url('images/nffcc.webp');">
@@ -446,7 +446,7 @@
     { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor' }
   ];
   const IMG_SRC = [
-    'images/good-intns-club.webp', null, 'images/wine.webp', null, null,
+    'images/good-intns-club.webp', 'images/tpd.webp', 'images/wine.webp', null, 'images/fingertips.webp',
     'images/nffcc.webp'
   ];
   const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52'];
@@ -477,22 +477,27 @@
   function lerp(a, b, t){ return a + (b - a) * t; }
   function lerpColor(c1, c2, t){ return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)]; }
 
+  let lastActiveIdx = -1;
   function setActive(idx){
-    stageItems.forEach(el => {
-      const isActive = Number(el.dataset.idx) === idx;
-      el.classList.toggle('active', isActive);
-      const vid = el.querySelector('video');
-      if (vid) {
-        if (isActive) { vid.play().catch(()=>{}); }
-        else { vid.pause(); }
-      }
-    });
-    thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
-    const d = DATA[idx];
-    stageNum.textContent = ROMAN[idx];
-    stageCat.textContent = d.cat;
-    stageTitle.textContent = d.title;
-    stageRole.textContent = d.role;
+    const changed = idx !== lastActiveIdx;
+    if (changed) {
+      stageItems.forEach(el => {
+        const isActive = Number(el.dataset.idx) === idx;
+        el.classList.toggle('active', isActive);
+        const vid = el.querySelector('video');
+        if (vid) {
+          if (isActive) { vid.play().catch(()=>{}); }
+          else { vid.pause(); }
+        }
+      });
+      thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
+      const d = DATA[idx];
+      stageNum.textContent = ROMAN[idx];
+      stageCat.textContent = d.cat;
+      stageTitle.textContent = d.title;
+      stageRole.textContent = d.role;
+      lastActiveIdx = idx;
+    }
   }
   thumbs.forEach(thumb => {
     thumb.addEventListener('click', () => setActive(Number(thumb.dataset.idx)));
