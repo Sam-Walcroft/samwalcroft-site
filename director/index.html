@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sam Walcroft — Film Director &amp; Artist</title>
-<meta name="description" content="Sam Walcroft is a Brisbane-based film director and artist working in science fiction, gothic fantasy and romantic drama. Selected works include Celestial Bodies and Folklore.">
-<meta property="og:title" content="Sam Walcroft — Film Director &amp; Artist">
-<meta property="og:description" content="Brisbane-based film director and artist. Narrative film, music video direction, and poetry.">
+<title>Sam Walcroft — Videographer &amp; Marketer</title>
+<meta name="description" content="Sam Walcroft is a Brisbane videographer and marketer offering video production, social media strategy, SEO and paid social advertising for brands and businesses.">
+<meta property="og:title" content="Sam Walcroft — Videographer &amp; Marketer">
+<meta property="og:description" content="Brisbane video production, social strategy, SEO and paid social for brands and businesses.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://samwalcroft.com.au/director/">
+<meta property="og:url" content="https://samwalcroft.com.au/commercial/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -52,422 +52,307 @@
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   :root{
-    --paper:#f4efe4; --ink:#161310; --ink-soft:#5c5648;
-    --wine:#5a2333; --terracotta:#c17158; --mustard:#c9a227;
-    --serif:'Libre Caslon Display', Georgia, serif;
+    --paper:#f8f3ea; --ink:#201d19; --ink-soft:#7d7466; --olive:#4a5c3a; --line:rgba(32,29,25,0.12);
+    --accent:#c1663a; --terracotta:#c1663a; --gold:#d9a548; --teal:#2d6b74; --wine:#8a4560;
+    --display:'Libre Caslon Display', Georgia, serif;
     --sans:'Inter Tight', system-ui, sans-serif;
   }
   html{scroll-behavior:smooth; cursor:none;}
-  body{ font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.7; cursor:none; }
+  body{ font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.65; cursor:none; }
   a, button{ cursor:none; }
   a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 44px;}
+  @media(max-width:700px){ .wrap{padding:0 24px;} }
+  em{ font-style:italic; color:var(--accent); }
 
   #cursor{
     position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
     background:var(--ink); pointer-events:none; z-index:200; transform:translate(-50%,-50%);
     transition:width 0.2s, height 0.2s, background 0.2s;
   }
-  #cursor.hover{ width:46px; height:46px; background:var(--terracotta); }
+  #cursor.hover{ width:44px; height:44px; background:var(--accent); }
   @media(max-width:900px){ #cursor{ display:none; } html,body{ cursor:auto; } a,button{ cursor:pointer; } }
-  .wrap{max-width:1220px; margin:0 auto; padding:0 44px;}
-  @media(max-width:700px){ .wrap{padding:0 24px;} }
 
-  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 44px; }
-  .nav-name{ font-family:var(--serif); font-size:1.05rem; }
-  .nav-links{ display:none; gap:30px; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 44px; position:relative; z-index:10; }
+  .nav-name{ font-family:var(--display); font-style:italic; font-size:1.05rem; }
+  .nav-links{ display:none; gap:30px; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; }
   @media(min-width:860px){ .nav-links{ display:flex; } }
-  .nav-links a:hover{ color:var(--terracotta); }
-  .nav-social{ display:flex; gap:16px; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; }
+  .nav-links a{ position:relative; }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--ink); transition:width 0.3s; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ padding:9px 20px; border:1px solid var(--ink); border-radius:999px; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; }
+  .nav-cta:hover{ background:var(--ink); color:var(--paper); }
 
-  /* ===== HERO — statement, not just a name ===== */
-  .hero{ padding:70px 0 90px; }
-  .hero-index{ font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracotta); margin-bottom:26px; }
-  .hero-statement{
-    font-family:var(--serif); font-weight:400; line-height:1.05;
-    font-size:clamp(2.6rem, 6.4vw, 5.4rem); max-width:15ch;
+  /* ===== HERO — statement + showreel CTA ===== */
+  .hero{ padding:70px 0 60px; text-align:center; }
+  .hero-index{ font-size:0.72rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:28px; }
+  .hero-flow{
+    font-family:var(--display); line-height:1.14;
+    font-size:clamp(2.2rem, 5.4vw, 4.2rem); max-width:20ch; margin:0 auto 40px;
   }
-  .hero-statement em{ font-style:italic; color:var(--wine); }
-  .clip-media{
-    font-style:italic;
-    display:inline-block;
-    padding-right:0.12em;
-    background:linear-gradient(120deg, #c17158, #7a2333, #c9a227, #c17158);
-    background-size:300% 300%;
-    animation:clipShift 8s ease-in-out infinite;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    /* Swap this gradient for a <video> layer (see .clip-media-video) once real footage is ready */
+  .hero-flow .thin{ font-weight:400; color:var(--ink-soft); }
+  .btn-reel{
+    display:inline-flex; align-items:center; gap:14px; padding:16px 30px 16px 22px;
+    border:1px solid var(--ink); border-radius:999px; font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase;
+    transition:background 0.3s, color 0.3s;
   }
-  @keyframes clipShift{ 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
-  .clip-media-video{ position:relative; display:inline-block; }
-  .clip-media-video video{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-1;
+  .btn-reel:hover{ background:var(--ink); color:var(--paper); }
+  .btn-reel .play-dot{ width:34px; height:34px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.7rem; }
+
+  /* ===== SHOWREEL — full-bleed cinematic panel ===== */
+  .showreel{ padding:0 0 130px; }
+  .showreel-frame{
+    aspect-ratio:21/9; border-radius:4px; overflow:hidden; position:relative;
   }
-  .clip-media-video .clip-text{
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    background:linear-gradient(120deg, #c17158, #7a2333);
-    font-style:italic;
+  @media(max-width:760px){ .showreel-frame{ aspect-ratio:4/5; } }
+  .showreel-frame video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .showreel-caption{
+    position:absolute; bottom:28px; left:28px; color:#f4efe4; z-index:2;
+    font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.8;
   }
-  .hero-byline{ margin-top:30px; font-size:0.95rem; color:var(--ink-soft); max-width:46ch; }
 
-  /* ===== CRAFT / SKILLS ===== */
-  .craft{ padding:20px 0 90px; }
-  .craft-grid{ display:grid; grid-template-columns:1fr; gap:2px; background:rgba(22,19,16,0.1); }
-  @media(min-width:700px){ .craft-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media(min-width:1080px){ .craft-grid{ grid-template-columns:repeat(3,1fr); } }
-  .craft-item{ background:var(--paper); padding:32px; }
-  .craft-title{ font-family:var(--serif); font-style:italic; font-size:1.2rem; margin-bottom:10px; }
-  .craft-desc{ font-size:0.87rem; color:var(--ink-soft); }
-  .craft-desc em{ font-style:italic; color:var(--ink); }
+  /* ===== MARQUEE ===== */
+  .marquee{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 0; overflow:hidden; }
+  .marquee-track{ display:flex; gap:60px; white-space:nowrap; animation:scroll 26s linear infinite; width:max-content; }
+  .marquee-track span{ font-family:var(--display); font-style:italic; font-size:1.1rem; color:var(--ink-soft); }
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
-  /* ===== NUMBERED WORK INDEX ===== */
-  section{ padding:0; }
-  .work-section{ padding:70px 0 90px; }
-  .section-label{ font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracotta); margin-bottom:40px; }
+  section{ padding:130px 0; }
+  .eyebrow{ font-size:0.72rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:20px; }
+  .section-title{ font-family:var(--display); font-style:italic; font-size:clamp(2rem,4.4vw,3rem); max-width:18ch; }
 
-  .work-row{
-    display:grid; grid-template-columns:1fr; gap:28px;
-    padding:44px 0; border-top:1px solid rgba(22,19,16,0.14);
-    align-items:center;
+  /* ===== FULL-SCREEN WORK VIEWER — scroll-driven, vertical bar always visible during scroll ===== */
+  #page-bg{ position:fixed; inset:0; z-index:-3; background:var(--paper); }
+  .reel-scroll{ height:525vh; position:relative; }
+  .reel-viewer{ height:100vh; position:sticky; top:0; overflow:hidden; color:#f4efe4; }
+  .reel-stage-item{
+    position:absolute; inset:0; background-size:cover; background-position:center;
+    opacity:0; transition:opacity 0.6s ease; pointer-events:none;
   }
-  .work-row:last-child{ border-bottom:1px solid rgba(22,19,16,0.14); }
-  @media(min-width:820px){ .work-row{ grid-template-columns:0.55fr 1fr 1fr; gap:40px; } }
-
-  .work-num{ font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--ink-soft); }
-  .work-media{
-    aspect-ratio:4/3; border-radius:2px;
-    background:linear-gradient(135deg, #d8cbb3, #b7a688);
+  .reel-stage-item.active{ opacity:1; pointer-events:auto; }
+  .reel-stage-item video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .reel-stage-item::after{
+    content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6), transparent 45%);
   }
-  .work-media.wine{ background:linear-gradient(135deg, #7a3a48, #3c1a24); }
-  .work-media.olive{ background:linear-gradient(135deg, #6b7a4a, #333d1f); }
-  .work-media.terracotta{ background:linear-gradient(135deg, #cf8567, #7a3a26); }
+  .reel-stage-info{ position:absolute; left:44px; bottom:44px; z-index:3; }
+  .reel-stage-info .num{ font-size:0.75rem; letter-spacing:0.2em; opacity:0.65; margin-bottom:10px; }
+  .reel-stage-info .cat{ font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; opacity:0.7; margin-bottom:8px; }
+  .reel-stage-info .title{ font-family:var(--display); font-style:italic; font-size:clamp(1.8rem,3.6vw,2.8rem); }
+  .reel-stage-info .role{ font-size:0.85rem; opacity:0.75; margin-top:6px; }
 
-  .work-info .tag{ font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px; }
-  .work-info .title{ font-family:var(--serif); font-style:italic; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:12px; }
-  .work-info .role{ font-size:0.85rem; color:var(--ink-soft); margin-bottom:18px; }
-  .work-cta{ font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:3px; display:inline-block; }
-  .work-cta:hover{ color:var(--wine); }
-
-  /* ===== STATEMENT / ABOUT ===== */
-  .statement{ background:var(--ink); color:var(--paper); padding:110px 0; text-align:center; }
-  .statement-text{ font-family:var(--serif); font-style:italic; font-size:clamp(1.7rem,4vw,2.8rem); max-width:22ch; margin:0 auto; line-height:1.35; }
-  .statement-sub{ margin-top:32px; max-width:56ch; margin-left:auto; margin-right:auto; opacity:0.75; font-size:0.95rem; }
-
-  /* ===== ABOUT DETAIL ===== */
-  .about{ padding:100px 0; display:grid; grid-template-columns:1fr; gap:48px; }
-  @media(min-width:860px){ .about{ grid-template-columns:0.85fr 1.4fr; } }
-  .about-photo{ aspect-ratio:4/5; object-fit:cover; filter:grayscale(1); display:block; }
-  .about-body p{ margin-bottom:20px; max-width:58ch; color:var(--ink-soft); }
-  .about-body em{ color:var(--ink); font-family:var(--serif); }
-
-  /* ===== CONTACT ===== */
-  .contact{ background:linear-gradient(160deg,#5a2333,#2a0f17); color:var(--paper); padding:100px 0; }
-  .contact-grid{ display:grid; grid-template-columns:1fr; gap:40px; }
-  @media(min-width:860px){ .contact-grid{ grid-template-columns:1fr 1fr; } }
-  .contact-title{ font-family:var(--serif); font-size:clamp(2.2rem,4vw,3rem); font-style:italic; margin-bottom:14px; }
-  form{ display:flex; flex-direction:column; gap:16px; max-width:440px; }
-  .form-row{ display:flex; gap:16px; }
-  form input, form textarea{
-    background:transparent; border:none; border-bottom:1px solid rgba(244,239,228,0.4);
-    color:var(--paper); font-family:var(--sans); padding:10px 2px; font-size:0.95rem; width:100%;
+  .reel-filmstrip{
+    position:absolute; left:0; top:0; height:100%; width:230px; z-index:52; overflow:visible;
+    opacity:0; pointer-events:none;
+    transform:translateX(-40px); transition:opacity 0.35s ease, transform 0.35s ease;
   }
-  form label{ font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.65; }
-  form button{
-    align-self:flex-start; margin-top:10px; padding:13px 32px; border-radius:999px;
-    background:var(--paper); color:var(--ink); border:none; font-size:0.82rem; letter-spacing:0.05em; cursor:pointer;
+  .reel-filmstrip.visible{ opacity:1; transform:translateX(0); }
+  .film-track{
+    display:flex; flex-direction:column; width:100%; height:100%;
+    background:rgba(10,9,7,0.85); backdrop-filter:blur(8px);
   }
-  .contact-social{ display:flex; gap:22px; margin-top:26px; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; }
+  .film-thumb{
+    flex:1 1 0; min-height:0; width:100%; background-size:cover; background-position:center;
+    position:relative; cursor:none;
+    transform-origin:0% 50%;
+    transition:transform 0.35s ease, flex-grow 0.35s ease;
+  }
+  .film-thumb.is-current{ transform:scale(1.3); z-index:2; flex-grow:1.4; box-shadow:0 20px 40px rgba(0,0,0,0.5); }
+  .film-thumb-cap{
+    position:absolute; left:0; right:0; bottom:0; padding:10px;
+    background:linear-gradient(to top, rgba(0,0,0,0.8), transparent 70%);
+    font-size:0.64rem; letter-spacing:0.05em;
+  }
+  .film-thumb-cap .fnum{ opacity:0.65; margin-bottom:2px; }
+  .film-thumb-cap .fname{ font-family:var(--display); font-style:italic; font-size:0.8rem; line-height:1.15; }
+  .film-thumb-cap .fcat{ opacity:0.6; text-transform:uppercase; letter-spacing:0.08em; font-size:0.58rem; margin-top:2px; }
 
-  footer{ background:var(--ink); color:var(--paper); padding-top:70px; }
+  .reel-hint{
+    position:absolute; left:44px; top:44px; z-index:3; font-size:0.7rem; letter-spacing:0.16em;
+    text-transform:uppercase; opacity:0.6;
+  }
+
+  /* ===== CASE STUDY — closing narrative, not a stat table ===== */
+  .case-study{ color:var(--paper); }
+  .case-study .eyebrow{ color:#b9c79a; }
+  .case-grid{ display:grid; grid-template-columns:1fr; gap:56px; }
+  @media(min-width:900px){ .case-grid{ grid-template-columns:1fr 1fr; } }
+  .case-visual{ aspect-ratio:4/5; border-radius:4px; background:linear-gradient(160deg,#3f6b52,#152820); }
+  .case-client{ font-family:var(--display); font-style:italic; font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:22px; }
+  .case-block{ margin-bottom:26px; }
+  .case-block-label{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.55; margin-bottom:8px; }
+  .case-block-body{ font-size:0.95rem; opacity:0.85; max-width:52ch; }
+  .case-metrics{ display:flex; gap:36px; flex-wrap:wrap; margin-top:32px; padding-top:28px; border-top:1px solid rgba(244,239,228,0.15); }
+  .case-metric-num{ font-family:var(--display); font-size:1.8rem; color:#d9a548; }
+  .case-metric-label{ font-size:0.68rem; opacity:0.6; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; }
+
+  /* ===== CTA BAND ===== */
+  .cta-band{ color:var(--ink); text-align:center; border-top:1px solid var(--line); }
+  .cta-title{ font-family:var(--display); font-style:italic; font-size:clamp(2rem,5vw,3.4rem); max-width:16ch; margin:0 auto 30px; }
+  .btn-magnetic{
+    display:inline-block; padding:16px 40px; border:1px solid var(--ink); border-radius:999px;
+    font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase; transition:background 0.3s, color 0.3s;
+  }
+  .btn-magnetic:hover{ background:var(--ink); color:var(--paper); }
+
+  footer{ padding-top:70px; }
   .footer-top{ display:flex; flex-wrap:wrap; gap:48px; justify-content:space-between; padding-bottom:50px; }
-  .footer-brand-name{ font-family:var(--serif); font-style:italic; font-size:1.6rem; margin-bottom:10px; }
-  .footer-brand-loc{ font-size:0.8rem; opacity:0.6; }
-  .footer-col-title{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:16px; }
-  .footer-col a{ display:block; font-size:0.88rem; margin-bottom:10px; opacity:0.85; }
-  .footer-col a:hover{ color:var(--terracotta); }
-  .footer-stripe{
-    padding:16px 44px; display:flex; justify-content:space-between; align-items:center;
-    background:repeating-linear-gradient(45deg, var(--mustard) 0 18px, var(--ink) 18px 36px);
-  }
-  .footer-stripe .footer-name{ background:var(--paper); color:var(--ink); padding:8px 20px; font-family:var(--serif); font-size:0.9rem; }
-  .footer-stripe .footer-social{ display:flex; gap:14px; background:var(--paper); padding:8px 16px; border-radius:999px; font-size:0.8rem; }
-
-  /* ===== WORK MASONRY (media-forward) ===== */
-  .work-masonry{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  @media(max-width:760px){ .work-masonry{ grid-template-columns:1fr; } }
-  .work-tile{ aspect-ratio:4/3; border-radius:3px; position:relative; }
-  .work-tile.tile-1{ grid-row:span 2; aspect-ratio:auto; }
-  .work-info-overlay{
-    position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; justify-content:flex-end;
-    padding:24px; background:linear-gradient(to top, rgba(0,0,0,0.65), transparent 60%);
-    color:#f4efe4; pointer-events:none;
-  }
-  .work-info-overlay .tag{ font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; opacity:0.85; margin-bottom:6px; }
-  .work-info-overlay .title{ font-family:var(--serif); font-style:italic; font-size:1.4rem; margin-bottom:4px; }
-  .work-info-overlay .role{ font-size:0.78rem; opacity:0.75; }
-
-  /* ===== PHOTOGRAPHY GALLERY ===== */
-  .photo-gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-  @media(max-width:760px){ .photo-gallery{ grid-template-columns:repeat(2,1fr); } }
-  .photo-tile{ aspect-ratio:1; border-radius:3px; cursor:none; transition:transform 0.4s ease; }
-  .photo-tile:hover{ transform:scale(0.97); }
-
-  /* ===== FIXED BACKGROUND LAYER (swaps per hovered work item) ===== */
-  #work-bg{
-    position:fixed; inset:0; z-index:-1; opacity:0; transition:opacity 0.6s ease, background 0.6s ease;
-    pointer-events:none;
-  }
-  #work-bg.active{ opacity:0.16; }
-
-  /* ===== GRID / LIST TOGGLE ===== */
-  .view-toggle{ display:flex; gap:18px; margin-bottom:32px; }
-  .view-toggle button{
-    background:none; border:none; font-family:var(--sans); font-size:0.72rem; letter-spacing:0.2em;
-    text-transform:uppercase; color:var(--ink-soft); cursor:none; padding:0; border-bottom:1px solid transparent;
-  }
-  .view-toggle button.active{ color:var(--ink); border-color:var(--ink); }
-  .work-list-view{ display:none; }
-  .work-list-view.active{ display:block; }
-  .work-masonry.hidden{ display:none; }
-
-  .list-row{
-    display:grid; grid-template-columns:1fr; gap:8px; padding:26px 0; border-top:1px solid rgba(22,19,16,0.14);
-  }
-  .list-row:last-child{ border-bottom:1px solid rgba(22,19,16,0.14); }
-  @media(min-width:700px){ .list-row{ grid-template-columns:70px 1fr 1fr; align-items:baseline; } }
-  .list-row .tag{ font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); }
-  .list-row .title{ font-family:var(--serif); font-style:italic; font-size:1.5rem; }
-  .list-row .role{ font-size:0.82rem; color:var(--ink-soft); }
-
-  /* ===== SCROLL SHINE INDICATOR ===== */
-  .scroll-indicator{
-    position:fixed; bottom:26px; right:32px; z-index:60; text-align:right;
-    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
-  }
-  .scroll-shine{
-    background:linear-gradient(to right, var(--ink-soft) 40%, var(--terracotta) 50%, var(--ink-soft) 60%);
-    background-size:200% auto; background-clip:text; -webkit-background-clip:text; color:transparent;
-    -webkit-text-fill-color:transparent;
-    animation:shine 2.4s linear infinite;
-  }
-  @keyframes shine{ to{ background-position:-200% center; } }
-  .scroll-pct{ margin-top:4px; color:var(--ink-soft); font-size:0.7rem; }
-  @media(max-width:760px){ .scroll-indicator{ display:none; } }
-
-  /* ===== CINEMATIC SCROLL REEL — panels stacked in one spot, revealed from behind ===== */
-  .reel-scroll{ height:750vh; position:relative; }
-  .reel-label{ position:absolute; top:36px; left:0; right:0; z-index:5; }
-  .reel-label .section-label{ color:#f4efe4; mix-blend-mode:difference; }
-  .reel-stage{
-    height:100vh; position:sticky; top:0; overflow:hidden;
-  }
-
-  /* scroll-triggered entrance for the About section */
-  .reveal{ opacity:0; transform:translateY(48px); transition:opacity 0.9s ease, transform 0.9s ease; }
-  .reveal.in-view{ opacity:1; transform:translateY(0); }
-  #page-bg{
-    position:fixed; inset:0; z-index:-3; background:var(--paper);
-  }
-  .reel-wash{ position:absolute; inset:-15%; z-index:0; filter:blur(100px); }
-  .reel-blob{ position:absolute; width:44vw; height:44vw; border-radius:50%; opacity:0.3; transition:opacity 0.25s linear, background 0.4s linear; }
-  .reel-panel{
-    position:absolute; inset:0; z-index:1;
-    display:flex; align-items:center; justify-content:center;
-    will-change:transform, opacity;
-  }
-  .reel-media{
-    width:min(58vw, 820px); aspect-ratio:16/9; border-radius:4px;
-    display:flex; align-items:flex-end; padding:36px; color:#f4efe4;
-    background-size:cover; background-position:center; text-decoration:none;
-  }
-  .reel-media .tag{ font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.75; margin-bottom:6px; }
-  .reel-media .title{ font-family:var(--serif); font-style:italic; font-size:2rem; }
+  .footer-col-title{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; }
+  .footer-col a{ display:block; font-size:0.88rem; margin-bottom:10px; color:var(--ink-soft); }
+  .footer-col a:hover{ color:var(--accent); }
+  .footer-bottom{ border-top:1px solid var(--line); padding:20px 0 30px; font-size:0.7rem; color:var(--ink-soft); text-align:center; letter-spacing:0.08em; text-transform:uppercase; }
 </style>
 </head>
 <body>
 
 <div id="cursor"></div>
-<div id="work-bg"></div>
 <div id="page-bg"></div>
 
 <nav>
   <a href="./" class="nav-name">Sam Walcroft</a>
   <div class="nav-links">
-    <a href="#work">Showreel</a>
-    <a href="#work">My Works</a>
+    <a href="services.html">Services</a>
+    <a href="case-studies.html">Case Studies</a>
+    <a href="photography.html">Photography</a>
+    <a href="about.html">About</a>
   </div>
-  <div class="nav-social">
-    <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">IG</a>
-    <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.imdb.com/name/nm14596615/" target="_blank" rel="noopener">IMDb</a>
-  </div>
+  <a href="contact.html" class="nav-cta">Contact</a>
 </nav>
 
 <header class="hero wrap">
-  <div class="hero-index">Brisbane, Australia — Est. 2020</div>
-  <h1 class="hero-statement">Films about <span class="clip-media">love</span> the world refuses to allow.</h1>
-  <p class="hero-byline">Sam Walcroft is a director, writer, and cinematographer working in science fiction, gothic fantasy, and romantic drama — visual opulence and emotional severity in equal measure.</p>
+  <div class="hero-index">Videography &amp; Marketing — Brisbane</div>
+  <h1 class="hero-flow">Video, <em>strategy</em>, and growth <span class="thin">built around your brand, not a template.</span></h1>
+  <a class="btn-reel" href="#showreel" data-reel="true">
+    <span class="play-dot">►</span> Watch Showreel
+  </a>
 </header>
 
-<div class="reel-scroll" id="reel">
-  <div class="reel-label wrap">
-    <div class="section-label">My Work</div>
+<section class="showreel wrap" id="showreel">
+  <div class="showreel-frame media-card">
+    <video muted loop playsinline></video>
+    <div class="showreel-caption">Showreel — Ads, Music Videos &amp; Content</div>
   </div>
-  <div class="reel-stage">
-    <div class="reel-wash" id="reel-wash">
-      <div class="reel-blob" data-blob="0" style="left:8%; top:10%;"></div>
-      <div class="reel-blob" data-blob="1" style="right:8%; top:20%;"></div>
-      <div class="reel-blob" data-blob="2" style="left:15%; top:45%;"></div>
-      <div class="reel-blob" data-blob="3" style="right:15%; bottom:35%;"></div>
-      <div class="reel-blob" data-blob="4" style="left:20%; bottom:12%;"></div>
-      <div class="reel-blob" data-blob="5" style="right:12%; bottom:2%;"></div>
-    </div>
+</section>
 
-    <div class="reel-panel" data-img="images/celestial-bodies.webp">
-      <a class="reel-media" href="work/celestial-bodies.html" style="background-image:url('images/celestial-bodies.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Sci-Fi Romance</div><div class="title">Celestial Bodies</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-img="images/the-box.webp">
-      <a class="reel-media" href="work/the-box.html" style="background-image:url('images/the-box.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Short Film</div><div class="title">The Box</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-img="images/wine.webp">
-      <a class="reel-media" href="work/wine.html" style="background-image:url('images/wine.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Music Video</div><div class="title">Wine</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-bg-fallback="linear-gradient(160deg,#c9a227,#7a5f14)">
-      <a class="reel-media" href="work/live-orchestra-ep.html" style="background:linear-gradient(160deg,#c9a227,#7a5f14);">
-        <div><div class="tag">Music Video — 6 videos, one day</div><div class="title">Live Orchestra EP</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-bg-fallback="linear-gradient(160deg,#7a3a48,#33151c)">
-      <a class="reel-media" href="work/fingertips.html" style="background:linear-gradient(160deg,#7a3a48,#33151c);">
-        <div><div class="tag">Music Video</div><div class="title">Fingertips</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-img="images/the-hills.webp">
-      <a class="reel-media" href="work/the-hills.html" style="background-image:url('images/the-hills.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Narrative Short</div><div class="title">The Hills</div></div>
-      </a>
-    </div>
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Ads</span><span>Music Videos</span><span>Photography</span><span>Social Content</span><span>Brand Films</span>
+    <span>Ads</span><span>Music Videos</span><span>Photography</span><span>Social Content</span><span>Brand Films</span>
   </div>
 </div>
 
-<section class="about wrap reveal">
-  <img class="about-photo" src="images/headshot.webp" alt="Sam Walcroft portrait" style="width:100%; object-fit:cover;">
-  <div class="about-body">
-    <p>Sam Walcroft is a Brisbane-based filmmaker, writer, and director.</p>
-    <p><em>Sam makes films about love that the world refuses to allow.</em> Working in science fiction, gothic fantasy, and romantic drama, his work is defined by visual opulence, emotional severity, and a preoccupation with beauty under threat.</p>
-    <p>Born and raised in Brisbane, Queensland, Sam's filmmaking is rooted in the Australian landscape — its warmth, its isolation, its capacity to hold both tenderness and menace in the same frame. He shoots on cinema-grade formats with an emphasis on naturalistic light and rich colour, treating intimacy and violence with equal visual reverence.</p>
-    <p>His short <em>Celestial Bodies</em>, a science fiction romance set in 1950s rural Queensland, follows a farmer sheltering an alien with healing powers. When their hidden love is discovered, fear becomes violence — establishing Sam as a filmmaker unafraid to use genre to ask urgent, human questions.</p>
-    <p>He is also a poet, currently developing a manuscript for self-publication.</p>
+<div class="reel-scroll" id="reel-scroll">
+<section class="reel-viewer" id="work-viewer">
+  <div class="reel-hint">Scroll to browse</div>
+
+  <div class="reel-stage-item active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/good-intns-club.webp" src="videos/good-intns-club.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="1" style="background-image:url('images/tpd.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/tpd.webp" src="videos/tpd.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="2" style="background-image:url('images/wine.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/wine.webp" src="videos/wine.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);"></div>
+  <div class="reel-stage-item" data-idx="4" style="background-image:url('images/fingertips.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/fingertips.webp" src="videos/fingertips.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="5" style="background-image:url('images/nffcc.webp');">
+    <video autoplay muted loop playsinline preload="auto" poster="images/nffcc.webp" src="videos/nffcc.mp4"></video>
+  </div>
+
+  <div class="reel-stage-info">
+    <div class="num" id="stage-num">I</div>
+    <div class="cat" id="stage-cat">Ads &amp; Commercial</div>
+    <div class="title" id="stage-title">The Good Intns Club</div>
+    <div class="role" id="stage-role">TVC — Videographer</div>
+  </div>
+
+  <div class="reel-filmstrip" id="reel-filmstrip">
+    <div class="film-track" id="film-track">
+      <div class="film-thumb is-active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
+        <div class="film-thumb-cap"><div class="fnum">I</div><div class="fname">The Good Intns Club</div><div class="fcat">Ads &amp; Commercial</div></div>
+      </div>
+      <div class="film-thumb" data-idx="1" style="background-image:url('images/tpd.webp');">
+        <div class="film-thumb-cap"><div class="fnum">II</div><div class="fname">TPD Claim Support</div><div class="fcat">Ads &amp; Commercial</div></div>
+      </div>
+      <div class="film-thumb" data-idx="2" style="background-image:url('images/wine.webp');">
+        <div class="film-thumb-cap"><div class="fnum">III</div><div class="fname">Wine</div><div class="fcat">Music Video</div></div>
+      </div>
+      <div class="film-thumb" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);">
+        <div class="film-thumb-cap"><div class="fnum">IV</div><div class="fname">Live Orchestra EP</div><div class="fcat">Music Video</div></div>
+      </div>
+      <div class="film-thumb" data-idx="4" style="background-image:url('images/fingertips.webp');">
+        <div class="film-thumb-cap"><div class="fnum">V</div><div class="fname">Fingertips</div><div class="fcat">Music Video</div></div>
+      </div>
+      <div class="film-thumb" data-idx="5" style="background-image:url('images/nffcc.webp');">
+        <div class="film-thumb-cap"><div class="fnum">VI</div><div class="fname">Nanna Fitty's FCC</div><div class="fcat">Photography &amp; Content</div></div>
+      </div>
+    </div>
   </div>
 </section>
+</div>
 
-<section class="craft wrap">
-  <div class="section-label">Craft</div>
-  <div class="craft-grid">
-    <div class="craft-item">
-      <div class="craft-title">Directing &amp; Writing</div>
-      <div class="craft-desc">Narrative development and screenwriting through to on-set direction, across short film, feature development, and music video.</div>
+<section class="case-study">
+  <div class="wrap case-grid">
+    <div class="case-visual media-card">
+      <video muted loop playsinline></video>
     </div>
-    <div class="craft-item">
-      <div class="craft-title">Cinematography</div>
-      <div class="craft-desc">Shooting on the Blackmagic Cinema Camera 6K, with an emphasis on naturalistic light and considered composition.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Editing &amp; Colour</div>
-      <div class="craft-desc">Full post-production in Adobe Premiere Pro and DaVinci Resolve, including colour grading from raw footage to final grade.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">VFX &amp; Motion</div>
-      <div class="craft-desc">Medium-level visual effects in After Effects, built to serve the story rather than call attention to themselves.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Photography</div>
-      <div class="craft-desc">Portrait and on-set stills work, shot with the same eye for light and composition as the moving image.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Writing</div>
-      <div class="craft-desc">Screenwriting and poetry — a manuscript, <em>The Lonely Lover</em>, currently in development for self-publication.</div>
-    </div>
-  </div>
-</section>
-
-<section class="statement">
-  <div class="wrap">
-    <div class="statement-text">Beauty, filmed like it's already under threat.</div>
-    <div class="statement-sub">Currently developing Folklore, an Australian Gothic fantasy feature set in the Far North Queensland rainforest.</div>
-  </div>
-</section>
-
-<section class="contact">
-  <div class="wrap contact-grid">
     <div>
-      <div class="contact-title">Contact Me</div>
-      <p style="opacity:0.75; max-width:40ch;">For festival, collaboration, or representation enquiries.</p>
-    </div>
-    <div>
-      <form onsubmit="return false;">
-        <div class="form-row">
-          <div><label>First Name</label><input type="text"></div>
-          <div><label>Last Name</label><input type="text"></div>
-        </div>
-        <div><label>Email</label><input type="email"></div>
-        <div><label>Message</label><textarea rows="4"></textarea></div>
-        <button type="submit">Submit</button>
-      </form>
-      <div class="contact-social">
-        <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.imdb.com/name/nm14596615/" target="_blank" rel="noopener">IMDb</a>
+      <div class="eyebrow">Case Study</div>
+      <div class="case-client">TPD Claim Support</div>
+      <div class="case-block">
+        <div class="case-block-label">The Brief</div>
+        <div class="case-block-body">Own the full marketing stack for a Brisbane insurance claims specialist, end to end: video, brand voice, website, SEO and paid social, with no separate agency or specialist to hand off to.</div>
+      </div>
+      <div class="case-block">
+        <div class="case-block-label">The Approach</div>
+        <div class="case-block-body">Built the site's brand-first design in WordPress/Elementor plus custom code, wrote and shot the ad creative for distinct audience segments, and layered SEO and Meta Ads on top of that foundation rather than bolting them on separately.</div>
+      </div>
+      <div class="case-metrics">
+        <div><div class="case-metric-num">+270%</div><div class="case-metric-label">Search Visibility Growth</div></div>
+        <div><div class="case-metric-num">$0.37</div><div class="case-metric-label">Lowest CPC Achieved</div></div>
+        <div><div class="case-metric-num">Pos. 1–2</div><div class="case-metric-label">Brand Search Ranking</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap footer-top">
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-title">Let's build something that actually performs.</div>
+    <a class="btn-magnetic" href="contact.html">Start a Project</a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="footer-top">
     <div>
-      <div class="footer-brand-name">Sam Walcroft</div>
-      <div class="footer-brand-loc">Film Director &amp; Artist<br>Brisbane, Australia</div>
+      <div style="font-family:var(--display); font-style:italic; font-size:1.2rem; margin-bottom:8px;">Sam Walcroft</div>
+      <div style="color:var(--ink-soft); font-size:0.85rem;">Brisbane, Australia</div>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Selected Works</div>
-      <a href="work/celestial-bodies.html">Celestial Bodies</a>
-      <a href="work/the-box.html">The Box</a>
-      <a href="work/wine.html">Wine</a>
-      <a href="work/live-orchestra-ep.html">Live Orchestra EP</a>
-      <a href="work/fingertips.html">Fingertips</a>
-      <a href="work/the-hills.html">The Hills</a>
+      <div class="footer-col-title">Services</div>
+      <a href="services.html">Video Production</a>
+      <a href="services.html">Social Media Management</a>
+      <a href="services.html">SEO &amp; Web Development</a>
+      <a href="services.html">Paid Social &amp; Meta Ads</a>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Craft</div>
-      <a href="#work">Directing &amp; Writing</a>
-      <a href="#work">Cinematography</a>
-      <a href="#work">Editing &amp; Colour</a>
-      <a href="#work">VFX &amp; Motion</a>
-      <a href="#work">Photography</a>
+      <div class="footer-col-title">Work</div>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="photography.html">Photography</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Connect</div>
       <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://www.imdb.com/name/nm14596615/" target="_blank" rel="noopener">IMDb</a>
     </div>
   </div>
-  <div class="footer-stripe">
-    <div class="footer-name">Sam Walcroft</div>
-    <div class="footer-social">Film Director &amp; Artist</div>
-  </div>
+  <div class="footer-bottom">Sam Walcroft — Brisbane, Australia</div>
 </footer>
-
-<div class="scroll-indicator">
-  <div class="scroll-shine">Scroll</div>
-  <div class="scroll-pct" id="scroll-pct">0%</div>
-</div>
 
 <script>
 // Shared lightbox gallery — works for both director and commercial sites
@@ -554,62 +439,37 @@
 
 </script>
 <script>
-  initLightbox('.lb-work', [
-    { title:'Celestial Bodies', tag:'Director, Writer — Sci-Fi Romance', img:'images/celestial-bodies.webp' },
-    { title:'Wine', tag:'Director, Videographer — Music Video', img:'images/wine.webp' },
-    { title:'The Box', tag:'Director, Writer — Short Film', img:'images/the-box.webp' },
-    { title:'Live Orchestra EP', tag:'Director — 6 videos shot in one day', placeholderColor:'linear-gradient(160deg,#c9a227,#7a5f14)' },
-    { title:'Fingertips', tag:'Director, Editor, Colourist — Music Video', placeholderColor:'linear-gradient(160deg,#7a3a48,#33151c)' },
-    { title:'The Hills', tag:'Director, Videographer, Editor', img:'images/the-hills.webp' }
-  ]);
-  initLightbox('.lb-photo', [
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#8a3b52,#3c1a24)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#c9a227,#7a5f14)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#2f6b73,#12333a)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#5c6b3f,#28311a)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#cf8567,#7a3a26)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#7a3a48,#33151c)' }
-  ]);
   initHoverPreview('.media-card');
 
-  const cursor = document.getElementById('cursor');
-  window.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-  });
+  const ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
+  const DATA = [
+    { title:'The Good Intns Club', cat:'Ads & Commercial', role:'TVC — Videographer' },
+    { title:'TPD Claim Support', cat:'Ads & Commercial', role:'Video Production & Digital Marketing' },
+    { title:'Wine', cat:'Music Video', role:'Director, Videographer' },
+    { title:'Live Orchestra EP', cat:'Music Video', role:'Director — 6 videos, one day' },
+    { title:'Fingertips', cat:'Music Video', role:'Director, Editor, Colourist' },
+    { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor' }
+  ];
+  const IMG_SRC = [
+    'images/good-intns-club.webp', 'images/tpd.webp', 'images/wine.webp', null, 'images/fingertips.webp',
+    'images/nffcc.webp'
+  ];
+  const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52'];
 
-  // fixed background swaps to match whichever work item is hovered
-  const workBg = document.getElementById('work-bg');
-  document.querySelectorAll('[data-bg]').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      workBg.style.background = el.getAttribute('data-bg');
-      workBg.classList.add('active');
-    });
-    el.addEventListener('mouseleave', () => workBg.classList.remove('active'));
-  });
-
-  // scroll percentage indicator
-  const scrollPct = document.getElementById('scroll-pct');
-  window.addEventListener('scroll', () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 0;
-    scrollPct.textContent = pct + '%';
-  });
-
-  // cinematic reel: all panels stack in the same spot. As you scroll, the current
-  // panel grows past full size and fades ("disappears forward", toward camera)
-  // while the next one grows in from small/faint behind it ("revealed from behind").
-  const reelScroll = document.getElementById('reel');
-  const reelPanels = document.querySelectorAll('.reel-panel');
-  const reelBlobs = document.querySelectorAll('.reel-blob');
+  const reelScroll = document.getElementById('reel-scroll');
+  const caseStudy = document.querySelector('.case-study');
+  const filmstrip = document.getElementById('reel-filmstrip');
+  const stageItems = document.querySelectorAll('.reel-stage-item');
+  const thumbs = document.querySelectorAll('.film-thumb');
+  const stageNum = document.getElementById('stage-num');
+  const stageCat = document.getElementById('stage-cat');
+  const stageTitle = document.getElementById('stage-title');
+  const stageRole = document.getElementById('stage-role');
   const pageBg = document.getElementById('page-bg');
-  const numPanels = reelPanels.length;
-  const BEIGE = [244, 239, 228];
-  const panelColors = new Array(numPanels).fill([201, 162, 39]); // temp fallback until sampled
+  const numPanels = stageItems.length;
+  const BEIGE = [250, 249, 245];
+  const INK = [17, 17, 16];
+  const panelColors = FALLBACK_HEX.map(hexOrRgbToArr);
 
   function hexOrRgbToArr(str){
     if (!str) return [201,162,39];
@@ -617,83 +477,102 @@
       const n = parseInt(str.slice(1), 16);
       return [(n>>16)&255, (n>>8)&255, n&255];
     }
-    const m = str.match(/\d+/g);
-    return m ? m.slice(0,3).map(Number) : [201,162,39];
+    return [201,162,39];
   }
   function lerp(a, b, t){ return a + (b - a) * t; }
-  function lerpColor(c1, c2, t){
-    return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)];
+  function lerpColor(c1, c2, t){ return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)]; }
+
+  let lastActiveIdx = -1;
+  function setActive(idx){
+    const changed = idx !== lastActiveIdx;
+    if (changed) {
+      stageItems.forEach(el => {
+        const isActive = Number(el.dataset.idx) === idx;
+        el.classList.toggle('active', isActive);
+        const vid = el.querySelector('video');
+        if (vid) {
+          if (isActive) { vid.play().catch(()=>{}); }
+          else { vid.pause(); }
+        }
+      });
+      thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
+      const d = DATA[idx];
+      stageNum.textContent = ROMAN[idx];
+      stageCat.textContent = d.cat;
+      stageTitle.textContent = d.title;
+      stageRole.textContent = d.role;
+      lastActiveIdx = idx;
+    }
+  }
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => setActive(Number(thumb.dataset.idx)));
+  });
+
+  // filmstrip only shows while the page is actively scrolling
+  let scrollHideTimer = null;
+  window.addEventListener('scroll', () => {
+    filmstrip.classList.add('visible');
+    clearTimeout(scrollHideTimer);
+    scrollHideTimer = setTimeout(() => filmstrip.classList.remove('visible'), 500);
+  }, { passive: true });
+
+  function rgbaStr(arr, a){ return `rgba(${arr[0].toFixed(0)}, ${arr[1].toFixed(0)}, ${arr[2].toFixed(0)}, ${a.toFixed(2)})`; }
+
+  function buildMesh(baseColor, blobs){
+    // blobs: array of { color:[r,g,b], alpha, x, y, size }
+    const layers = blobs.map(b =>
+      `radial-gradient(circle at ${b.x}% ${b.y}%, ${rgbaStr(b.color, b.alpha)}, transparent ${b.size}%)`
+    );
+    layers.push(`rgb(${baseColor.map(v=>v.toFixed(0)).join(',')})`);
+    return layers.join(', ');
   }
 
-  function updateReel(){
-    const rect = reelScroll.getBoundingClientRect();
+  function updatePage(){
     const vh = window.innerHeight;
-    const span = rect.height - vh;
-    const overall = span > 0 ? Math.min(Math.max(-rect.top / span, 0), 1) : 0;
-    const continuous = overall * numPanels;
 
-    let blendedColor = [0,0,0];
-    let weightSum = 0;
+    // ----- reel: which work is current, driven by page scroll position -----
+    const reelRect = reelScroll.getBoundingClientRect();
+    const reelSpan = reelRect.height - vh;
+    const reelProgress = reelSpan > 0 ? Math.min(Math.max(-reelRect.top / reelSpan, 0), 1) : 0;
+    const currentIdx = Math.min(numPanels - 1, Math.floor(reelProgress * numPanels));
+    setActive(currentIdx);
 
-    reelPanels.forEach((panel, i) => {
-      const local = continuous - i; // -1..0 = arriving from behind, 0..1 = current -> disappearing forward
-      let scale, opacity;
-      if (local <= 0) {
-        const t = Math.max(local + 1, 0); // 0 (far behind) -> 1 (arrived)
-        scale = 0.55 + t * 0.45;
-        opacity = t;
+    // ----- page-wide mesh-gradient background, blended by scroll position -----
+    if (reelRect.top > -1 && reelRect.bottom > vh) {
+      // approaching or inside the reel: mesh built from this work's colour and its neighbours
+      const approach = reelRect.top > 0 ? Math.max(0, 1 - reelRect.top / (vh * 0.8)) : 1;
+      const prevIdx = Math.max(0, currentIdx - 1);
+      const nextIdx = Math.min(numPanels - 1, currentIdx + 1);
+      const base = lerpColor(BEIGE, panelColors[currentIdx], approach * 0.5);
+      pageBg.style.background = buildMesh(base, [
+        { color: panelColors[currentIdx], alpha: 0.55 * approach, x: 20, y: 25, size: 65 },
+        { color: panelColors[nextIdx],    alpha: 0.40 * approach, x: 82, y: 30, size: 60 },
+        { color: panelColors[prevIdx],    alpha: 0.35 * approach, x: 35, y: 85, size: 60 },
+        { color: panelColors[currentIdx], alpha: 0.30 * approach, x: 75, y: 80, size: 55 }
+      ]);
+    } else {
+      const caseRect = caseStudy.getBoundingClientRect();
+      if (caseRect.top < vh && caseRect.bottom > 0) {
+        // approaching / within / leaving the dark case-study section
+        let caseMix;
+        if (caseRect.top > 0) caseMix = Math.max(0, 1 - caseRect.top / (vh * 0.6));
+        else if (caseRect.bottom < vh) caseMix = Math.max(0, caseRect.bottom / (vh * 0.6));
+        else caseMix = 1;
+        const base = lerpColor(BEIGE, INK, caseMix);
+        pageBg.style.background = buildMesh(base, [
+          { color: INK,                   alpha: 0.4 * caseMix, x: 25, y: 20, size: 65 },
+          { color: panelColors[numPanels-1], alpha: 0.2 * caseMix, x: 80, y: 70, size: 55 }
+        ]);
       } else {
-        const t = Math.min(local, 1); // 0 (arrived) -> 1 (fully gone)
-        scale = 1 + t * 0.9;
-        opacity = 1 - t;
+        pageBg.style.background = `rgb(${BEIGE.join(',')})`;
       }
-      panel.style.transform = `scale(${scale.toFixed(3)})`;
-      panel.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(3);
-      panel.style.zIndex = 10 - Math.abs(local);
-
-      const dominance = Math.max(0, 1 - Math.abs(local)); // peaks at 1 when panel is fully "current"
-      if (reelBlobs[i]) reelBlobs[i].style.opacity = (0.25 + dominance * 0.55).toFixed(3);
-
-      blendedColor[0] += panelColors[i][0] * dominance;
-      blendedColor[1] += panelColors[i][1] * dominance;
-      blendedColor[2] += panelColors[i][2] * dominance;
-      weightSum += dominance;
-    });
-
-    if (weightSum > 0) {
-      blendedColor = blendedColor.map(v => v / weightSum);
-    } else {
-      blendedColor = panelColors[0];
     }
 
-    // ease the whole page's background between beige and the reel's blended
-    // colour as the reel approaches and departs, rather than a hard cut
-    let mix;
-    if (rect.top > 0) {
-      mix = Math.max(0, 1 - rect.top / (vh * 0.8));
-    } else if (rect.bottom < vh) {
-      mix = Math.max(0, rect.bottom / (vh * 0.8));
-    } else {
-      mix = 1;
-    }
-    const pageColor = lerpColor(BEIGE, blendedColor, mix);
-    pageBg.style.background = `rgb(${pageColor[0].toFixed(0)}, ${pageColor[1].toFixed(0)}, ${pageColor[2].toFixed(0)})`;
-
-    requestAnimationFrame(updateReel);
+    requestAnimationFrame(updatePage);
   }
-  requestAnimationFrame(updateReel);
+  requestAnimationFrame(updatePage);
 
-  // reveal the About section as it scrolls into view
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in-view');
-    });
-  }, { threshold: 0.2 });
-  revealEls.forEach(el => revealObserver.observe(el));
-
-  // sample each reel image's average colour so the blurred background wash
-  // (and the page-wide blend above) is built from the real footage, not guessed hex values
+  // sample real image colours so the blend above uses actual footage, not guessed hex
   function sampleAverageColor(src, callback){
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -707,23 +586,36 @@
         let r=0,g=0,b=0,n=0;
         for (let p = 0; p < data.length; p += 4) { r+=data[p]; g+=data[p+1]; b+=data[p+2]; n++; }
         callback([Math.round(r/n), Math.round(g/n), Math.round(b/n)]);
-      } catch(e){ /* fails on file:// in some browsers — falls back to placeholder colour below */ }
+      } catch(e){}
     };
     img.src = src;
   }
-  reelPanels.forEach((panel, i) => {
-    const src = panel.getAttribute('data-img');
-    const blob = reelBlobs[i];
-    const fallback = hexOrRgbToArr(panel.getAttribute('data-bg-fallback'));
-    panelColors[i] = fallback;
-    if (blob) blob.style.background = `rgb(${fallback[0]},${fallback[1]},${fallback[2]})`;
-    if (src) {
-      sampleAverageColor(src, (rgbArr) => {
-        panelColors[i] = rgbArr;
-        if (blob) blob.style.background = `rgb(${rgbArr[0]},${rgbArr[1]},${rgbArr[2]})`;
-      });
-    }
+  IMG_SRC.forEach((src, i) => {
+    if (src) sampleAverageColor(src, (rgbArr) => { panelColors[i] = rgbArr; });
   });
+
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  const magnetic = document.querySelector('.btn-magnetic');
+  if (magnetic) {
+    magnetic.addEventListener('mousemove', (e) => {
+      const rect = magnetic.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      magnetic.style.transform = `translate(${x * 0.25}px, ${y * 0.4}px)`;
+    });
+    magnetic.addEventListener('mouseleave', () => {
+      magnetic.style.transform = 'translate(0,0)';
+    });
+  }
 </script>
 
 </body>
