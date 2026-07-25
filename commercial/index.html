@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sam Walcroft — Videographer &amp; Marketer</title>
+<meta name="description" content="Sam Walcroft is a Brisbane videographer and marketer offering video production, social media strategy, SEO and paid social advertising for brands and businesses.">
+<meta property="og:title" content="Sam Walcroft — Videographer &amp; Marketer">
+<meta property="og:description" content="Brisbane video production, social strategy, SEO and paid social for brands and businesses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://samwalcroft.com.au/commercial/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -78,6 +83,17 @@
   .nav-cta{ padding:9px 20px; border:1px solid var(--ink); border-radius:999px; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; }
   .nav-cta:hover{ background:var(--ink); color:var(--paper); }
 
+  .nav-drop{ position:relative; }
+  .nav-drop-trigger{ background:none; border:none; font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; cursor:none; padding:0; }
+  .nav-drop-menu{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,-6px); margin-top:16px; background:var(--paper); border:1px solid var(--line);
+    min-width:230px; padding:8px 0; opacity:0; visibility:hidden;
+    transition:opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; box-shadow:0 24px 48px rgba(0,0,0,0.1); z-index:20;
+  }
+  .nav-drop:hover .nav-drop-menu{ opacity:1; visibility:visible; transform:translate(-50%,0); }
+  .nav-drop-menu a{ display:block; padding:11px 22px; font-size:0.78rem; text-transform:none; letter-spacing:normal; }
+  .nav-drop-menu a:hover{ background:var(--line); }
+
   /* ===== HERO — statement + showreel CTA ===== */
   .hero{ padding:70px 0 60px; text-align:center; }
   .hero-index{ font-size:0.72rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:28px; }
@@ -118,7 +134,7 @@
 
   /* ===== FULL-SCREEN WORK VIEWER — scroll-driven, vertical bar always visible during scroll ===== */
   #page-bg{ position:fixed; inset:0; z-index:-3; background:var(--paper); }
-  .reel-scroll{ height:525vh; position:relative; }
+  .reel-scroll{ height:610vh; position:relative; }
   .reel-viewer{ height:100vh; position:sticky; top:0; overflow:hidden; color:#f4efe4; }
   .reel-stage-item{
     position:absolute; inset:0; background-size:cover; background-position:center;
@@ -205,10 +221,23 @@
 <nav>
   <a href="./" class="nav-name">Sam Walcroft</a>
   <div class="nav-links">
-    <a href="services.html">Services</a>
-    <a href="case-studies.html">Case Studies</a>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Services</button>
+      <div class="nav-drop-menu">
+        <a href="services/video-production.html">Video Production</a>
+        <a href="services/social-media-management.html">Social Media Management</a>
+        <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+        <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
+      </div>
+    </div>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Case Studies</button>
+      <div class="nav-drop-menu">
+        <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+        <a href="case-studies/music-videos.html">Music Video Direction</a>
+      </div>
+    </div>
     <a href="photography.html">Photography</a>
-    <a href="about.html">About</a>
   </div>
   <a href="contact.html" class="nav-cta">Contact</a>
 </nav>
@@ -216,7 +245,7 @@
 <header class="hero wrap">
   <div class="hero-index">Videography &amp; Marketing — Brisbane</div>
   <h1 class="hero-flow">Video, <em>strategy</em>, and growth <span class="thin">built around your brand, not a template.</span></h1>
-  <a class="btn-reel" href="#showreel" data-reel="true">
+  <a class="btn-reel" href="showreel.html">
     <span class="play-dot">►</span> Watch Showreel
   </a>
 </header>
@@ -255,6 +284,7 @@
   <div class="reel-stage-item" data-idx="5" style="background-image:url('images/nffcc.webp');">
     <video autoplay muted loop playsinline preload="auto" poster="images/nffcc.webp" src="videos/nffcc.mp4"></video>
   </div>
+  <a class="reel-stage-item" data-idx="6" href="photography.html" style="background-image:url('photography/seavibes/seavibes-15.webp'); background-size:cover; background-position:center;"></a>
 
   <div class="reel-stage-info">
     <div class="num" id="stage-num">I</div>
@@ -283,6 +313,9 @@
       <div class="film-thumb" data-idx="5" style="background-image:url('images/nffcc.webp');">
         <div class="film-thumb-cap"><div class="fnum">VI</div><div class="fname">Nanna Fitty's FCC</div><div class="fcat">Photography &amp; Content</div></div>
       </div>
+      <a class="film-thumb" data-idx="6" href="photography.html" style="background-image:url('photography/seavibes/seavibes-15.webp');">
+        <div class="film-thumb-cap"><div class="fnum">VII</div><div class="fname">SeaVibes</div><div class="fcat">Photography</div></div>
+      </a>
     </div>
   </div>
 </section>
@@ -328,16 +361,16 @@
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Services</div>
-      <a href="services.html">Video Production</a>
-      <a href="services.html">Social Media Management</a>
-      <a href="services.html">SEO &amp; Web Development</a>
-      <a href="services.html">Paid Social &amp; Meta Ads</a>
+      <a href="services/video-production.html">Video Production</a>
+      <a href="services/social-media-management.html">Social Media Management</a>
+      <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+      <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Work</div>
-      <a href="case-studies.html">Case Studies</a>
+      <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+      <a href="case-studies/music-videos.html">Music Video Direction</a>
       <a href="photography.html">Photography</a>
-      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="footer-col">
@@ -443,13 +476,14 @@
     { title:'Wine', cat:'Music Video', role:'Director, Videographer' },
     { title:'Live Orchestra EP', cat:'Music Video', role:'Director — 6 videos, one day' },
     { title:'Fingertips', cat:'Music Video', role:'Director, Editor, Colourist' },
-    { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor' }
+    { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor' },
+    { title:'SeaVibes', cat:'Photography', role:'Photographer, Social Media Manager' }
   ];
   const IMG_SRC = [
     'images/good-intns-club.webp', 'images/tpd.webp', 'images/wine.webp', null, 'images/fingertips.webp',
-    'images/nffcc.webp'
+    'images/nffcc.webp', 'photography/seavibes/seavibes-15.webp'
   ];
-  const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52'];
+  const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52','#2d6b74'];
 
   const reelScroll = document.getElementById('reel-scroll');
   const caseStudy = document.querySelector('.case-study');
