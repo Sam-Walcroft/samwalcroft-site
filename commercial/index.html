@@ -470,6 +470,9 @@
   const stageLink = document.getElementById('stage-link');
   const pageBg = document.getElementById('page-bg');
   const numPanels = stageItems.length;
+  let activeIdx = 0;
+  let userScrolling = false;
+  let userScrollTimer = null;
   const BEIGE = [250, 249, 245];
   const INK = [17, 17, 16];
   const panelColors = FALLBACK_HEX.map(hexOrRgbToArr);
@@ -504,16 +507,33 @@
     if (stageLink) stageLink.href = d.link;
   }
   thumbs.forEach(thumb => {
-    thumb.addEventListener('click', () => setActive(Number(thumb.dataset.idx)));
+    thumb.addEventListener('click', () => {
+      activeIdx = Number(thumb.dataset.idx);
+      setActive(activeIdx);
+    });
   });
 
   // filmstrip only shows while the page is actively scrolling
   let scrollHideTimer = null;
   window.addEventListener('scroll', () => {
     filmstrip.classList.add('visible');
+    userScrolling = true;
     clearTimeout(scrollHideTimer);
     scrollHideTimer = setTimeout(() => filmstrip.classList.remove('visible'), 500);
+    clearTimeout(userScrollTimer);
+    userScrollTimer = setTimeout(() => { userScrolling = false; }, 1200);
   }, { passive: true });
+
+  // auto-cycle through the reel when the viewer is in view and the person isn't actively scrolling
+  function reelIsInView(){
+    const r = reelScroll.getBoundingClientRect();
+    return r.top < 1 && r.bottom > window.innerHeight - 1;
+  }
+  setInterval(() => {
+    if (!userScrolling && reelIsInView()) {
+      activeIdx = (activeIdx + 1) % numPanels;
+    }
+  }, 4500);
 
   function rgbaStr(arr, a){ return `rgba(${arr[0].toFixed(0)}, ${arr[1].toFixed(0)}, ${arr[2].toFixed(0)}, ${a.toFixed(2)})`; }
 
@@ -529,25 +549,27 @@
   function updatePage(){
     const vh = window.innerHeight;
 
-    // ----- reel: which work is current, driven by page scroll position -----
+    // ----- reel: which work is current — scroll position while actively scrolling, else the auto-cycle timer -----
     const reelRect = reelScroll.getBoundingClientRect();
     const reelSpan = reelRect.height - vh;
-    const reelProgress = reelSpan > 0 ? Math.min(Math.max(-reelRect.top / reelSpan, 0), 1) : 0;
-    const currentIdx = Math.min(numPanels - 1, Math.floor(reelProgress * numPanels));
-    setActive(currentIdx);
+    if (userScrolling && reelSpan > 0) {
+      const reelProgress = Math.min(Math.max(-reelRect.top / reelSpan, 0), 1);
+      activeIdx = Math.min(numPanels - 1, Math.floor(reelProgress * numPanels));
+    }
+    setActive(activeIdx);
 
     // ----- page-wide mesh-gradient background, blended by scroll position -----
     if (reelRect.top > -1 && reelRect.bottom > vh) {
       // approaching or inside the reel: mesh built from this work's colour and its neighbours
       const approach = reelRect.top > 0 ? Math.max(0, 1 - reelRect.top / (vh * 0.8)) : 1;
-      const prevIdx = Math.max(0, currentIdx - 1);
-      const nextIdx = Math.min(numPanels - 1, currentIdx + 1);
-      const base = lerpColor(BEIGE, panelColors[currentIdx], approach * 0.5);
+      const prevIdx = Math.max(0, activeIdx - 1);
+      const nextIdx = Math.min(numPanels - 1, activeIdx + 1);
+      const base = lerpColor(BEIGE, panelColors[activeIdx], approach * 0.5);
       pageBg.style.background = buildMesh(base, [
-        { color: panelColors[currentIdx], alpha: 0.55 * approach, x: 20, y: 25, size: 65 },
+        { color: panelColors[activeIdx], alpha: 0.55 * approach, x: 20, y: 25, size: 65 },
         { color: panelColors[nextIdx],    alpha: 0.40 * approach, x: 82, y: 30, size: 60 },
         { color: panelColors[prevIdx],    alpha: 0.35 * approach, x: 35, y: 85, size: 60 },
-        { color: panelColors[currentIdx], alpha: 0.30 * approach, x: 75, y: 80, size: 55 }
+        { color: panelColors[activeIdx], alpha: 0.30 * approach, x: 75, y: 80, size: 55 }
       ]);
     } else {
       const caseRect = caseStudy.getBoundingClientRect();
