@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sam Walcroft — Videographer &amp; Marketer</title>
-<meta name="description" content="Sam Walcroft is a Brisbane videographer and marketer offering video production, social media strategy, SEO and paid social advertising for brands and businesses.">
-<meta property="og:title" content="Sam Walcroft — Videographer &amp; Marketer">
-<meta property="og:description" content="Brisbane video production, social strategy, SEO and paid social for brands and businesses.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://samwalcroft.com.au/commercial/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -83,17 +78,6 @@
   .nav-cta{ padding:9px 20px; border:1px solid var(--ink); border-radius:999px; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; }
   .nav-cta:hover{ background:var(--ink); color:var(--paper); }
 
-  .nav-drop{ position:relative; }
-  .nav-drop-trigger{ background:none; border:none; font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; cursor:none; padding:0; }
-  .nav-drop-menu{
-    position:absolute; top:100%; left:50%; transform:translate(-50%,-6px); margin-top:16px; background:var(--paper); border:1px solid var(--line);
-    min-width:230px; padding:8px 0; opacity:0; visibility:hidden;
-    transition:opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; box-shadow:0 24px 48px rgba(0,0,0,0.1); z-index:20;
-  }
-  .nav-drop:hover .nav-drop-menu{ opacity:1; visibility:visible; transform:translate(-50%,0); }
-  .nav-drop-menu a{ display:block; padding:11px 22px; font-size:0.78rem; text-transform:none; letter-spacing:normal; }
-  .nav-drop-menu a:hover{ background:var(--line); }
-
   /* ===== HERO — statement + showreel CTA ===== */
   .hero{ padding:70px 0 60px; text-align:center; }
   .hero-index{ font-size:0.72rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:28px; }
@@ -134,7 +118,7 @@
 
   /* ===== FULL-SCREEN WORK VIEWER — scroll-driven, vertical bar always visible during scroll ===== */
   #page-bg{ position:fixed; inset:0; z-index:-3; background:var(--paper); }
-  .reel-scroll{ height:610vh; position:relative; }
+  .reel-scroll{ height:525vh; position:relative; }
   .reel-viewer{ height:100vh; position:sticky; top:0; overflow:hidden; color:#f4efe4; }
   .reel-stage-item{
     position:absolute; inset:0; background-size:cover; background-position:center;
@@ -150,6 +134,12 @@
   .reel-stage-info .cat{ font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; opacity:0.7; margin-bottom:8px; }
   .reel-stage-info .title{ font-family:var(--display); font-style:italic; font-size:clamp(1.8rem,3.6vw,2.8rem); }
   .reel-stage-info .role{ font-size:0.85rem; opacity:0.75; margin-top:6px; }
+  .reel-stage-info .watch-full{
+    display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+    font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+    border-bottom:1px solid rgba(244,239,228,0.5); padding-bottom:3px; opacity:0.9;
+  }
+  .reel-stage-info .watch-full:hover{ opacity:1; border-color:#f4efe4; }
 
   .reel-filmstrip{
     position:absolute; left:0; top:0; height:100%; width:230px; z-index:52; overflow:visible;
@@ -219,33 +209,74 @@
 <div id="page-bg"></div>
 
 <nav>
-  <a href="./" class="nav-name">Sam Walcroft</a>
+  <a href="/commercial/" class="nav-name">Sam Walcroft</a>
   <div class="nav-links">
-    <div class="nav-drop">
-      <button class="nav-drop-trigger">Services</button>
-      <div class="nav-drop-menu">
-        <a href="services/video-production.html">Video Production</a>
-        <a href="services/social-media-management.html">Social Media Management</a>
-        <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
-        <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
-      </div>
-    </div>
-    <div class="nav-drop">
-      <button class="nav-drop-trigger">Case Studies</button>
-      <div class="nav-drop-menu">
-        <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
-        <a href="case-studies/music-videos.html">Music Video Direction</a>
-      </div>
-    </div>
-    <a href="photography.html">Photography</a>
+    <a href="/commercial/services.html">Services</a>
+    <a href="/commercial/case-studies.html">Case Studies</a>
+    <a href="/commercial/photography.html">Photography</a>
+    <a href="/commercial/about.html">About</a>
   </div>
-  <a href="contact.html" class="nav-cta">Contact</a>
+  <a href="/commercial/contact.html" class="nav-cta">Contact</a>
 </nav>
+
+<div class="reel-scroll" id="reel-scroll">
+<section class="reel-viewer" id="work-viewer">
+  <div class="reel-hint">Scroll to browse</div>
+
+  <div class="reel-stage-item active" data-idx="0" style="background-image:url('image/good-intns-club.webp');">
+    <video autoplay muted loop playsinline src="videos/good-intns-club.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="1" style="background:linear-gradient(160deg,#3f6b52,#152820);">
+    <video autoplay muted loop playsinline src="videos/tpd.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="2" style="background-image:url('image/wine.webp');">
+    <video autoplay muted loop playsinline src="videos/wine.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);"></div>
+  <div class="reel-stage-item" data-idx="4" style="background:linear-gradient(160deg,#2d6b74,#0f2a30);">
+    <video autoplay muted loop playsinline src="videos/fingertips.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="5" style="background-image:url('image/nffcc.webp');">
+    <video autoplay muted loop playsinline src="videos/nffcc.mp4"></video>
+  </div>
+
+  <div class="reel-stage-info">
+    <div class="num" id="stage-num">I</div>
+    <div class="cat" id="stage-cat">Ads &amp; Commercial</div>
+    <div class="title" id="stage-title">The Good Intns Club</div>
+    <div class="role" id="stage-role">TVC — Videographer</div>
+    <a class="watch-full" id="stage-link" href="reels/good-intns-club.html">Watch in Full →</a>
+  </div>
+
+  <div class="reel-filmstrip" id="reel-filmstrip">
+    <div class="film-track" id="film-track">
+      <div class="film-thumb is-active" data-idx="0" style="background-image:url('image/good-intns-club.webp');">
+        <div class="film-thumb-cap"><div class="fnum">I</div><div class="fname">The Good Intns Club</div><div class="fcat">Ads &amp; Commercial</div></div>
+      </div>
+      <div class="film-thumb" data-idx="1" style="background:linear-gradient(160deg,#3f6b52,#152820);">
+        <div class="film-thumb-cap"><div class="fnum">II</div><div class="fname">TPD Claim Support</div><div class="fcat">Ads &amp; Commercial</div></div>
+      </div>
+      <div class="film-thumb" data-idx="2" style="background-image:url('image/wine.webp');">
+        <div class="film-thumb-cap"><div class="fnum">III</div><div class="fname">Wine</div><div class="fcat">Music Video</div></div>
+      </div>
+      <div class="film-thumb" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);">
+        <div class="film-thumb-cap"><div class="fnum">IV</div><div class="fname">Live Orchestra EP</div><div class="fcat">Music Video</div></div>
+      </div>
+      <div class="film-thumb" data-idx="4" style="background:linear-gradient(160deg,#2d6b74,#0f2a30);">
+        <div class="film-thumb-cap"><div class="fnum">V</div><div class="fname">Fingertips</div><div class="fcat">Music Video</div></div>
+      </div>
+      <div class="film-thumb" data-idx="5" style="background-image:url('image/nffcc.webp');">
+        <div class="film-thumb-cap"><div class="fnum">VI</div><div class="fname">Nanna Fitty's FCC</div><div class="fcat">Photography &amp; Content</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
 
 <header class="hero wrap">
   <div class="hero-index">Videography &amp; Marketing — Brisbane</div>
   <h1 class="hero-flow">Video, <em>strategy</em>, and growth <span class="thin">built around your brand, not a template.</span></h1>
-  <a class="btn-reel" href="showreel.html">
+  <a class="btn-reel" href="#showreel" data-reel="true">
     <span class="play-dot">►</span> Watch Showreel
   </a>
 </header>
@@ -262,63 +293,6 @@
     <span>Ads</span><span>Music Videos</span><span>Photography</span><span>Social Content</span><span>Brand Films</span>
     <span>Ads</span><span>Music Videos</span><span>Photography</span><span>Social Content</span><span>Brand Films</span>
   </div>
-</div>
-
-<div class="reel-scroll" id="reel-scroll">
-<section class="reel-viewer" id="work-viewer">
-  <div class="reel-hint">Scroll to browse</div>
-
-  <div class="reel-stage-item active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
-    <video autoplay muted loop playsinline preload="auto" poster="images/good-intns-club.webp" src="videos/good-intns-club.mp4"></video>
-  </div>
-  <div class="reel-stage-item" data-idx="1" style="background-image:url('images/tpd.webp');">
-    <video autoplay muted loop playsinline preload="auto" poster="images/tpd.webp" src="videos/tpd.mp4"></video>
-  </div>
-  <div class="reel-stage-item" data-idx="2" style="background-image:url('images/wine.webp');">
-    <video autoplay muted loop playsinline preload="auto" poster="images/wine.webp" src="videos/wine.mp4"></video>
-  </div>
-  <div class="reel-stage-item" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);"></div>
-  <div class="reel-stage-item" data-idx="4" style="background-image:url('images/fingertips.webp');">
-    <video autoplay muted loop playsinline preload="auto" poster="images/fingertips.webp" src="videos/fingertips.mp4"></video>
-  </div>
-  <div class="reel-stage-item" data-idx="5" style="background-image:url('images/nffcc.webp');">
-    <video autoplay muted loop playsinline preload="auto" poster="images/nffcc.webp" src="videos/nffcc.mp4"></video>
-  </div>
-  <a class="reel-stage-item" data-idx="6" href="photography.html" style="background-image:url('photography/seavibes/seavibes-15.webp'); background-size:cover; background-position:center;"></a>
-
-  <div class="reel-stage-info">
-    <div class="num" id="stage-num">I</div>
-    <div class="cat" id="stage-cat">Ads &amp; Commercial</div>
-    <div class="title" id="stage-title">The Good Intns Club</div>
-    <div class="role" id="stage-role">TVC — Videographer</div>
-  </div>
-
-  <div class="reel-filmstrip" id="reel-filmstrip">
-    <div class="film-track" id="film-track">
-      <div class="film-thumb is-active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
-        <div class="film-thumb-cap"><div class="fnum">I</div><div class="fname">The Good Intns Club</div><div class="fcat">Ads &amp; Commercial</div></div>
-      </div>
-      <div class="film-thumb" data-idx="1" style="background-image:url('images/tpd.webp');">
-        <div class="film-thumb-cap"><div class="fnum">II</div><div class="fname">TPD Claim Support</div><div class="fcat">Ads &amp; Commercial</div></div>
-      </div>
-      <div class="film-thumb" data-idx="2" style="background-image:url('images/wine.webp');">
-        <div class="film-thumb-cap"><div class="fnum">III</div><div class="fname">Wine</div><div class="fcat">Music Video</div></div>
-      </div>
-      <div class="film-thumb" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);">
-        <div class="film-thumb-cap"><div class="fnum">IV</div><div class="fname">Live Orchestra EP</div><div class="fcat">Music Video</div></div>
-      </div>
-      <div class="film-thumb" data-idx="4" style="background-image:url('images/fingertips.webp');">
-        <div class="film-thumb-cap"><div class="fnum">V</div><div class="fname">Fingertips</div><div class="fcat">Music Video</div></div>
-      </div>
-      <div class="film-thumb" data-idx="5" style="background-image:url('images/nffcc.webp');">
-        <div class="film-thumb-cap"><div class="fnum">VI</div><div class="fname">Nanna Fitty's FCC</div><div class="fcat">Photography &amp; Content</div></div>
-      </div>
-      <a class="film-thumb" data-idx="6" href="photography.html" style="background-image:url('photography/seavibes/seavibes-15.webp');">
-        <div class="film-thumb-cap"><div class="fnum">VII</div><div class="fname">SeaVibes</div><div class="fcat">Photography</div></div>
-      </a>
-    </div>
-  </div>
-</section>
 </div>
 
 <section class="case-study">
@@ -349,7 +323,7 @@
 <section class="cta-band">
   <div class="wrap">
     <div class="cta-title">Let's build something that actually performs.</div>
-    <a class="btn-magnetic" href="contact.html">Start a Project</a>
+    <a class="btn-magnetic" href="/commercial/contact.html">Start a Project</a>
   </div>
 </section>
 
@@ -361,17 +335,17 @@
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Services</div>
-      <a href="services/video-production.html">Video Production</a>
-      <a href="services/social-media-management.html">Social Media Management</a>
-      <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
-      <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
+      <a href="/commercial/services.html">Video Production</a>
+      <a href="/commercial/services.html">Social Media Management</a>
+      <a href="/commercial/services.html">SEO &amp; Web Development</a>
+      <a href="/commercial/services.html">Paid Social &amp; Meta Ads</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Work</div>
-      <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
-      <a href="case-studies/music-videos.html">Music Video Direction</a>
-      <a href="photography.html">Photography</a>
-      <a href="contact.html">Contact</a>
+      <a href="/commercial/case-studies.html">Case Studies</a>
+      <a href="/commercial/photography.html">Photography</a>
+      <a href="/commercial/about.html">About</a>
+      <a href="/commercial/contact.html">Contact</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Connect</div>
@@ -471,19 +445,18 @@
 
   const ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
   const DATA = [
-    { title:'The Good Intns Club', cat:'Ads & Commercial', role:'TVC — Videographer' },
-    { title:'TPD Claim Support', cat:'Ads & Commercial', role:'Video Production & Digital Marketing' },
-    { title:'Wine', cat:'Music Video', role:'Director, Videographer' },
-    { title:'Live Orchestra EP', cat:'Music Video', role:'Director — 6 videos, one day' },
-    { title:'Fingertips', cat:'Music Video', role:'Director, Editor, Colourist' },
-    { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor' },
-    { title:'SeaVibes', cat:'Photography', role:'Photographer, Social Media Manager' }
+    { title:'The Good Intns Club', cat:'Ads & Commercial', role:'TVC — Videographer', link:'reels/good-intns-club.html' },
+    { title:'TPD Claim Support', cat:'Ads & Commercial', role:'Video Production & Digital Marketing', link:'reels/tpd-claim-support.html' },
+    { title:'Wine', cat:'Music Video', role:'Director, Videographer', link:'reels/wine.html' },
+    { title:'Live Orchestra EP', cat:'Music Video', role:'Director — 6 videos, one day', link:'reels/live-orchestra-ep.html' },
+    { title:'Fingertips', cat:'Music Video', role:'Director, Editor, Colourist', link:'reels/fingertips.html' },
+    { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor', link:'reels/nffcc.html' }
   ];
   const IMG_SRC = [
-    'images/good-intns-club.webp', 'images/tpd.webp', 'images/wine.webp', null, 'images/fingertips.webp',
-    'images/nffcc.webp', 'photography/seavibes/seavibes-15.webp'
+    'image/good-intns-club.webp', null, 'image/wine.webp', null, null,
+    'image/nffcc.webp'
   ];
-  const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52','#2d6b74'];
+  const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52'];
 
   const reelScroll = document.getElementById('reel-scroll');
   const caseStudy = document.querySelector('.case-study');
@@ -494,6 +467,7 @@
   const stageCat = document.getElementById('stage-cat');
   const stageTitle = document.getElementById('stage-title');
   const stageRole = document.getElementById('stage-role');
+  const stageLink = document.getElementById('stage-link');
   const pageBg = document.getElementById('page-bg');
   const numPanels = stageItems.length;
   const BEIGE = [250, 249, 245];
@@ -511,27 +485,23 @@
   function lerp(a, b, t){ return a + (b - a) * t; }
   function lerpColor(c1, c2, t){ return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)]; }
 
-  let lastActiveIdx = -1;
   function setActive(idx){
-    const changed = idx !== lastActiveIdx;
-    if (changed) {
-      stageItems.forEach(el => {
-        const isActive = Number(el.dataset.idx) === idx;
-        el.classList.toggle('active', isActive);
-        const vid = el.querySelector('video');
-        if (vid) {
-          if (isActive) { vid.play().catch(()=>{}); }
-          else { vid.pause(); }
-        }
-      });
-      thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
-      const d = DATA[idx];
-      stageNum.textContent = ROMAN[idx];
-      stageCat.textContent = d.cat;
-      stageTitle.textContent = d.title;
-      stageRole.textContent = d.role;
-      lastActiveIdx = idx;
-    }
+    stageItems.forEach(el => {
+      const isActive = Number(el.dataset.idx) === idx;
+      el.classList.toggle('active', isActive);
+      const vid = el.querySelector('video');
+      if (vid) {
+        if (isActive) { vid.play().catch(()=>{}); }
+        else { vid.pause(); }
+      }
+    });
+    thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
+    const d = DATA[idx];
+    stageNum.textContent = ROMAN[idx];
+    stageCat.textContent = d.cat;
+    stageTitle.textContent = d.title;
+    stageRole.textContent = d.role;
+    if (stageLink) stageLink.href = d.link;
   }
   thumbs.forEach(thumb => {
     thumb.addEventListener('click', () => setActive(Number(thumb.dataset.idx)));
