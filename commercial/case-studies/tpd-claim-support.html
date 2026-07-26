@@ -115,66 +115,19 @@
     background:linear-gradient(90deg, var(--emerald), var(--gold), var(--wine), var(--teal), var(--accent));
   }
 
-  .device-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:70px 30px; margin-top:24px; }
-  @media(max-width:760px){ .device-grid{ grid-template-columns:1fr; gap:60px; } }
-
-  .laptop{ width:100%; max-width:400px; margin:0 auto; }
-  .laptop-frame{
-    position:relative; background:linear-gradient(155deg,#3a3a37,#101010 65%);
-    border-radius:13px 13px 3px 3px; padding:15px 15px 9px;
-    box-shadow:0 2px 0 rgba(255,255,255,0.06) inset, 0 45px 60px -25px rgba(20,15,10,0.4);
-  }
-  .laptop-notch{
-    position:absolute; top:6px; left:50%; transform:translateX(-50%);
-    width:5px; height:5px; border-radius:50%;
-    background:#050505; box-shadow:0 0 0 1.5px rgba(255,255,255,0.06);
-  }
-  .laptop-screen{
-    position:relative; width:100%; height:250px; overflow:hidden;
-    border-radius:2px; background:#f4f3f0;
-    box-shadow:inset 0 0 26px rgba(0,0,0,0.18);
-  }
-  .browser-chrome{
-    position:relative; z-index:3; display:flex; align-items:center; gap:10px;
-    height:26px; padding:0 10px; background:#e9e7e2; border-bottom:1px solid rgba(0,0,0,0.06);
-  }
-  .browser-dot{ width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-  .browser-dot.r{ background:#e5564c; } .browser-dot.y{ background:#e6b93a; } .browser-dot.g{ background:#5cb85c; }
-  .browser-url{
-    flex:1; background:#fff; border-radius:20px; height:16px; padding:0 10px;
-    display:flex; align-items:center; font-size:0.56rem; color:var(--ink-soft);
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .laptop-viewport{ position:relative; width:100%; height:calc(100% - 26px); overflow:hidden; }
-  .laptop-viewport img{
-    width:100%; display:block; position:absolute; top:0; left:0;
-    animation:deviceScroll 15s ease-in-out infinite;
-  }
-  .laptop-screen::after{
-    content:''; position:absolute; inset:0; z-index:4; pointer-events:none;
-    background:linear-gradient(115deg, rgba(255,255,255,0.10) 0%, transparent 26%, transparent 74%, rgba(255,255,255,0.05) 100%);
-  }
-  .laptop-base{
-    height:15px; margin:0 -20px 0; position:relative;
-    background:linear-gradient(180deg,#4a4a46,#232320);
-    clip-path:polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%);
-    border-radius:0 0 6px 6px;
-  }
-  .laptop-base::before{
-    content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
-    width:15%; height:4px; background:rgba(0,0,0,0.3); border-radius:0 0 4px 4px;
-  }
-  .laptop-shadow{
-    width:88%; height:22px; margin:8px auto 0;
-    background:radial-gradient(ellipse at center, rgba(20,15,10,0.28), transparent 72%);
-    filter:blur(3px);
-  }
-  @keyframes deviceScroll{
-    0%, 8%{ transform:translateY(0); }
-    50%, 58%{ transform:translateY(calc(-1 * var(--scroll-dist))); }
-    100%{ transform:translateY(0); }
-  }
-  .device-caption{ text-align:center; margin-top:14px; font-size:0.8rem; color:var(--ink-soft); letter-spacing:0.02em; }
+  /* ===== MONITOR MOCKUP — exact geometry lifted from the PSD's smart-object warp ===== */
+  .monitor-scene{ container-type:inline-size; width:100%; max-width:1000px; aspect-ratio:2/1; margin:34px auto 0; position:relative; }
+  .monitor-scene-inner{ width:1000px; height:500px; position:absolute; top:0; left:0; transform-origin:0 0; transform:scale(calc(100cqw / 1000px)); }
+  .monitor-frame-img{ position:absolute; top:0; left:0; width:1000px; height:500px; pointer-events:none; z-index:1; filter:drop-shadow(0 25px 40px rgba(32,29,25,0.15)); }
+  .monitor-screen{ position:absolute; top:0; left:0; width:808.4px; height:461px; overflow:hidden; z-index:2; transform-origin:0 0; }
+  .monitor-screen img{ position:absolute; top:0; left:0; width:100%; height:auto; display:block; animation:screenScroll 16s ease-in-out infinite; }
+  .monitor-screen.s1{ transform:matrix3d(0.422646, 0.036610, 0, 0.00014615, 0.013027, 0.386403, 0, -0.00004673, 0, 0, 1, 0, 111.2428, 195.2804, 0, 1); }
+  .monitor-screen.s2{ transform:matrix3d(0.374716, 0.032322, 0, 0.00013026, 0.010677, 0.342615, 0, -0.00004051, 0, 0, 1, 0, 425.2421, 176.2415, 0, 1); }
+  .monitor-screen.s3{ transform:matrix3d(0.344192, 0.030841, 0, 0.00012284, 0.009037, 0.309135, 0, -0.00003702, 0, 0, 1, 0, 679.5639, 206.3699, 0, 1); }
+  @keyframes screenScroll{ 0%,8%{ transform:translateY(0); } 50%,58%{ transform:translateY(-28%); } 100%{ transform:translateY(0); } }
+  .monitor-captions{ position:relative; max-width:1000px; margin:6px auto 44px; height:22px; }
+  .monitor-captions span{ position:absolute; top:0; transform:translateX(-50%); font-size:0.78rem; color:var(--ink-soft); letter-spacing:0.02em; white-space:nowrap; }
+  .device-caption{ text-align:center; margin-top:16px; font-size:0.8rem; color:var(--ink-soft); letter-spacing:0.02em; }
 
   .hero-media{ margin-top:36px; aspect-ratio:21/8; border-radius:4px; overflow:hidden; background-size:cover; background-position:center; }
   @media(max-width:760px){ .hero-media{ aspect-ratio:4/5; } }
@@ -248,103 +201,33 @@
 
 <section class="wrap">
   <div class="section-title">The Website</div>
-  <div class="device-grid">
-    <div><div class="laptop">
-  <div class="laptop-frame">
-    <div class="laptop-notch"></div>
-    <div class="laptop-screen">
-      <div class="browser-chrome">
-        <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-        <div class="browser-url">tpdclaimsupport.com.au</div>
-      </div>
-      <div class="laptop-viewport">
-        <img src="../images/tpd-site-full/homepage.webp" style="--scroll-dist:2939.5px;" alt="TPD Claim Support homepage">
-      </div>
+
+  <div class="monitor-scene">
+    <div class="monitor-scene-inner">
+      <img class="monitor-frame-img" src="../images/monitor-mockup-frame.png" alt="">
+      <div class="monitor-screen s1"><img src="../images/tpd-site-full/homepage.webp" alt="TPD Claim Support homepage"></div>
+      <div class="monitor-screen s2"><img src="../images/tpd-site-full/about-us.webp" alt="TPD Claim Support About Us page"></div>
+      <div class="monitor-screen s3"><img src="../images/tpd-site-full/services.webp" alt="TPD Claim Support Services page"></div>
     </div>
   </div>
-  <div class="laptop-base"></div>
-  <div class="laptop-shadow"></div>
-</div><div class="device-caption">Homepage</div></div>
-    <div><div class="laptop">
-  <div class="laptop-frame">
-    <div class="laptop-notch"></div>
-    <div class="laptop-screen">
-      <div class="browser-chrome">
-        <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-        <div class="browser-url">tpdclaimsupport.com.au/about-us</div>
-      </div>
-      <div class="laptop-viewport">
-        <img src="../images/tpd-site-full/about-us.webp" style="--scroll-dist:3744px;" alt="TPD Claim Support About Us page">
-      </div>
+  <div class="monitor-captions">
+    <span style="left:26.4%;">Homepage</span>
+    <span style="left:54.9%;">About Us</span>
+    <span style="left:78.4%;">Services</span>
+  </div>
+
+  <div class="monitor-scene">
+    <div class="monitor-scene-inner">
+      <img class="monitor-frame-img" src="../images/monitor-mockup-frame.png" alt="">
+      <div class="monitor-screen s1"><img src="../images/tpd-site-full/eligibility.webp" alt="TPD Claim Support eligibility page"></div>
+      <div class="monitor-screen s2"><img src="../images/tpd-site-full/how-we-help.webp" alt="TPD Claim Support How We Help page"></div>
+      <div class="monitor-screen s3"><img src="../images/tpd-site-full/brisbane-office.webp" alt="TPD Claim Support Brisbane office page"></div>
     </div>
   </div>
-  <div class="laptop-base"></div>
-  <div class="laptop-shadow"></div>
-</div><div class="device-caption">About Us</div></div>
-    <div><div class="laptop">
-  <div class="laptop-frame">
-    <div class="laptop-notch"></div>
-    <div class="laptop-screen">
-      <div class="browser-chrome">
-        <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-        <div class="browser-url">tpdclaimsupport.com.au/services</div>
-      </div>
-      <div class="laptop-viewport">
-        <img src="../images/tpd-site-full/services.webp" style="--scroll-dist:2769.5px;" alt="TPD Claim Support Services page">
-      </div>
-    </div>
-  </div>
-  <div class="laptop-base"></div>
-  <div class="laptop-shadow"></div>
-</div><div class="device-caption">Services</div></div>
-    <div><div class="laptop">
-  <div class="laptop-frame">
-    <div class="laptop-notch"></div>
-    <div class="laptop-screen">
-      <div class="browser-chrome">
-        <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-        <div class="browser-url">tpdclaimsupport.com.au/am-i-eligible-for-tpd</div>
-      </div>
-      <div class="laptop-viewport">
-        <img src="../images/tpd-site-full/eligibility.webp" style="--scroll-dist:1569.5px;" alt="TPD Claim Support eligibility page">
-      </div>
-    </div>
-  </div>
-  <div class="laptop-base"></div>
-  <div class="laptop-shadow"></div>
-</div><div class="device-caption">Am I Eligible for TPD</div></div>
-    <div><div class="laptop">
-  <div class="laptop-frame">
-    <div class="laptop-notch"></div>
-    <div class="laptop-screen">
-      <div class="browser-chrome">
-        <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-        <div class="browser-url">tpdclaimsupport.com.au/how-we-help</div>
-      </div>
-      <div class="laptop-viewport">
-        <img src="../images/tpd-site-full/how-we-help.webp" style="--scroll-dist:2415px;" alt="TPD Claim Support How We Help page">
-      </div>
-    </div>
-  </div>
-  <div class="laptop-base"></div>
-  <div class="laptop-shadow"></div>
-</div><div class="device-caption">How We Help</div></div>
-    <div><div class="laptop">
-  <div class="laptop-frame">
-    <div class="laptop-notch"></div>
-    <div class="laptop-screen">
-      <div class="browser-chrome">
-        <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-        <div class="browser-url">tpdclaimsupport.com.au/brisbane-office</div>
-      </div>
-      <div class="laptop-viewport">
-        <img src="../images/tpd-site-full/brisbane-office.webp" style="--scroll-dist:1546px;" alt="TPD Claim Support Brisbane office page">
-      </div>
-    </div>
-  </div>
-  <div class="laptop-base"></div>
-  <div class="laptop-shadow"></div>
-</div><div class="device-caption">Brisbane Office</div></div>
+  <div class="monitor-captions">
+    <span style="left:26.4%;">Am I Eligible for TPD</span>
+    <span style="left:54.9%;">How We Help</span>
+    <span style="left:78.4%;">Brisbane Office</span>
   </div>
 </section>
 
