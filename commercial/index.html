@@ -78,6 +78,17 @@
   .nav-cta{ padding:9px 20px; border:1px solid var(--ink); border-radius:999px; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; }
   .nav-cta:hover{ background:var(--ink); color:var(--paper); }
 
+  .nav-drop{ position:relative; }
+  .nav-drop-trigger{ background:none; border:none; font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; cursor:none; padding:0; }
+  .nav-drop-menu{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,-6px); margin-top:16px; background:var(--paper); border:1px solid var(--line);
+    min-width:230px; padding:8px 0; opacity:0; visibility:hidden;
+    transition:opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; box-shadow:0 24px 48px rgba(0,0,0,0.1); z-index:20;
+  }
+  .nav-drop:hover .nav-drop-menu{ opacity:1; visibility:visible; transform:translate(-50%,0); }
+  .nav-drop-menu a{ display:block; padding:11px 22px; font-size:0.78rem; text-transform:none; letter-spacing:normal; color:var(--ink); }
+  .nav-drop-menu a:hover{ background:var(--line); }
+
   /* ===== HERO — statement + showreel CTA ===== */
   .hero{ padding:70px 0 60px; text-align:center; }
   .hero-index{ font-size:0.72rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:28px; }
@@ -209,14 +220,27 @@
 <div id="page-bg"></div>
 
 <nav>
-  <a href="/commercial/" class="nav-name">Sam Walcroft</a>
+  <a href="index.html" class="nav-name">Sam Walcroft</a>
   <div class="nav-links">
-    <a href="/commercial/services.html">Services</a>
-    <a href="/commercial/case-studies.html">Case Studies</a>
-    <a href="/commercial/photography.html">Photography</a>
-    <a href="/commercial/about.html">About</a>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Services</button>
+      <div class="nav-drop-menu">
+        <a href="services/video-production.html">Video Production</a>
+        <a href="services/social-media-management.html">Social Media Management</a>
+        <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+        <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
+      </div>
+    </div>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Case Studies</button>
+      <div class="nav-drop-menu">
+        <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+        <a href="case-studies/music-videos.html">Music Video Direction</a>
+      </div>
+    </div>
+    <a href="photography/photography.html">Photography</a>
   </div>
-  <a href="/commercial/contact.html" class="nav-cta">Contact</a>
+  <a href="contact.html" class="nav-cta">Contact</a>
 </nav>
 
 <div class="reel-scroll" id="reel-scroll">
@@ -224,20 +248,20 @@
   <div class="reel-hint">Scroll to browse</div>
 
   <div class="reel-stage-item active" data-idx="0" style="background-image:url('image/good-intns-club.webp');">
-    <video autoplay muted loop playsinline src="videos/good-intns-club.mp4"></video>
+    <video autoplay muted playsinline src="videos/good-intns-club.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="1" style="background:linear-gradient(160deg,#3f6b52,#152820);">
-    <video autoplay muted loop playsinline src="videos/tpd.mp4"></video>
+    <video autoplay muted playsinline src="videos/tpd.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="2" style="background-image:url('image/wine.webp');">
-    <video autoplay muted loop playsinline src="videos/wine.mp4"></video>
+    <video autoplay muted playsinline src="videos/wine.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="3" style="background:linear-gradient(160deg,#d9a548,#8a5f18);"></div>
   <div class="reel-stage-item" data-idx="4" style="background:linear-gradient(160deg,#2d6b74,#0f2a30);">
-    <video autoplay muted loop playsinline src="videos/fingertips.mp4"></video>
+    <video autoplay muted playsinline src="videos/fingertips.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="5" style="background-image:url('image/nffcc.webp');">
-    <video autoplay muted loop playsinline src="videos/nffcc.mp4"></video>
+    <video autoplay muted playsinline src="videos/nffcc.mp4"></video>
   </div>
 
   <div class="reel-stage-info">
@@ -323,7 +347,7 @@
 <section class="cta-band">
   <div class="wrap">
     <div class="cta-title">Let's build something that actually performs.</div>
-    <a class="btn-magnetic" href="/commercial/contact.html">Start a Project</a>
+    <a class="btn-magnetic" href="contact.html">Start a Project</a>
   </div>
 </section>
 
@@ -335,17 +359,17 @@
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Services</div>
-      <a href="/commercial/services.html">Video Production</a>
-      <a href="/commercial/services.html">Social Media Management</a>
-      <a href="/commercial/services.html">SEO &amp; Web Development</a>
-      <a href="/commercial/services.html">Paid Social &amp; Meta Ads</a>
+      <a href="services/video-production.html">Video Production</a>
+      <a href="services/social-media-management.html">Social Media Management</a>
+      <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+      <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Work</div>
-      <a href="/commercial/case-studies.html">Case Studies</a>
-      <a href="/commercial/photography.html">Photography</a>
-      <a href="/commercial/about.html">About</a>
-      <a href="/commercial/contact.html">Contact</a>
+      <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+      <a href="case-studies/music-videos.html">Music Video Direction</a>
+      <a href="photography/photography.html">Photography</a>
+      <a href="contact.html">Contact</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Connect</div>
@@ -488,14 +512,51 @@
   function lerp(a, b, t){ return a + (b - a) * t; }
   function lerpColor(c1, c2, t){ return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)]; }
 
+  // auto-advance: each panel's video plays through twice, then we move to the next.
+  // panels with no video (e.g. Live Orchestra EP) fall back to a fixed timer instead.
+  const stagePlayCounts = new Map();
+  let noVideoFallbackTimer = null;
+  function clearNoVideoFallback(){
+    if (noVideoFallbackTimer) { clearTimeout(noVideoFallbackTimer); noVideoFallbackTimer = null; }
+  }
+  function advanceReel(){
+    if (userScrolling) return;
+    activeIdx = (activeIdx + 1) % numPanels;
+  }
+  stageItems.forEach(el => {
+    const vid = el.querySelector('video');
+    if (!vid) return;
+    stagePlayCounts.set(vid, 0);
+    vid.addEventListener('ended', () => {
+      const count = (stagePlayCounts.get(vid) || 0) + 1;
+      if (count < 2) {
+        stagePlayCounts.set(vid, count);
+        vid.currentTime = 0;
+        vid.play().catch(()=>{});
+      } else {
+        stagePlayCounts.set(vid, 0);
+        advanceReel();
+      }
+    });
+  });
+
+  let currentPanelIdx = -1;
   function setActive(idx){
+    if (idx === currentPanelIdx) return; // this runs every animation frame — only act on a real change
+    currentPanelIdx = idx;
+    clearNoVideoFallback();
     stageItems.forEach(el => {
       const isActive = Number(el.dataset.idx) === idx;
       el.classList.toggle('active', isActive);
       const vid = el.querySelector('video');
       if (vid) {
-        if (isActive) { vid.play().catch(()=>{}); }
-        else { vid.pause(); }
+        if (isActive) {
+          stagePlayCounts.set(vid, 0);
+          vid.currentTime = 0;
+          vid.play().catch(()=>{});
+        } else {
+          vid.pause();
+        }
       }
     });
     thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
@@ -505,6 +566,13 @@
     stageTitle.textContent = d.title;
     stageRole.textContent = d.role;
     if (stageLink) stageLink.href = d.link;
+
+    // no video on this panel — advance on a timed fallback (roughly two "loops" worth)
+    const activeItem = document.querySelector(`.reel-stage-item[data-idx="${idx}"]`);
+    const activeVid = activeItem ? activeItem.querySelector('video') : null;
+    if (!activeVid) {
+      noVideoFallbackTimer = setTimeout(advanceReel, 7000);
+    }
   }
   thumbs.forEach(thumb => {
     thumb.addEventListener('click', () => {
@@ -523,17 +591,6 @@
     clearTimeout(userScrollTimer);
     userScrollTimer = setTimeout(() => { userScrolling = false; }, 1200);
   }, { passive: true });
-
-  // auto-cycle through the reel when the viewer is in view and the person isn't actively scrolling
-  function reelIsInView(){
-    const r = reelScroll.getBoundingClientRect();
-    return r.top < 1 && r.bottom > window.innerHeight - 1;
-  }
-  setInterval(() => {
-    if (!userScrolling && reelIsInView()) {
-      activeIdx = (activeIdx + 1) % numPanels;
-    }
-  }, 4500);
 
   function rgbaStr(arr, a){ return `rgba(${arr[0].toFixed(0)}, ${arr[1].toFixed(0)}, ${arr[2].toFixed(0)}, ${a.toFixed(2)})`; }
 
