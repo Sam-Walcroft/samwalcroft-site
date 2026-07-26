@@ -125,12 +125,11 @@
   .img-grid > :nth-child(2){ grid-column:span 1; grid-row:span 2; }
   .img-grid > :nth-child(3){ grid-column:span 1; grid-row:span 1; }
   .img-grid > :nth-child(4){ grid-column:span 1; grid-row:span 1; }
-  .img-grid > :nth-child(5){ grid-column:span 2; grid-row:span 1; }
-  .img-grid > :nth-child(6){ grid-column:span 2; grid-row:span 1; }
+  .img-grid > :nth-child(5){ grid-column:span 2; grid-row:span 2; }
+  .img-grid > :nth-child(6){ grid-column:span 2; grid-row:span 2; }
   @media(max-width:700px){
-    .img-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:150px; }
+    .img-grid{ grid-template-columns:1fr; grid-auto-rows:220px; }
     .img-grid > *{ grid-column:span 1 !important; grid-row:span 1 !important; }
-    .img-grid > :nth-child(1){ grid-column:span 2 !important; grid-row:span 2 !important; }
   }
 
   footer{ border-top:none; margin-top:80px; padding-top:0; }
@@ -224,20 +223,20 @@
 <section class="wrap">
   <div class="section-title">Featured Work</div>
   <div class="img-grid">
+    <a href="../case-studies/music-videos.html" class="img-tile">
+      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-guitarist-blue.webp');"></div>
+      <div class="img-tile-caption">Live Performance</div>
+    </a>
     <a href="../index.html" class="img-tile">
       <div class="img-tile-img" style="background-image:url('../images/video-production/bts-tshirts.webp');"></div>
       <div class="img-tile-caption">Behind the Scenes</div>
     </a>
     <a href="../case-studies/music-videos.html" class="img-tile">
-      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-guitarist-blue.webp');"></div>
+      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-guitar-closeup.webp');"></div>
       <div class="img-tile-caption">Live Performance</div>
     </a>
     <a href="../case-studies/music-videos.html" class="img-tile">
-      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-singer-warm.webp');"></div>
-      <div class="img-tile-caption">On Set</div>
-    </a>
-    <a href="../case-studies/music-videos.html" class="img-tile">
-      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-guitar-closeup.webp');"></div>
+      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-acoustic-blue.webp');"></div>
       <div class="img-tile-caption">Live Performance</div>
     </a>
     <a href="../index.html" class="img-tile">
@@ -245,8 +244,8 @@
       <div class="img-tile-caption">Interview Shoot</div>
     </a>
     <a href="../case-studies/music-videos.html" class="img-tile">
-      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-acoustic-blue.webp');"></div>
-      <div class="img-tile-caption">Live Performance</div>
+      <div class="img-tile-img" style="background-image:url('../images/video-production/bts-singer-warm.webp');"></div>
+      <div class="img-tile-caption">On Set</div>
     </a>
   </div>
 </section>
