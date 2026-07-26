@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Sam Walcroft</title>
+<meta name="description" content="Get in touch with Sam Walcroft for video production, social media management, SEO &amp; web development, or paid social &amp; Meta Ads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --paper:#f8f3ea; --ink:#201d19; --ink-soft:#7d7466; --olive:#4a5c3a; --line:rgba(32,29,25,0.12);
+    --accent:#c1663a; --gold:#d9a548; --teal:#2d6b74; --wine:#8a4560; --emerald:#3f6b52;
+    --display:'Libre Caslon Display', Georgia, serif;
+    --sans:'Inter Tight', system-ui, sans-serif;
+  }
+  html{scroll-behavior:smooth; cursor:none;}
+  body{ font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.7; cursor:none; }
+  a, button{ cursor:none; }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding-left:44px; padding-right:44px;}
+  @media(max-width:700px){ .wrap{padding-left:24px; padding-right:24px;} }
+  em{ font-style:italic; color:var(--accent); }
+
+  #cursor{
+    position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
+    background:var(--ink); pointer-events:none; z-index:200; transform:translate(-50%,-50%);
+    transition:width 0.2s, height 0.2s, background 0.2s;
+  }
+  #cursor.hover{ width:44px; height:44px; background:var(--accent); }
+  @media(max-width:900px){ #cursor{ display:none; } html,body{ cursor:auto; } a,button{ cursor:pointer; } }
+
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 44px; }
+  .nav-name{ font-family:var(--display); font-style:italic; font-size:1.05rem; }
+  .nav-links{ display:none; gap:28px; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; }
+  @media(min-width:860px){ .nav-links{ display:flex; } }
+  .nav-links a{ position:relative; }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--ink); transition:width 0.3s; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ padding:9px 20px; border:1px solid var(--ink); border-radius:999px; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; }
+  .nav-cta:hover{ background:var(--ink); color:var(--paper); }
+
+  .page-hero{ padding:60px 0 70px; }
+  .eyebrow{ font-size:0.7rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:20px; display:inline-flex; align-items:center; gap:10px; }
+  .eyebrow::before{ content:''; width:26px; height:1px; background:var(--accent); display:inline-block; }
+  .page-title{ font-family:var(--display); font-style:italic; font-size:clamp(2rem,5vw,3.6rem); max-width:18ch; line-height:1.15; }
+  .page-sub{ margin-top:20px; color:var(--ink-soft); max-width:56ch; font-size:1rem; }
+
+  section{ padding:70px 0; }
+  .section-title{ font-family:var(--display); font-style:italic; font-size:clamp(1.6rem,3.4vw,2.4rem); margin-bottom:32px; position:relative; padding-bottom:18px; display:inline-block; }
+  .section-title::after{ content:''; position:absolute; left:0; bottom:0; width:48px; height:2px; background:var(--accent); }
+
+  footer{ border-top:none; margin-top:80px; padding-top:0; }
+  footer::before{
+    content:''; display:block; height:5px; margin-bottom:56px;
+    background:linear-gradient(90deg, var(--emerald), var(--gold), var(--wine), var(--teal), var(--accent));
+  }
+  .footer-top{ display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; padding-bottom:40px; }
+  .footer-col-title{ font-size:0.66rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px; }
+  .footer-col a{ display:block; font-size:0.85rem; margin-bottom:8px; color:var(--ink-soft); }
+  .footer-col a:hover{ color:var(--accent); }
+  .footer-bottom{ border-top:1px solid var(--line); padding:18px 0 26px; font-size:0.68rem; color:var(--ink-soft); text-align:center; letter-spacing:0.08em; text-transform:uppercase; }
+
+  .nav-drop{ position:relative; }
+  .nav-drop-trigger{ background:none; border:none; font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; cursor:none; padding:0; }
+  .nav-drop-menu{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,-6px); margin-top:16px; background:var(--paper); border:1px solid var(--line);
+    min-width:230px; padding:8px 0; opacity:0; visibility:hidden;
+    transition:opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; box-shadow:0 24px 48px rgba(0,0,0,0.1); z-index:20;
+  }
+  .nav-drop:hover .nav-drop-menu{ opacity:1; visibility:visible; transform:translate(-50%,0); }
+  .nav-drop-menu a{ display:block; padding:11px 22px; font-size:0.78rem; text-transform:none; letter-spacing:normal; }
+  .nav-drop-menu a:hover{ background:var(--line); }
+
+  body{ position:relative; }
+  #mood-wash{
+    position:fixed; inset:0; z-index:-2; pointer-events:none;
+    background:
+      radial-gradient(circle at 12% -5%, rgba(193,102,58,0.09), transparent 50%),
+      radial-gradient(circle at 92% 105%, rgba(74,92,58,0.08), transparent 48%),
+      radial-gradient(circle at 60% 40%, rgba(216,166,72,0.05), transparent 60%);
+  }
+  .page-hero{ position:relative; overflow:hidden; }
+  .page-hero::before{
+    content:'SW'; position:absolute; top:-0.22em; right:-0.03em; z-index:0;
+    font-family:var(--display); font-style:italic; font-size:clamp(7rem,20vw,15rem);
+    color:var(--ink); opacity:0.045; line-height:1; letter-spacing:-0.02em; pointer-events:none;
+  }
+  .page-hero > *{ position:relative; z-index:1; }
+
+  /* ===== CONTACT LAYOUT ===== */
+  .contact-grid{ display:grid; grid-template-columns:1fr; gap:56px; }
+  @media(min-width:900px){ .contact-grid{ grid-template-columns:1.1fr 1fr; } }
+
+  .contact-form{ display:flex; flex-direction:column; gap:18px; }
+  .contact-form input, .contact-form textarea{
+    width:100%; background:none; border:none; border-bottom:1px solid var(--line);
+    padding:12px 2px; font-family:var(--sans); font-size:0.95rem; color:var(--ink);
+    cursor:auto; resize:none; transition:border-color 0.25s;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{ color:var(--ink-soft); }
+  .contact-form input:focus, .contact-form textarea:focus{ outline:none; border-bottom-color:var(--accent); }
+  .btn-submit{
+    align-self:flex-start; margin-top:8px; padding:14px 34px; border:1px solid var(--ink); border-radius:999px;
+    background:none; font-family:var(--sans); font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase;
+    transition:background 0.3s, color 0.3s;
+  }
+  .btn-submit:hover{ background:var(--ink); color:var(--paper); }
+
+  .contact-info-block{ margin-bottom:34px; }
+  .contact-info-label{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px; }
+  .contact-info-value{ font-family:var(--display); font-style:italic; font-size:1.4rem; }
+  .contact-info-value a:hover{ color:var(--accent); }
+  .contact-socials{ display:flex; gap:18px; margin-top:8px; }
+  .contact-socials a{ font-size:0.85rem; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .contact-socials a:hover{ color:var(--accent); border-color:var(--accent); }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="mood-wash"></div>
+<nav>
+  <a href="index.html" class="nav-name">Sam Walcroft</a>
+  <div class="nav-links">
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Services</button>
+      <div class="nav-drop-menu">
+        <a href="services/video-production.html">Video Production</a>
+        <a href="services/social-media-management.html">Social Media Management</a>
+        <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+        <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
+      </div>
+    </div>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Case Studies</button>
+      <div class="nav-drop-menu">
+        <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+        <a href="case-studies/music-videos.html">Music Video Direction</a>
+      </div>
+    </div>
+    <a href="photography/photography.html">Photography</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+
+<header class="page-hero wrap">
+  <div class="eyebrow">Get in Touch</div>
+  <h1 class="page-title">Let's Build <em>Something</em> That Performs</h1>
+  <p class="page-sub">Video, strategy and growth work — tell me what you're trying to move, and I'll tell you honestly whether I'm the right fit.</p>
+</header>
+
+<section class="wrap">
+  <div class="contact-grid">
+    <div>
+      <div class="section-title">Send a Message</div>
+      <form class="contact-form" action="mailto:info@tpdcs.com.au" method="POST" enctype="text/plain">
+        <input type="text" name="Name" placeholder="Name" required>
+        <input type="email" name="Email" placeholder="Email" required>
+        <textarea name="Message" rows="6" placeholder="Tell me about your project" required></textarea>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+    <div>
+      <div class="contact-info-block">
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-value"><a href="mailto:info@tpdcs.com.au">info@tpdcs.com.au</a></div>
+      </div>
+      <div class="contact-info-block">
+        <div class="contact-info-label">Location</div>
+        <div class="contact-info-value">Brisbane, Australia</div>
+      </div>
+      <div class="contact-info-block">
+        <div class="contact-info-label">Connect</div>
+        <div class="contact-socials">
+          <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="footer-top">
+    <div>
+      <div style="font-family:var(--display); font-style:italic; font-size:1.1rem; margin-bottom:6px;">Sam Walcroft</div>
+      <div style="color:var(--ink-soft); font-size:0.82rem;">Brisbane, Australia</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <a href="services/video-production.html">Video Production</a>
+      <a href="services/social-media-management.html">Social Media Management</a>
+      <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+      <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Work</div>
+      <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+      <a href="case-studies/music-videos.html">Music Video Direction</a>
+      <a href="photography/photography.html">Photography</a>
+      <a href="index.html">Home</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Connect</div>
+      <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">Sam Walcroft — Brisbane, Australia</div>
+</footer>
+<script>
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+</script>
+</body>
+</html>
