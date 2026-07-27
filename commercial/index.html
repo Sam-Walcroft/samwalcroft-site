@@ -112,6 +112,13 @@
   }
   @media(max-width:760px){ .showreel-frame{ aspect-ratio:4/5; } }
   .showreel-frame video{ width:100%; height:100%; object-fit:cover; display:block; opacity:1; }
+  .showreel-frame::before{
+    content:''; position:absolute; top:0; left:0; width:55%; height:100%; z-index:1;
+    background:linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.18) 42%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.18) 58%, transparent 80%);
+    transform:skewX(-18deg) translateX(-220%);
+    pointer-events:none;
+  }
+  .showreel-frame:hover::before{ transform:skewX(-18deg) translateX(280%); transition:transform 1.1s cubic-bezier(.25,.7,.3,1); }
   .showreel-caption{
     position:absolute; bottom:28px; left:28px; color:#f4efe4; z-index:2;
     font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.8;
