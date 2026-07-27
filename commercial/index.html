@@ -108,9 +108,8 @@
   /* ===== SHOWREEL — full-bleed cinematic panel ===== */
   .showreel{ padding:0 0 130px; }
   .showreel-frame{
-    aspect-ratio:21/9; border-radius:4px; overflow:hidden; position:relative;
+    aspect-ratio:16/9; border-radius:4px; overflow:hidden; position:relative; background:#111; cursor:pointer;
   }
-  @media(max-width:760px){ .showreel-frame{ aspect-ratio:4/5; } }
   .showreel-frame video{ width:100%; height:100%; object-fit:cover; display:block; opacity:1; }
   .showreel-frame::before{
     content:''; position:absolute; top:0; left:0; width:55%; height:100%; z-index:1;
@@ -123,6 +122,27 @@
     position:absolute; bottom:28px; left:28px; color:#f4efe4; z-index:2;
     font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.8;
   }
+  .showreel-play-indicator{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:76px; height:76px; border-radius:50%; z-index:4; pointer-events:none;
+    background:rgba(16,14,12,0.5); border:1px solid rgba(244,239,228,0.55);
+    display:flex; align-items:center; justify-content:center; color:#f4efe4;
+    opacity:1; transition:opacity 0.35s ease, transform 0.35s ease;
+  }
+  .showreel-play-indicator svg{ width:26px; height:26px; }
+  .showreel-play-indicator .icon-pause{ display:none; }
+  .showreel-frame.is-playing .showreel-play-indicator{ opacity:0; transform:translate(-50%,-50%) scale(0.85); }
+  .showreel-frame.is-playing:hover .showreel-play-indicator{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  .showreel-frame.is-playing .showreel-play-indicator .icon-play{ display:none; }
+  .showreel-frame.is-playing .showreel-play-indicator .icon-pause{ display:block; }
+  .showreel-restart-btn{
+    position:absolute; bottom:16px; right:16px; z-index:5; width:38px; height:38px; border-radius:50%;
+    background:rgba(16,14,12,0.55); border:1px solid rgba(244,239,228,0.4);
+    display:flex; align-items:center; justify-content:center; color:#f4efe4;
+    opacity:0; transition:opacity 0.3s ease; pointer-events:none;
+  }
+  .showreel-restart-btn svg{ width:16px; height:16px; }
+  .showreel-frame:hover .showreel-restart-btn{ opacity:1; pointer-events:auto; }
 
   /* ===== MARQUEE ===== */
   .marquee{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 0; overflow:hidden; }
@@ -319,8 +339,15 @@
 </header>
 
 <section class="showreel wrap" id="showreel">
-  <div class="showreel-frame media-card">
-    <video autoplay muted loop playsinline poster="images/showreel-poster.webp" src="videos/showreel.mp4"></video>
+  <div class="showreel-frame" id="showreelFrame">
+    <video id="showreelVideo" playsinline poster="images/showreel-poster.webp" src="videos/showreel.mp4"></video>
+    <div class="showreel-play-indicator">
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </div>
+    <button class="showreel-restart-btn" id="showreelRestartBtn" aria-label="Restart showreel" title="Restart from beginning">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+    </button>
     <div class="showreel-caption">Showreel — Ads, Music Videos &amp; Content</div>
   </div>
 </section>
@@ -479,6 +506,29 @@
 </script>
 <script>
   initHoverPreview('.media-card');
+
+  // showreel: click anywhere on the frame to play/pause (with sound), separate button to restart
+  (function initShowreel(){
+    const frame = document.getElementById('showreelFrame');
+    const video = document.getElementById('showreelVideo');
+    const restartBtn = document.getElementById('showreelRestartBtn');
+    if (!frame || !video) return;
+
+    function syncState(){ frame.classList.toggle('is-playing', !video.paused && !video.ended); }
+
+    frame.addEventListener('click', () => {
+      if (video.paused || video.ended) { video.play().catch(()=>{}); }
+      else { video.pause(); }
+    });
+    restartBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.currentTime = 0;
+      video.play().catch(()=>{});
+    });
+    video.addEventListener('play', syncState);
+    video.addEventListener('pause', syncState);
+    video.addEventListener('ended', syncState);
+  })();
 
   const ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
   const DATA = [
