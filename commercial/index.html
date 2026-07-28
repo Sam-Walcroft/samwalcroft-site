@@ -271,7 +271,7 @@
         <a href="case-studies/music-videos.html">Music Video Direction</a>
       </div>
     </div>
-    <a href="photography/photography.html">Photography</a>
+    <a href="photography.html">Photography</a>
   </div>
   <a href="contact.html" class="nav-cta">Contact</a>
 </nav>
@@ -410,7 +410,7 @@
       <div class="footer-col-title">Work</div>
       <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
       <a href="case-studies/music-videos.html">Music Video Direction</a>
-      <a href="photography/photography.html">Photography</a>
+      <a href="photography.html">Photography</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="footer-col">
@@ -564,7 +564,6 @@
   let userScrollTimer = null;
   const BEIGE = [250, 249, 245];
   const INK = [17, 17, 16];
-  const panelColors = FALLBACK_HEX.map(hexOrRgbToArr);
 
   function hexOrRgbToArr(str){
     if (!str) return [201,162,39];
@@ -576,6 +575,7 @@
   }
   function lerp(a, b, t){ return a + (b - a) * t; }
   function lerpColor(c1, c2, t){ return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)]; }
+  const panelColors = FALLBACK_HEX.map(hexOrRgbToArr);
 
   // auto-advance: each panel's video plays through twice, then we move to the next.
   // panels with no video (e.g. Live Orchestra EP) fall back to a fixed timer instead.
