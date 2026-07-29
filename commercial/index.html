@@ -167,43 +167,77 @@
   .reel-stage-item::after{
     content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6), transparent 45%);
   }
-  .reel-stage-info{ position:absolute; left:44px; bottom:44px; z-index:3; }
+  .reel-stage-info{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3;
+    text-align:center; max-width:min(84vw, 640px); width:100%;
+    text-shadow:0 2px 14px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .reel-stage-info::before{
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:150%; height:180%; z-index:-1; pointer-events:none;
+    background:radial-gradient(closest-side, rgba(0,0,0,0.3), transparent 68%);
+  }
   .reel-stage-info .num{ font-size:0.75rem; letter-spacing:0.2em; opacity:0.65; margin-bottom:10px; }
   .reel-stage-info .cat{ font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; opacity:0.7; margin-bottom:8px; }
-  .reel-stage-info .title{ font-family:var(--display); font-style:italic; font-size:clamp(1.8rem,3.6vw,2.8rem); }
-  .reel-stage-info .role{ font-size:0.85rem; opacity:0.75; margin-top:6px; }
+  .reel-stage-info .title{ font-family:var(--display); font-style:italic; font-size:clamp(2rem,5.2vw,3.8rem); }
+  .reel-stage-info .role{ font-size:0.85rem; opacity:0.75; margin-top:8px; }
   .reel-stage-info .watch-full{
-    display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+    display:inline-flex; align-items:center; gap:8px; margin-top:24px;
     font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
     border-bottom:1px solid rgba(244,239,228,0.5); padding-bottom:3px; opacity:0.9;
   }
   .reel-stage-info .watch-full:hover{ opacity:1; border-color:#f4efe4; }
 
+  /* browse bar — a floating glass dock on the left, vertical, clear of the centred caption */
   .reel-filmstrip{
-    position:absolute; left:0; top:0; height:100%; width:230px; z-index:52; overflow:visible;
+    position:absolute; left:clamp(16px, 3vw, 40px); top:50%; z-index:52;
+    max-height:70vh;
     opacity:0; pointer-events:none;
-    transform:translateX(-40px); transition:opacity 0.35s ease, transform 0.35s ease;
+    transform:translate(-18px, -50%);
+    transition:opacity 0.4s ease, transform 0.4s ease;
   }
-  .reel-filmstrip.visible{ opacity:1; transform:translateX(0); }
+  .reel-filmstrip.visible{ opacity:1; pointer-events:auto; transform:translate(0, -50%); }
   .film-track{
-    display:flex; flex-direction:column; width:100%; height:100%;
-    background:rgba(10,9,7,0.85); backdrop-filter:blur(8px);
+    display:flex; flex-direction:column; align-items:center; gap:clamp(9px, 1.6vw, 14px);
+    padding:14px; border-radius:24px;
+    background:rgba(10,9,7,0.5); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(244,239,228,0.14);
+    box-shadow:0 30px 60px -24px rgba(0,0,0,0.45);
+    max-height:74vh; overflow-y:auto; overflow-x:visible; scrollbar-width:none;
   }
+  .film-track::-webkit-scrollbar{ display:none; }
   .film-thumb{
-    flex:1 1 0; min-height:0; width:100%; background-size:cover; background-position:center;
-    position:relative; cursor:none;
-    transform-origin:0% 50%;
-    transition:transform 0.35s ease, flex-grow 0.35s ease;
+    flex:0 0 auto; width:clamp(52px, 8.5vw, 84px); aspect-ratio:1;
+    border-radius:13px; background-size:cover; background-position:center;
+    position:relative; cursor:none; overflow:hidden;
+    transform:scale(0.92); opacity:0.6;
+    transition:transform 0.4s cubic-bezier(.2,.8,.2,1), opacity 0.3s ease, box-shadow 0.3s ease;
   }
-  .film-thumb.is-current{ transform:scale(1.3); z-index:2; flex-grow:1.4; box-shadow:0 20px 40px rgba(0,0,0,0.5); }
+  .film-thumb:hover{ opacity:0.88; transform:scale(1); }
+  .film-thumb.is-current{
+    transform:scale(1.2); opacity:1; z-index:2;
+    box-shadow:0 0 0 1.5px rgba(244,239,228,0.9), 0 16px 26px -12px rgba(0,0,0,0.45);
+  }
   .film-thumb-cap{
-    position:absolute; left:0; right:0; bottom:0; padding:10px;
-    background:linear-gradient(to top, rgba(0,0,0,0.8), transparent 70%);
-    font-size:0.64rem; letter-spacing:0.05em;
+    position:absolute; top:50%; left:calc(100% + 12px); transform:translateY(-50%) translateX(-6px);
+    white-space:nowrap; padding:9px 16px; border-radius:999px;
+    background:rgba(10,9,7,0.92); backdrop-filter:blur(6px);
+    text-align:left; letter-spacing:0.05em;
+    opacity:0; pointer-events:none; transition:opacity 0.25s ease, transform 0.25s ease;
   }
-  .film-thumb-cap .fnum{ opacity:0.65; margin-bottom:2px; }
-  .film-thumb-cap .fname{ font-family:var(--display); font-style:italic; font-size:0.8rem; line-height:1.15; }
-  .film-thumb-cap .fcat{ opacity:0.6; text-transform:uppercase; letter-spacing:0.08em; font-size:0.58rem; margin-top:2px; }
+  .film-thumb.is-current .film-thumb-cap, .film-thumb:hover .film-thumb-cap{ opacity:1; transform:translateY(-50%) translateX(0); }
+  .film-thumb-cap .fnum{ opacity:0.6; font-size:0.6rem; margin-bottom:2px; }
+  .film-thumb-cap .fname{ font-family:var(--display); font-style:italic; font-size:0.82rem; line-height:1.15; }
+  .film-thumb-cap .fcat{ opacity:0.55; text-transform:uppercase; letter-spacing:0.08em; font-size:0.56rem; margin-top:2px; }
+  @media(max-width:560px){
+    .film-thumb-cap{ display:none; }
+  }
+
+  .reel-progress{
+    position:absolute; left:0; right:0; bottom:0; height:2px; z-index:51;
+    background:rgba(244,239,228,0.12);
+  }
+  .reel-progress-fill{ height:100%; width:0%; background:#f4efe4; transition:width 0.25s ease; }
 
   .reel-hint{
     position:absolute; left:44px; top:44px; z-index:3; font-size:0.7rem; letter-spacing:0.16em;
@@ -329,6 +363,7 @@
       </div>
     </div>
   </div>
+  <div class="reel-progress"><div class="reel-progress-fill" id="reel-progress-fill"></div></div>
 </section>
 </div>
 
@@ -558,6 +593,7 @@
   const stageRole = document.getElementById('stage-role');
   const stageLink = document.getElementById('stage-link');
   const pageBg = document.getElementById('page-bg');
+  const reelProgressFill = document.getElementById('reel-progress-fill');
   const numPanels = stageItems.length;
   let activeIdx = 0;
   let userScrolling = false;
@@ -625,6 +661,7 @@
       }
     });
     thumbs.forEach(el => el.classList.toggle('is-current', Number(el.dataset.idx) === idx));
+    if (reelProgressFill) reelProgressFill.style.width = ((idx / (numPanels - 1)) * 100) + '%';
     const d = DATA[idx];
     stageNum.textContent = ROMAN[idx];
     stageCat.textContent = d.cat;
