@@ -273,7 +273,16 @@
     width:min(58vw, 820px); aspect-ratio:16/9; border-radius:4px;
     display:flex; align-items:flex-end; padding:36px; color:#f4efe4;
     background-size:cover; background-position:center; text-decoration:none;
+    position:relative; overflow:hidden;
   }
+  .reel-media video{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;
+  }
+  .reel-media::after{
+    content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(to top, rgba(0,0,0,0.6), transparent 55%);
+  }
+  .reel-media > div{ position:relative; z-index:2; }
   .reel-media .tag{ font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.75; margin-bottom:6px; }
   .reel-media .title{ font-family:var(--serif); font-style:italic; font-size:2rem; }
 </style>
@@ -329,16 +338,19 @@
     </div>
     <div class="reel-panel" data-img="images/wine.webp">
       <a class="reel-media" href="/work/wine.html" style="background-image:url('images/wine.webp'); background-size:cover; background-position:center;">
+        <video autoplay muted loop playsinline src="videos/wine.mp4"></video>
         <div><div class="tag">Music Video</div><div class="title">Wine</div></div>
       </a>
     </div>
-    <div class="reel-panel" data-bg-fallback="linear-gradient(160deg,#c9a227,#7a5f14)">
-      <a class="reel-media" href="/work/live-orchestra-ep.html" style="background:linear-gradient(160deg,#c9a227,#7a5f14);">
+    <div class="reel-panel" data-img="images/live-orchestra-ep.webp" data-bg-fallback="linear-gradient(160deg,#c9a227,#7a5f14)">
+      <a class="reel-media" href="/work/live-orchestra-ep.html" style="background-image:url('images/live-orchestra-ep.webp'); background-size:cover; background-position:center;">
+        <video autoplay muted loop playsinline src="videos/live-orchestra-ep.mp4"></video>
         <div><div class="tag">Music Video — 6 videos, one day</div><div class="title">Live Orchestra EP</div></div>
       </a>
     </div>
-    <div class="reel-panel" data-bg-fallback="linear-gradient(160deg,#7a3a48,#33151c)">
-      <a class="reel-media" href="/work/fingertips.html" style="background:linear-gradient(160deg,#7a3a48,#33151c);">
+    <div class="reel-panel" data-img="images/fingertips.webp" data-bg-fallback="linear-gradient(160deg,#7a3a48,#33151c)">
+      <a class="reel-media" href="/work/fingertips.html" style="background-image:url('images/fingertips.webp'); background-size:cover; background-position:center;">
+        <video autoplay muted loop playsinline src="videos/fingertips.mp4"></video>
         <div><div class="tag">Music Video</div><div class="title">Fingertips</div></div>
       </a>
     </div>
@@ -605,6 +617,7 @@
   const numPanels = reelPanels.length;
   const BEIGE = [244, 239, 228];
   const panelColors = new Array(numPanels).fill([201, 162, 39]); // temp fallback until sampled
+  let smoothContinuous = 0; // eased/lagged scroll position so panel motion glides instead of tracking the scrollbar 1:1
 
   function hexOrRgbToArr(str){
     if (!str) return [201,162,39];
@@ -626,25 +639,35 @@
     const span = rect.height - vh;
     const overall = span > 0 ? Math.min(Math.max(-rect.top / span, 0), 1) : 0;
     const continuous = overall * numPanels;
+    smoothContinuous += (continuous - smoothContinuous) * 0.12; // glide toward the scroll target instead of snapping straight to it
 
     let blendedColor = [0,0,0];
     let weightSum = 0;
 
     reelPanels.forEach((panel, i) => {
-      const local = continuous - i; // -1..0 = arriving from behind, 0..1 = current -> disappearing forward
-      let scale, opacity;
-      if (local <= 0) {
-        const t = Math.max(local + 1, 0); // 0 (far behind) -> 1 (arrived)
-        scale = 0.55 + t * 0.45;
-        opacity = t;
-      } else {
-        const t = Math.min(local, 1); // 0 (arrived) -> 1 (fully gone)
-        scale = 1 + t * 0.9;
-        opacity = 1 - t;
-      }
-      panel.style.transform = `scale(${scale.toFixed(3)})`;
-      panel.style.opacity = Math.max(0, Math.min(1, opacity)).toFixed(3);
-      panel.style.zIndex = 10 - Math.abs(local);
+      const local = smoothContinuous - i; // <0 = approaching from a distant point, 0 = centred/current, >0 = departed
+      const side = i % 2 === 0 ? -1 : 1; // alternate exit direction panel to panel: left, right, left, right...
+      const cl = Math.max(-4, Math.min(numPanels + 2, local)); // ceiling always beyond any reachable local, so exit growth never caps out early
+
+      // one continuous curve for the whole lifecycle, no branching, no plateau at the centre.
+      // approach is steep and holds small right up until dead centre, so it reads purely as "growing
+      // toward the viewer" — fully centred, no drift at all — and stays hidden behind the current slide
+      // until that slide actually leaves. The exit then grows fast and hard — much bigger than the
+      // approach — getting bigger and bigger the whole way out, as if heading off toward infinity.
+      const scale = cl < 0 ? Math.pow(2, cl * 6.5) : Math.pow(2, cl * 2.4);
+
+      // horizontal-only: virtually zero drift while arriving/centred (so it comes straight at the
+      // viewer with no sideways lean), then opens up smoothly right after centre into a sweep off to
+      // its alternating side — no vertical movement at all, the "lift off the page" is entirely the
+      // scale getting huge. Because the sweep scales with the panel's own current size it always
+      // outruns its own growth, clears the screen right as the next slide takes over, and never drifts
+      // back into frame.
+      const gate = (1 + Math.tanh((cl - 0.75) * 3.5)) / 2; // ~0 through the centre, ramps to ~1 just after
+      const xOff = side * scale * gate * 900;
+
+      panel.style.transform = `translateX(${xOff.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      panel.style.opacity = 1; // no fade — panels stay fully visible, revealed purely by scale/position/stacking
+      panel.style.zIndex = numPanels - i; // earlier panels always sit above later ones as they pass in front on their way out
 
       const dominance = Math.max(0, 1 - Math.abs(local)); // peaks at 1 when panel is fully "current"
       if (reelBlobs[i]) reelBlobs[i].style.opacity = (0.25 + dominance * 0.55).toFixed(3);
