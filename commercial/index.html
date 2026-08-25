@@ -346,14 +346,14 @@
 <section class="reel-viewer" id="work-viewer">
   <div class="reel-hint">Scroll to browse</div>
 
-  <div class="reel-stage-item active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
-    <video autoplay muted playsinline src="videos/good-intns-club.mp4"></video>
-  </div>
-  <div class="reel-stage-item" data-idx="1" style="background-image:url('images/tpd.webp');">
+  <div class="reel-stage-item active" data-idx="0" style="background-image:url('images/tpd.webp');">
     <video autoplay muted playsinline src="videos/tpd.mp4"></video>
   </div>
-  <div class="reel-stage-item" data-idx="2" style="background-image:url('images/wine.webp');">
+  <div class="reel-stage-item" data-idx="1" style="background-image:url('images/wine.webp');">
     <video autoplay muted playsinline src="videos/wine.mp4"></video>
+  </div>
+  <div class="reel-stage-item" data-idx="2" style="background-image:url('images/good-intns-club.webp');">
+    <video autoplay muted playsinline src="videos/good-intns-club.mp4"></video>
   </div>
   <div class="reel-stage-item" data-idx="3" style="background-image:url('images/live-orchestra-ep.webp');">
     <video autoplay muted playsinline src="videos/live-orchestra-ep.mp4"></video>
@@ -368,21 +368,21 @@
   <div class="reel-stage-info">
     <div class="num" id="stage-num">I</div>
     <div class="cat" id="stage-cat">Ads &amp; Commercial</div>
-    <div class="title" id="stage-title">The Good Intns Club</div>
-    <div class="role" id="stage-role">TVC — Videographer</div>
-    <a class="watch-full" id="stage-link" href="reels/good-intns-club.html">Watch in Full →</a>
+    <div class="title" id="stage-title">TPD Claim Support</div>
+    <div class="role" id="stage-role">Video Production &amp; Digital Marketing</div>
+    <a class="watch-full" id="stage-link" href="reels/tpd-claim-support.html">Watch in Full →</a>
   </div>
 
   <div class="reel-filmstrip" id="reel-filmstrip">
     <div class="film-track" id="film-track">
-      <div class="film-thumb is-active" data-idx="0" style="background-image:url('images/good-intns-club.webp');">
-        <div class="film-thumb-cap"><div class="fnum">I</div><div class="fname">The Good Intns Club</div><div class="fcat">Ads &amp; Commercial</div></div>
+      <div class="film-thumb is-active" data-idx="0" style="background-image:url('images/tpd.webp');">
+        <div class="film-thumb-cap"><div class="fnum">I</div><div class="fname">TPD Claim Support</div><div class="fcat">Ads &amp; Commercial</div></div>
       </div>
-      <div class="film-thumb" data-idx="1" style="background-image:url('images/tpd.webp');">
-        <div class="film-thumb-cap"><div class="fnum">II</div><div class="fname">TPD Claim Support</div><div class="fcat">Ads &amp; Commercial</div></div>
+      <div class="film-thumb" data-idx="1" style="background-image:url('images/wine.webp');">
+        <div class="film-thumb-cap"><div class="fnum">II</div><div class="fname">Wine</div><div class="fcat">Music Video</div></div>
       </div>
-      <div class="film-thumb" data-idx="2" style="background-image:url('images/wine.webp');">
-        <div class="film-thumb-cap"><div class="fnum">III</div><div class="fname">Wine</div><div class="fcat">Music Video</div></div>
+      <div class="film-thumb" data-idx="2" style="background-image:url('images/good-intns-club.webp');">
+        <div class="film-thumb-cap"><div class="fnum">III</div><div class="fname">The Good Intns Club</div><div class="fcat">Ads &amp; Commercial</div></div>
       </div>
       <div class="film-thumb" data-idx="3" style="background-image:url('images/live-orchestra-ep.webp');">
         <div class="film-thumb-cap"><div class="fnum">IV</div><div class="fname">Live Orchestra EP</div><div class="fcat">Music Video</div></div>
@@ -612,18 +612,18 @@
 
   const ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
   const DATA = [
-    { title:'The Good Intns Club', cat:'Ads & Commercial', role:'TVC — Videographer', link:'reels/good-intns-club.html' },
     { title:'TPD Claim Support', cat:'Ads & Commercial', role:'Video Production & Digital Marketing', link:'reels/tpd-claim-support.html' },
     { title:'Wine', cat:'Music Video', role:'Director, Videographer', link:'reels/wine.html' },
+    { title:'The Good Intns Club', cat:'Ads & Commercial', role:'TVC — Videographer', link:'reels/good-intns-club.html' },
     { title:'Live Orchestra EP', cat:'Music Video', role:'Director — 6 videos, one day', link:'reels/live-orchestra-ep.html' },
     { title:'Fingertips', cat:'Music Video', role:'Director, Editor, Colourist', link:'reels/fingertips.html' },
     { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Photography & Content', role:'Videographer, Editor', link:'reels/nffcc.html' }
   ];
   const IMG_SRC = [
-    'images/good-intns-club.webp', 'images/tpd.webp', 'images/wine.webp', 'images/live-orchestra-ep.webp', 'images/fingertips.webp',
+    'images/tpd.webp', 'images/wine.webp', 'images/good-intns-club.webp', 'images/live-orchestra-ep.webp', 'images/fingertips.webp',
     'images/nffcc.webp'
   ];
-  const FALLBACK_HEX = ['#c1663a','#3f6b52','#c1663a','#d9a548','#2d6b74','#3f6b52'];
+  const FALLBACK_HEX = ['#3f6b52','#c1663a','#c1663a','#d9a548','#2d6b74','#3f6b52'];
 
   const reelScroll = document.getElementById('reel-scroll');
   const caseStudy = document.querySelector('.case-study');
