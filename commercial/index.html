@@ -644,6 +644,20 @@
     syncState();
     syncMute();
 
+    // browsers block autoplay-with-sound until the visitor has interacted with the page,
+    // so the reel loads muted (guaranteed to autoplay) and unmutes itself on the very
+    // first interaction anywhere on the page, rather than staying silent forever
+    let hasInteracted = false;
+    const unmuteEvents = ['click','scroll','keydown','touchstart'];
+    function unmuteOnFirstInteraction(){
+      if (hasInteracted) return;
+      hasInteracted = true;
+      video.muted = false;
+      syncMute();
+      unmuteEvents.forEach(evt => window.removeEventListener(evt, unmuteOnFirstInteraction));
+    }
+    unmuteEvents.forEach(evt => window.addEventListener(evt, unmuteOnFirstInteraction, { passive:true }));
+
     if (title) setTimeout(() => title.classList.add('faded'), 2600);
 
     if (section && 'IntersectionObserver' in window) {
