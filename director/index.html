@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sam Walcroft — Film Director &amp; Artist</title>
+<title>Sam Walcroft — Videographer &amp; Marketer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/wga5psq.css">
 <style>
 #lb-overlay{
   position:fixed; inset:0; z-index:500; background:rgba(10,9,7,0.96);
@@ -47,434 +48,442 @@
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   :root{
-    --paper:#f4efe4; --ink:#161310; --ink-soft:#5c5648;
-    --wine:#5a2333; --terracotta:#c17158; --mustard:#c9a227;
-    --serif:'Libre Caslon Display', Georgia, serif;
+    --paper:#f8f3ea; --ink:#201d19; --ink-soft:#7d7466; --olive:#2f7a4f; --line:rgba(32,29,25,0.12);
+    --accent:#ff6a3d; --terracotta:#ff6a3d; --gold:#ffb92e; --teal:#11a8b5; --wine:#c81d5c;
+    --display:'adobe-caslon-pro', Georgia, serif;
     --sans:'Inter Tight', system-ui, sans-serif;
+
+    /* duotone palette — every coloured/stroked word on the page picks a light+deep pair from
+       this same set, so it all reads as one cohesive colour language rather than one-offs */
+    --coral-light:#ffb08a; --coral-deep:#c73f00;
+    --gold-light:#ffdd94;  --gold-deep:#a8690a;
+    --teal-light:#8fe3e6;  --teal-deep:#0a6e77;
+    --wine-light:#ff9dc2;  --wine-deep:#8a0f43;
   }
   html{scroll-behavior:smooth; cursor:none;}
-  body{ font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.7; cursor:none; }
+  body{ font-family:var(--sans); background:var(--paper); color:var(--ink); line-height:1.65; cursor:none; }
   a, button{ cursor:none; }
   a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 44px;}
+  @media(max-width:700px){ .wrap{padding:0 24px;} }
+  em{ font-style:italic; color:var(--accent); }
 
   #cursor{
     position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
     background:var(--ink); pointer-events:none; z-index:200; transform:translate(-50%,-50%);
     transition:width 0.2s, height 0.2s, background 0.2s;
   }
-  #cursor.hover{ width:46px; height:46px; background:var(--terracotta); }
+  #cursor.hover{ width:44px; height:44px; background:var(--accent); }
   @media(max-width:900px){ #cursor{ display:none; } html,body{ cursor:auto; } a,button{ cursor:pointer; } }
-  .wrap{max-width:1220px; margin:0 auto; padding:0 44px;}
-  @media(max-width:700px){ .wrap{padding:0 24px;} }
 
-  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 44px; }
-  .nav-name{ font-family:var(--serif); font-size:1.05rem; }
-  .nav-links{ display:none; gap:30px; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 44px; position:relative; z-index:10; }
+  .nav-name{ font-family:var(--display); font-style:italic; font-size:1.05rem; }
+  .nav-links{ display:none; gap:30px; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; }
   @media(min-width:860px){ .nav-links{ display:flex; } }
-  .nav-links a:hover{ color:var(--terracotta); }
-  .nav-social{ display:flex; gap:16px; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; }
+  .nav-links a{ position:relative; }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--ink); transition:width 0.3s; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ padding:9px 20px; border:1px solid var(--ink); border-radius:999px; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; }
+  .nav-cta:hover{ background:var(--ink); color:var(--paper); }
 
-  /* ===== HERO — statement, not just a name ===== */
-  .hero{ padding:70px 0 90px; }
-  .hero-index{ font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracotta); margin-bottom:26px; }
-  .hero-statement{
-    font-family:var(--serif); font-weight:400; line-height:1.05;
-    font-size:clamp(2.6rem, 6.4vw, 5.4rem); max-width:15ch;
+  .nav-drop{ position:relative; }
+  .nav-drop-trigger{ background:none; border:none; font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; cursor:none; padding:0; }
+  .nav-drop-menu{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,-6px); margin-top:16px; background:var(--paper); border:1px solid var(--line);
+    min-width:230px; padding:8px 0; opacity:0; visibility:hidden;
+    transition:opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; box-shadow:0 24px 48px rgba(0,0,0,0.1); z-index:20;
   }
-  .hero-statement em{ font-style:italic; color:var(--wine); }
-  .clip-media{
-    font-style:italic;
-    display:inline-block;
-    padding-right:0.12em;
-    background:linear-gradient(120deg, #c17158, #7a2333, #c9a227, #c17158);
-    background-size:300% 300%;
-    animation:clipShift 8s ease-in-out infinite;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    /* Swap this gradient for a <video> layer (see .clip-media-video) once real footage is ready */
+  .nav-drop:hover .nav-drop-menu{ opacity:1; visibility:visible; transform:translate(-50%,0); }
+  .nav-drop-menu a{ display:block; padding:11px 22px; font-size:0.78rem; text-transform:none; letter-spacing:normal; color:var(--ink); }
+  .nav-drop-menu a:hover{ background:var(--line); }
+
+  /* ===== SHOWREEL — full-screen landing, first thing you see ===== */
+  .showreel{ padding:0; }
+  .showreel-frame{
+    height:100vh; width:100%; position:relative; overflow:hidden; background:#111; cursor:pointer;
   }
-  @keyframes clipShift{ 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
-  .clip-media-video{ position:relative; display:inline-block; }
-  .clip-media-video video{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-1;
+  .showreel-frame video{ width:100%; height:100%; object-fit:cover; display:block; opacity:1; position:absolute; inset:0; }
+  .showreel-frame::after{
+    content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(to top, rgba(10,9,7,0.72) 0%, rgba(10,9,7,0.18) 42%, rgba(10,9,7,0.28) 100%);
   }
-  .clip-media-video .clip-text{
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    background:linear-gradient(120deg, #c17158, #7a2333);
-    font-style:italic;
-  }
-  .hero-byline{ margin-top:30px; font-size:0.95rem; color:var(--ink-soft); max-width:46ch; }
-
-  /* ===== CRAFT / SKILLS ===== */
-  .craft{ padding:20px 0 90px; }
-  .craft-grid{ display:grid; grid-template-columns:1fr; gap:2px; background:rgba(22,19,16,0.1); }
-  @media(min-width:700px){ .craft-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media(min-width:1080px){ .craft-grid{ grid-template-columns:repeat(3,1fr); } }
-  .craft-item{ background:var(--paper); padding:32px; }
-  .craft-title{ font-family:var(--serif); font-style:italic; font-size:1.2rem; margin-bottom:10px; }
-  .craft-desc{ font-size:0.87rem; color:var(--ink-soft); }
-  .craft-desc em{ font-style:italic; color:var(--ink); }
-
-  /* ===== NUMBERED WORK INDEX ===== */
-  section{ padding:0; }
-  .work-section{ padding:70px 0 90px; }
-  .section-label{ font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracotta); margin-bottom:40px; }
-
-  .work-row{
-    display:grid; grid-template-columns:1fr; gap:28px;
-    padding:44px 0; border-top:1px solid rgba(22,19,16,0.14);
-    align-items:center;
-  }
-  .work-row:last-child{ border-bottom:1px solid rgba(22,19,16,0.14); }
-  @media(min-width:820px){ .work-row{ grid-template-columns:0.55fr 1fr 1fr; gap:40px; } }
-
-  .work-num{ font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--ink-soft); }
-  .work-media{
-    aspect-ratio:4/3; border-radius:2px;
-    background:linear-gradient(135deg, #d8cbb3, #b7a688);
-  }
-  .work-media.wine{ background:linear-gradient(135deg, #7a3a48, #3c1a24); }
-  .work-media.olive{ background:linear-gradient(135deg, #6b7a4a, #333d1f); }
-  .work-media.terracotta{ background:linear-gradient(135deg, #cf8567, #7a3a26); }
-
-  .work-info .tag{ font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px; }
-  .work-info .title{ font-family:var(--serif); font-style:italic; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:12px; }
-  .work-info .role{ font-size:0.85rem; color:var(--ink-soft); margin-bottom:18px; }
-  .work-cta{ font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:3px; display:inline-block; }
-  .work-cta:hover{ color:var(--wine); }
-
-  /* ===== STATEMENT / ABOUT ===== */
-  .statement{ background:var(--ink); color:var(--paper); padding:110px 0; text-align:center; }
-  .statement-text{ font-family:var(--serif); font-style:italic; font-size:clamp(1.7rem,4vw,2.8rem); max-width:22ch; margin:0 auto; line-height:1.35; }
-  .statement-sub{ margin-top:32px; max-width:56ch; margin-left:auto; margin-right:auto; opacity:0.75; font-size:0.95rem; }
-
-  /* ===== ABOUT DETAIL ===== */
-  .about{ padding:100px 0; display:grid; grid-template-columns:1fr; gap:48px; }
-  @media(min-width:860px){ .about{ grid-template-columns:0.85fr 1.4fr; } }
-  .about-photo{ aspect-ratio:4/5; object-fit:cover; filter:grayscale(1); display:block; }
-  .about-body p{ margin-bottom:20px; max-width:58ch; color:var(--ink-soft); }
-  .about-body em{ color:var(--ink); font-family:var(--serif); }
-
-  /* ===== CONTACT ===== */
-  .contact{ background:linear-gradient(160deg,#5a2333,#2a0f17); color:var(--paper); padding:100px 0; }
-  .contact-grid{ display:grid; grid-template-columns:1fr; gap:40px; }
-  @media(min-width:860px){ .contact-grid{ grid-template-columns:1fr 1fr; } }
-  .contact-title{ font-family:var(--serif); font-size:clamp(2.2rem,4vw,3rem); font-style:italic; margin-bottom:14px; }
-  form{ display:flex; flex-direction:column; gap:16px; max-width:440px; }
-  .form-row{ display:flex; gap:16px; }
-  form input, form textarea{
-    background:transparent; border:none; border-bottom:1px solid rgba(244,239,228,0.4);
-    color:var(--paper); font-family:var(--sans); padding:10px 2px; font-size:0.95rem; width:100%;
-  }
-  form label{ font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.65; }
-  form button{
-    align-self:flex-start; margin-top:10px; padding:13px 32px; border-radius:999px;
-    background:var(--paper); color:var(--ink); border:none; font-size:0.82rem; letter-spacing:0.05em; cursor:pointer;
-  }
-  .contact-social{ display:flex; gap:22px; margin-top:26px; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; }
-
-  footer{ background:var(--ink); color:var(--paper); padding-top:70px; }
-  .footer-top{ display:flex; flex-wrap:wrap; gap:48px; justify-content:space-between; padding-bottom:50px; }
-  .footer-brand-name{ font-family:var(--serif); font-style:italic; font-size:1.6rem; margin-bottom:10px; }
-  .footer-brand-loc{ font-size:0.8rem; opacity:0.6; }
-  .footer-col-title{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:16px; }
-  .footer-col a{ display:block; font-size:0.88rem; margin-bottom:10px; opacity:0.85; }
-  .footer-col a:hover{ color:var(--terracotta); }
-  .footer-stripe{
-    padding:16px 44px; display:flex; justify-content:space-between; align-items:center;
-    background:repeating-linear-gradient(45deg, var(--mustard) 0 18px, var(--ink) 18px 36px);
-  }
-  .footer-stripe .footer-name{ background:var(--paper); color:var(--ink); padding:8px 20px; font-family:var(--serif); font-size:0.9rem; }
-  .footer-stripe .footer-social{ display:flex; gap:14px; background:var(--paper); padding:8px 16px; border-radius:999px; font-size:0.8rem; }
-
-  /* ===== WORK MASONRY (media-forward) ===== */
-  .work-masonry{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  @media(max-width:760px){ .work-masonry{ grid-template-columns:1fr; } }
-  .work-tile{ aspect-ratio:4/3; border-radius:3px; position:relative; }
-  .work-tile.tile-1{ grid-row:span 2; aspect-ratio:auto; }
-  .work-info-overlay{
-    position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; justify-content:flex-end;
-    padding:24px; background:linear-gradient(to top, rgba(0,0,0,0.65), transparent 60%);
-    color:#f4efe4; pointer-events:none;
-  }
-  .work-info-overlay .tag{ font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; opacity:0.85; margin-bottom:6px; }
-  .work-info-overlay .title{ font-family:var(--serif); font-style:italic; font-size:1.4rem; margin-bottom:4px; }
-  .work-info-overlay .role{ font-size:0.78rem; opacity:0.75; }
-
-  /* ===== PHOTOGRAPHY GALLERY ===== */
-  .photo-gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-  @media(max-width:760px){ .photo-gallery{ grid-template-columns:repeat(2,1fr); } }
-  .photo-tile{ aspect-ratio:1; border-radius:3px; cursor:none; transition:transform 0.4s ease; }
-  .photo-tile:hover{ transform:scale(0.97); }
-
-  /* ===== FIXED BACKGROUND LAYER (swaps per hovered work item) ===== */
-  #work-bg{
-    position:fixed; inset:0; z-index:-1; opacity:0; transition:opacity 0.6s ease, background 0.6s ease;
+  .showreel-title{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:3;
+    width:min(60vw, 620px);
+    filter:drop-shadow(0 4px 30px rgba(0,0,0,0.45));
+    opacity:1; transition:opacity 1.4s ease;
     pointer-events:none;
   }
-  #work-bg.active{ opacity:0.16; }
+  .showreel-title img{ display:block; width:100%; height:auto; mix-blend-mode:overlay; }
+  .showreel-title.faded{ opacity:0; }
+  .showreel-scroll-cue{
+    position:absolute; left:50%; bottom:28px; transform:translateX(-50%); z-index:2;
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#f4efe4; opacity:0.65;
+    display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none;
+  }
+  .showreel-scroll-cue::after{
+    content:''; width:1px; height:34px; background:rgba(244,239,228,0.5);
+    animation:scrollCue 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollCue{ 0%{ transform:scaleY(0); transform-origin:top; opacity:0.3; } 50%{ transform:scaleY(1); transform-origin:top; opacity:1; } 100%{ transform:scaleY(0); transform-origin:bottom; opacity:0.3; } }
+  .showreel-play-indicator{
+    position:absolute; bottom:32px; left:36px; z-index:4; pointer-events:none;
+    width:52px; height:52px; border-radius:50%;
+    background:rgba(16,14,12,0.5); border:1px solid rgba(244,239,228,0.55);
+    display:flex; align-items:center; justify-content:center; color:#f4efe4;
+    opacity:0; transform:scale(0.85); transition:opacity 0.18s ease, transform 0.18s ease;
+  }
+  .showreel-play-indicator svg{ width:20px; height:20px; }
+  .showreel-play-indicator .icon-pause{ display:none; }
+  .showreel-frame:not(.is-playing) .showreel-play-indicator{ opacity:1; transform:scale(1); }
+  .showreel-frame.is-playing:hover .showreel-play-indicator{ opacity:1; transform:scale(1); }
+  .showreel-frame.is-playing .showreel-play-indicator .icon-play{ display:none; }
+  .showreel-frame.is-playing .showreel-play-indicator .icon-pause{ display:block; }
+  .showreel-restart-btn{
+    position:absolute; bottom:32px; right:36px; z-index:5; width:42px; height:42px; border-radius:50%;
+    background:rgba(16,14,12,0.55); border:1px solid rgba(244,239,228,0.4);
+    display:flex; align-items:center; justify-content:center; color:#f4efe4;
+    opacity:0; transition:opacity 0.3s ease; pointer-events:none;
+  }
+  .showreel-restart-btn svg{ width:16px; height:16px; }
+  .showreel-frame:hover .showreel-restart-btn{ opacity:1; pointer-events:auto; }
+  .showreel-mute-btn{
+    position:absolute; bottom:32px; right:90px; z-index:5; width:42px; height:42px; border-radius:50%;
+    background:rgba(16,14,12,0.55); border:1px solid rgba(244,239,228,0.4);
+    display:flex; align-items:center; justify-content:center; color:#f4efe4;
+    opacity:1; transition:background 0.2s ease;
+  }
+  .showreel-mute-btn:hover{ background:rgba(16,14,12,0.75); }
+  .showreel-mute-btn svg{ width:17px; height:17px; }
+  .showreel-mute-btn .icon-unmuted{ display:none; }
+  .showreel-mute-btn.is-unmuted .icon-muted{ display:none; }
+  .showreel-mute-btn.is-unmuted .icon-unmuted{ display:block; }
 
-  /* ===== GRID / LIST TOGGLE ===== */
-  .view-toggle{ display:flex; gap:18px; margin-bottom:32px; }
-  .view-toggle button{
-    background:none; border:none; font-family:var(--sans); font-size:0.72rem; letter-spacing:0.2em;
-    text-transform:uppercase; color:var(--ink-soft); cursor:none; padding:0; border-bottom:1px solid transparent;
-  }
-  .view-toggle button.active{ color:var(--ink); border-color:var(--ink); }
-  .work-list-view{ display:none; }
-  .work-list-view.active{ display:block; }
-  .work-masonry.hidden{ display:none; }
+  /* ===== MARQUEE ===== */
+  .marquee{ border-top:1px solid rgba(244,239,228,0.18); border-bottom:1px solid rgba(244,239,228,0.18); padding:22px 0; overflow:hidden; }
+  .marquee-track{ display:flex; gap:60px; white-space:nowrap; animation:scroll 26s linear infinite; width:max-content; }
+  .marquee-track span{ font-family:var(--display); font-style:italic; font-size:1.1rem; color:#f4efe4; text-shadow:0 2px 12px rgba(0,0,0,0.35); }
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
-  .list-row{
-    display:grid; grid-template-columns:1fr; gap:8px; padding:26px 0; border-top:1px solid rgba(22,19,16,0.14);
-  }
-  .list-row:last-child{ border-bottom:1px solid rgba(22,19,16,0.14); }
-  @media(min-width:700px){ .list-row{ grid-template-columns:70px 1fr 1fr; align-items:baseline; } }
-  .list-row .tag{ font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); }
-  .list-row .title{ font-family:var(--serif); font-style:italic; font-size:1.5rem; }
-  .list-row .role{ font-size:0.82rem; color:var(--ink-soft); }
-
-  /* ===== SCROLL SHINE INDICATOR ===== */
-  .scroll-indicator{
-    position:fixed; bottom:26px; right:32px; z-index:60; text-align:right;
-    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
-  }
-  .scroll-shine{
-    background:linear-gradient(to right, var(--ink-soft) 40%, var(--terracotta) 50%, var(--ink-soft) 60%);
-    background-size:200% auto; background-clip:text; -webkit-background-clip:text; color:transparent;
-    -webkit-text-fill-color:transparent;
-    animation:shine 2.4s linear infinite;
-  }
-  @keyframes shine{ to{ background-position:-200% center; } }
-  .scroll-pct{ margin-top:4px; color:var(--ink-soft); font-size:0.7rem; }
-  @media(max-width:760px){ .scroll-indicator{ display:none; } }
-
-  /* ===== CINEMATIC SCROLL REEL — panels stacked in one spot, revealed from behind ===== */
-  .reel-scroll{ height:750vh; position:relative; }
-  .reel-label{ position:absolute; top:36px; left:0; right:0; z-index:5; }
-  .reel-label .section-label{ color:#f4efe4; mix-blend-mode:difference; }
-  .reel-stage{
-    height:100vh; position:sticky; top:0; overflow:hidden;
+  section{ padding:130px 0; }
+  .eyebrow{ font-size:0.72rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:20px; }
+  .section-title{ font-family:var(--display); font-style:italic; font-size:clamp(2rem,4.4vw,3rem); max-width:18ch; }
+  /* sits over the blurred photo backdrop now, so it needs a light fill and a light stroke
+     rather than the default dark ink used on plain-paper sections, plus a soft drop shadow */
+  .photo-row .section-title{
+    color:#f8f2e4; paint-order:stroke fill; -webkit-text-stroke:1px rgba(255,255,255,0.38);
+    text-shadow:0 3px 10px rgba(0,0,0,0.35);
   }
 
-  /* scroll-triggered entrance for the About section */
-  .reveal{ opacity:0; transform:translateY(48px); transition:opacity 0.9s ease, transform 0.9s ease; }
-  .reveal.in-view{ opacity:1; transform:translateY(0); }
-  #page-bg{
-    position:fixed; inset:0; z-index:-3; background:var(--paper);
+  /* duotone stroke-text — a light tint fill with a deep, saturated stroke of the SAME hue,
+     always drawn from the shared palette above so every instance feels like one family */
+  .stroke-text{ paint-order:stroke fill; }
+  .stroke-text--coral{ color:var(--coral-light); -webkit-text-stroke:1.6px var(--coral-deep); }
+  .stroke-text--gold{ color:var(--gold-light); -webkit-text-stroke:1.6px var(--gold-deep); }
+  .stroke-text--teal{ color:var(--teal-light); -webkit-text-stroke:1.6px var(--teal-deep); }
+  .stroke-text--wine{ color:var(--wine-light); -webkit-text-stroke:1.6px var(--wine-deep); }
+
+  /* ===== FULL-SCREEN WORK VIEWER — scroll-driven, contained video over a blurred backdrop ===== */
+  #page-bg{ position:fixed; inset:0; z-index:-3; background:var(--paper); }
+  /* layered above page-bg purely to crossfade the case-study photo into the photography
+     row photo — its opacity is driven live in JS, not a CSS transition, so it tracks scroll */
+  #page-bg-2{
+    position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center;
+    filter:blur(55px) brightness(0.55) saturate(1.25); opacity:0; pointer-events:none;
   }
-  .reel-wash{ position:absolute; inset:-15%; z-index:0; filter:blur(100px); }
-  .reel-blob{ position:absolute; width:44vw; height:44vw; border-radius:50%; opacity:0.3; transition:opacity 0.25s linear, background 0.4s linear; }
-  .reel-panel{
-    position:absolute; inset:0; z-index:1;
-    display:flex; align-items:center; justify-content:center;
-    will-change:transform, opacity;
+  .reel-scroll{ height:525vh; position:relative; }
+  .reel-viewer{ height:100vh; position:sticky; top:0; overflow:hidden; color:#f4efe4; }
+  .reel-work-title{
+    position:absolute; top:4%; left:50%; transform:translateX(-50%); z-index:4;
+    width:100%; text-align:center; opacity:1; transition:opacity 0.5s ease; pointer-events:none;
   }
-  .reel-media{
-    width:min(58vw, 820px); aspect-ratio:16/9; border-radius:4px;
-    display:flex; align-items:flex-end; padding:36px; color:#f4efe4;
-    background-size:cover; background-position:center; text-decoration:none;
-    position:relative; overflow:hidden;
+  .reel-work-title.faded{ opacity:0; }
+  .reel-work-title img{
+    width:min(38vw, 440px); height:auto; display:inline-block; mix-blend-mode:overlay;
   }
-  .reel-media video{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;
+  .reel-stage-item{
+    /* starts pushed down to clear the title, then eases up to true vertical centre as
+       you keep scrolling (padding-top is driven live in JS via --stage-pad-top) */
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    padding-top:var(--stage-pad-top, 20vh); padding-bottom:2vh; opacity:0; pointer-events:none; transform:translateY(7%);
+    transition:opacity 0.85s ease, transform 0.85s cubic-bezier(.22,.68,.24,1);
   }
-  .reel-media::after{
+  .reel-stage-item.active{ opacity:1; pointer-events:auto; transform:translateY(0); z-index:2; }
+  .reel-stage-item.prev{ opacity:0; transform:translateY(-7%); z-index:1; }
+  .reel-stage-bg{
+    position:absolute; inset:-6%; z-index:0; background-size:cover; background-position:center;
+    filter:blur(42px) brightness(0.55) saturate(1.45) contrast(1.08); transform:scale(1.14);
+  }
+  .reel-stage-item::after{
     content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(to top, rgba(0,0,0,0.6), transparent 55%);
+    background:linear-gradient(to top, rgba(0,0,0,0.62), transparent 48%);
   }
-  .reel-media > div{ position:relative; z-index:2; }
-  .reel-media .tag{ font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.75; margin-bottom:6px; }
-  .reel-media .title{ font-family:var(--serif); font-style:italic; font-size:2rem; }
+  .reel-stage-card{
+    /* fills as much of the frame as it can below the title's own band — the largest
+       16:9 box that fits inside a 90vw x 76vh area, so nothing crops or distorts */
+    position:relative; z-index:2; width:min(90vw, calc(76vh * 16 / 9));
+    aspect-ratio:16/9; height:auto;
+    border-radius:14px; overflow:hidden; background:#000;
+    box-shadow:0 60px 130px -40px rgba(0,0,0,0.7), 0 0 0 1px rgba(244,239,228,0.09);
+  }
+  @media(max-width:820px){ .reel-stage-card{ width:min(94vw, calc(60vh * 16 / 9)); } }
+  .reel-stage-card video{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; }
+  /* caption sits back on top of the video (it now fills most of the screen) — measured
+     live to match the card's own left/right/bottom edges, name bottom-left, role bottom-right */
+  .reel-stage-info{
+    position:absolute; z-index:3; display:flex; align-items:flex-end; justify-content:space-between;
+    gap:24px; padding:0 4.5%; box-sizing:border-box;
+    text-shadow:0 2px 14px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.6);
+  }
+  .reel-stage-info .stage-info-left{ text-align:left; }
+  .reel-stage-info .stage-info-right{ text-align:right; }
+  .reel-stage-info .title{ font-family:var(--sans); font-style:normal; font-weight:500; font-size:clamp(1.3rem,2.6vw,2rem); }
+  .reel-stage-info .role{ font-family:var(--display); font-style:italic; font-size:0.9rem; opacity:0.85; }
+  .reel-stage-info .watch-full{
+    display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+    font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;
+    border-bottom:1px solid rgba(244,239,228,0.5); padding-bottom:3px; opacity:0.9;
+  }
+  .reel-stage-info .watch-full:hover{ opacity:1; border-color:#f4efe4; }
+
+  /* ===== CASE STUDY — closing narrative, not a stat table ===== */
+  .case-study{ color:var(--paper); }
+  .case-study .eyebrow{ color:var(--gold-light); }
+  .case-grid{ display:grid; grid-template-columns:1fr; gap:56px; }
+  @media(min-width:900px){ .case-grid{ grid-template-columns:1fr 1fr; } }
+  /* ===== case visual — the team photo ===== */
+  .case-visual{
+    aspect-ratio:4/5; border-radius:12px; overflow:hidden; position:relative; display:block;
+    background:#111;
+    box-shadow:0 50px 90px -35px rgba(0,0,0,0.55), 0 0 0 1px rgba(244,239,228,0.08);
+    transition:transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  .case-visual:hover{ transform:translateY(-4px); box-shadow:0 60px 100px -30px rgba(0,0,0,0.62), 0 0 0 1px rgba(244,239,228,0.16); }
+  .case-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .case-client{
+    font-family:var(--display); font-style:italic; font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:22px;
+    paint-order:stroke fill; color:var(--gold-light); -webkit-text-stroke:1.6px var(--gold-deep);
+  }
+  .case-block{ margin-bottom:26px; }
+  .case-block-label{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.55; margin-bottom:8px; }
+  .case-block-body{ font-size:0.95rem; opacity:0.85; max-width:52ch; }
+  .case-metrics{ display:flex; gap:36px; flex-wrap:wrap; margin-top:32px; padding-top:28px; border-top:1px solid rgba(244,239,228,0.15); }
+  .case-metric-num{ font-family:var(--display); font-size:1.8rem; color:var(--gold); }
+  .case-metric-label{ font-size:0.68rem; color:#f4efe4; opacity:0.92; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; }
+
+  /* ===== PHOTOGRAPHY ROW — rotating stills pulled from the photography page ===== */
+  .photo-row{ text-align:center; padding-bottom:180px; }
+  .photo-row-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin:50px 0 44px; }
+  @media(max-width:820px){ .photo-row-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:520px){ .photo-row-grid{ grid-template-columns:repeat(2,1fr); gap:12px; } }
+  .photo-row-item{
+    aspect-ratio:2/3; border-radius:6px; background-size:cover; background-position:center;
+    box-shadow:0 20px 40px -20px rgba(0,0,0,0.3);
+    transition:opacity 0.6s ease;
+  }
+
+  /* ===== CTA BAND ===== */
+  .cta-band{ color:var(--ink); text-align:center; border-top:1px solid var(--line); padding-top:180px; }
+  .cta-title{ font-family:var(--display); font-style:italic; font-size:clamp(2rem,5vw,3.4rem); max-width:18ch; margin:0 auto 34px; }
+  .btn-magnetic{
+    display:inline-block; padding:16px 40px; border:1px solid #f4efe4; border-radius:999px;
+    color:#f4efe4; font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase;
+    transition:background 0.3s, color 0.3s;
+  }
+  .btn-magnetic:hover{ background:#f4efe4; color:var(--ink); }
+  .btn-pop{
+    display:inline-block; padding:19px 48px; border:none; border-radius:999px;
+    font-size:0.9rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+    color:#2b1400; background:linear-gradient(135deg, var(--gold) 0%, var(--terracotta) 100%);
+    box-shadow:0 14px 34px -12px rgba(255,106,61,0.55);
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-pop:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 20px 42px -12px rgba(255,106,61,0.7); }
+
+  footer{ padding-top:70px; }
+  .footer-top{ display:flex; flex-wrap:wrap; gap:48px; justify-content:space-between; padding-bottom:50px; }
+  .footer-col-title{ font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; }
+  .footer-col a{ display:block; font-size:0.88rem; margin-bottom:10px; color:var(--ink-soft); }
+  .footer-col a:hover{ color:var(--accent); }
+  .footer-bottom{ border-top:1px solid var(--line); padding:20px 0 30px; font-size:0.7rem; color:var(--ink-soft); text-align:center; letter-spacing:0.08em; text-transform:uppercase; }
 </style>
 </head>
 <body>
+<script>
+  // stop the browser restoring a mid-scroll position from a previous visit —
+  // without this, clicking back to this same page can land partway down the reel
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.scrollTo(0, 0);
+</script>
 
 <div id="cursor"></div>
-<div id="work-bg"></div>
 <div id="page-bg"></div>
+<div id="page-bg-2"></div>
 
 <nav>
-  <a href="/director/" class="nav-name">Sam Walcroft</a>
+  <a href="index.html" class="nav-name" onclick="window.scrollTo({top:0, behavior:'instant'});">Sam Walcroft</a>
   <div class="nav-links">
-    <a href="#work">Showreel</a>
-    <a href="#work">My Works</a>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Services</button>
+      <div class="nav-drop-menu">
+        <a href="services/video-production.html">Video Production</a>
+        <a href="services/social-media-management.html">Social Media Management</a>
+        <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+        <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
+      </div>
+    </div>
+    <div class="nav-drop">
+      <button class="nav-drop-trigger">Case Studies</button>
+      <div class="nav-drop-menu">
+        <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+        <a href="case-studies/music-videos.html">Music Video Direction</a>
+      </div>
+    </div>
+    <a href="photography.html">Photography</a>
   </div>
-  <div class="nav-social">
-    <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">IG</a>
-    <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.imdb.com/name/nm14596615/" target="_blank" rel="noopener">IMDb</a>
-  </div>
+  <a href="contact.html" class="nav-cta">Contact</a>
 </nav>
 
-<header class="hero wrap">
-  <div class="hero-index">Brisbane, Australia — Est. 2020</div>
-  <h1 class="hero-statement">Films about <span class="clip-media">love</span> the world refuses to allow.</h1>
-  <p class="hero-byline">Sam Walcroft is a director, writer, and cinematographer working in science fiction, gothic fantasy, and romantic drama — visual opulence and emotional severity in equal measure.</p>
-</header>
-
-<div class="reel-scroll" id="reel">
-  <div class="reel-label wrap">
-    <div class="section-label">My Work</div>
+<section class="showreel" id="showreel">
+  <div class="showreel-frame" id="showreelFrame">
+    <video id="showreelVideo" playsinline autoplay muted loop src="videos/showreel.mp4"></video>
+    <div class="showreel-title" id="showreelTitle"><img src="images/showreel-title.webp" alt="Showreel"></div>
+    <div class="showreel-play-indicator">
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </div>
+    <button class="showreel-restart-btn" id="showreelRestartBtn" aria-label="Restart showreel" title="Restart from beginning">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+    </button>
+    <button class="showreel-mute-btn" id="showreelMuteBtn" aria-label="Unmute showreel" title="Unmute">
+      <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      <svg class="icon-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    </button>
+    <div class="showreel-scroll-cue">Scroll</div>
   </div>
-  <div class="reel-stage">
-    <div class="reel-wash" id="reel-wash">
-      <div class="reel-blob" data-blob="0" style="left:8%; top:10%;"></div>
-      <div class="reel-blob" data-blob="1" style="right:8%; top:20%;"></div>
-      <div class="reel-blob" data-blob="2" style="left:15%; top:45%;"></div>
-      <div class="reel-blob" data-blob="3" style="right:15%; bottom:35%;"></div>
-      <div class="reel-blob" data-blob="4" style="left:20%; bottom:12%;"></div>
-      <div class="reel-blob" data-blob="5" style="right:12%; bottom:2%;"></div>
-    </div>
+</section>
 
-    <div class="reel-panel" data-img="images/celestial-bodies.webp">
-      <a class="reel-media" href="/work/celestial-bodies.html" style="background-image:url('images/celestial-bodies.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Sci-Fi Romance</div><div class="title">Celestial Bodies</div></div>
-      </a>
+<div class="reel-scroll" id="reel-scroll">
+<section class="reel-viewer" id="work-viewer">
+  <div class="reel-work-title" id="reelWorkTitle"><img src="images/my-work-title.webp" alt="My Work"></div>
+
+  <div class="reel-stage-item active" data-idx="0">
+    <div class="reel-stage-bg" style="background-image:url('images/tpd.webp');"></div>
+    <div class="reel-stage-card"><video autoplay muted playsinline src="videos/tpd.mp4"></video></div>
+  </div>
+  <div class="reel-stage-item" data-idx="1">
+    <div class="reel-stage-bg" style="background-image:url('images/wine.webp');"></div>
+    <div class="reel-stage-card"><video autoplay muted playsinline src="videos/wine.mp4"></video></div>
+  </div>
+  <div class="reel-stage-item" data-idx="2">
+    <div class="reel-stage-bg" style="background-image:url('images/good-intns-club.webp');"></div>
+    <div class="reel-stage-card"><video autoplay muted playsinline src="videos/good-intns-club.mp4"></video></div>
+  </div>
+  <div class="reel-stage-item" data-idx="3">
+    <div class="reel-stage-bg" style="background-image:url('images/live-orchestra-ep.webp');"></div>
+    <div class="reel-stage-card"><video autoplay muted playsinline src="videos/live-orchestra-ep.mp4"></video></div>
+  </div>
+  <div class="reel-stage-item" data-idx="4">
+    <div class="reel-stage-bg" style="background-image:url('images/fingertips.webp');"></div>
+    <div class="reel-stage-card"><video autoplay muted playsinline src="videos/fingertips.mp4"></video></div>
+  </div>
+  <div class="reel-stage-item" data-idx="5">
+    <div class="reel-stage-bg" style="background-image:url('images/nffcc.webp');"></div>
+    <div class="reel-stage-card"><video autoplay muted playsinline src="videos/nffcc.mp4"></video></div>
+  </div>
+
+  <div class="reel-stage-info">
+    <div class="stage-info-left">
+      <div class="title" id="stage-title">TPD Claim Support</div>
     </div>
-    <div class="reel-panel" data-img="images/the-box.webp">
-      <a class="reel-media" href="/work/the-box.html" style="background-image:url('images/the-box.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Short Film</div><div class="title">The Box</div></div>
-      </a>
+    <div class="stage-info-right">
+      <div class="role" id="stage-role">Video Production &amp; Digital Marketing</div>
+      <a class="watch-full" id="stage-link" href="reels/tpd-claim-support.html">Watch in Full →</a>
     </div>
-    <div class="reel-panel" data-img="images/wine.webp">
-      <a class="reel-media" href="/work/wine.html" style="background-image:url('images/wine.webp'); background-size:cover; background-position:center;">
-        <video autoplay muted loop playsinline src="videos/wine.mp4"></video>
-        <div><div class="tag">Music Video</div><div class="title">Wine</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-img="images/live-orchestra-ep.webp" data-bg-fallback="linear-gradient(160deg,#c9a227,#7a5f14)">
-      <a class="reel-media" href="/work/live-orchestra-ep.html" style="background-image:url('images/live-orchestra-ep.webp'); background-size:cover; background-position:center;">
-        <video autoplay muted loop playsinline src="videos/live-orchestra-ep.mp4"></video>
-        <div><div class="tag">Music Video — 6 videos, one day</div><div class="title">Live Orchestra EP</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-img="images/fingertips.webp" data-bg-fallback="linear-gradient(160deg,#7a3a48,#33151c)">
-      <a class="reel-media" href="/work/fingertips.html" style="background-image:url('images/fingertips.webp'); background-size:cover; background-position:center;">
-        <video autoplay muted loop playsinline src="videos/fingertips.mp4"></video>
-        <div><div class="tag">Music Video</div><div class="title">Fingertips</div></div>
-      </a>
-    </div>
-    <div class="reel-panel" data-img="images/the-hills.webp">
-      <a class="reel-media" href="/work/the-hills.html" style="background-image:url('images/the-hills.webp'); background-size:cover; background-position:center;">
-        <div><div class="tag">Narrative Short</div><div class="title">The Hills</div></div>
-      </a>
-    </div>
+  </div>
+</section>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Ads</span><span>Music Videos</span><span>Photography</span><span>Social Content</span><span>Brand Films</span>
+    <span>Ads</span><span>Music Videos</span><span>Photography</span><span>Social Content</span><span>Brand Films</span>
   </div>
 </div>
 
-<section class="about wrap reveal">
-  <img class="about-photo" src="images/headshot.webp" alt="Sam Walcroft portrait" style="width:100%; object-fit:cover;">
-  <div class="about-body">
-    <p>Sam Walcroft is a Brisbane-based filmmaker, writer, and director.</p>
-    <p><em>Sam makes films about love that the world refuses to allow.</em> Working in science fiction, gothic fantasy, and romantic drama, his work is defined by visual opulence, emotional severity, and a preoccupation with beauty under threat.</p>
-    <p>Born and raised in Brisbane, Queensland, Sam's filmmaking is rooted in the Australian landscape — its warmth, its isolation, its capacity to hold both tenderness and menace in the same frame. He shoots on cinema-grade formats with an emphasis on naturalistic light and rich colour, treating intimacy and violence with equal visual reverence.</p>
-    <p>His short <em>Celestial Bodies</em>, a science fiction romance set in 1950s rural Queensland, follows a farmer sheltering an alien with healing powers. When their hidden love is discovered, fear becomes violence — establishing Sam as a filmmaker unafraid to use genre to ask urgent, human questions.</p>
-    <p>He is also a poet, currently developing a manuscript for self-publication.</p>
-  </div>
-</section>
-
-<section class="craft wrap">
-  <div class="section-label">Craft</div>
-  <div class="craft-grid">
-    <div class="craft-item">
-      <div class="craft-title">Directing &amp; Writing</div>
-      <div class="craft-desc">Narrative development and screenwriting through to on-set direction, across short film, feature development, and music video.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Cinematography</div>
-      <div class="craft-desc">Shooting on the Blackmagic Cinema Camera 6K, with an emphasis on naturalistic light and considered composition.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Editing &amp; Colour</div>
-      <div class="craft-desc">Full post-production in Adobe Premiere Pro and DaVinci Resolve, including colour grading from raw footage to final grade.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">VFX &amp; Motion</div>
-      <div class="craft-desc">Medium-level visual effects in After Effects, built to serve the story rather than call attention to themselves.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Photography</div>
-      <div class="craft-desc">Portrait and on-set stills work, shot with the same eye for light and composition as the moving image.</div>
-    </div>
-    <div class="craft-item">
-      <div class="craft-title">Writing</div>
-      <div class="craft-desc">Screenwriting and poetry — a manuscript, <em>The Lonely Lover</em>, currently in development for self-publication.</div>
-    </div>
-  </div>
-</section>
-
-<section class="statement">
-  <div class="wrap">
-    <div class="statement-text">Beauty, filmed like it's already under threat.</div>
-    <div class="statement-sub">Currently developing Folklore, an Australian Gothic fantasy feature set in the Far North Queensland rainforest.</div>
-  </div>
-</section>
-
-<section class="contact">
-  <div class="wrap contact-grid">
+<section class="case-study">
+  <div class="wrap case-grid">
+    <a href="case-studies/tpd-claim-support.html" class="case-visual" aria-label="View the TPD Claim Support case study">
+      <img src="images/tpd-team-photo.webp" alt="The TPD Claim Support team">
+    </a>
     <div>
-      <div class="contact-title">Contact Me</div>
-      <p style="opacity:0.75; max-width:40ch;">For festival, collaboration, or representation enquiries.</p>
-    </div>
-    <div>
-      <form onsubmit="return false;">
-        <div class="form-row">
-          <div><label>First Name</label><input type="text"></div>
-          <div><label>Last Name</label><input type="text"></div>
-        </div>
-        <div><label>Email</label><input type="email"></div>
-        <div><label>Message</label><textarea rows="4"></textarea></div>
-        <button type="submit">Submit</button>
-      </form>
-      <div class="contact-social">
-        <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.imdb.com/name/nm14596615/" target="_blank" rel="noopener">IMDb</a>
+      <div class="eyebrow">Case Study</div>
+      <div class="case-client">TPD Claim Support</div>
+      <div class="case-block">
+        <div class="case-block-label">The Brief</div>
+        <div class="case-block-body">Own the full marketing stack for a Brisbane insurance claims specialist, end to end: video, brand voice, website, SEO and paid social, with no separate agency or specialist to hand off to.</div>
+      </div>
+      <div class="case-block">
+        <div class="case-block-label">The Approach</div>
+        <div class="case-block-body">Built the site's brand-first design in WordPress/Elementor plus custom code, wrote and shot the ad creative for distinct audience segments, and layered SEO and Meta Ads on top of that foundation rather than bolting them on separately.</div>
+      </div>
+      <div class="case-metrics">
+        <div><div class="case-metric-num">+270%</div><div class="case-metric-label">Search Visibility Growth</div></div>
+        <div><div class="case-metric-num">$0.37</div><div class="case-metric-label">Lowest CPC Achieved</div></div>
+        <div><div class="case-metric-num">Pos. 1–2</div><div class="case-metric-label">Brand Search Ranking</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap footer-top">
+<section class="photo-row wrap">
+  <div class="eyebrow">Photography</div>
+  <h2 class="section-title">Stills From the Field</h2>
+  <div class="photo-row-grid" id="photoRowGrid">
+    <div class="photo-row-item" style="background-image:url('photography/seavibes/seavibes-01.webp');"></div>
+    <div class="photo-row-item" style="background-image:url('photography/seavibes/seavibes-05.webp');"></div>
+    <div class="photo-row-item" style="background-image:url('photography/seavibes/seavibes-09.webp');"></div>
+    <div class="photo-row-item" style="background-image:url('photography/seavibes/seavibes-13.webp');"></div>
+    <div class="photo-row-item" style="background-image:url('photography/seavibes/seavibes-17.webp');"></div>
+  </div>
+  <a href="photography.html" class="btn-magnetic">See More</a>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-title">Got a story worth telling? Let's make it unmissable.</div>
+    <a class="btn-pop" href="contact.html">Let's Talk</a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="footer-top">
     <div>
-      <div class="footer-brand-name">Sam Walcroft</div>
-      <div class="footer-brand-loc">Film Director &amp; Artist<br>Brisbane, Australia</div>
+      <div style="font-family:var(--display); font-style:italic; font-size:1.2rem; margin-bottom:8px;">Sam Walcroft</div>
+      <div style="color:var(--ink-soft); font-size:0.85rem;">Brisbane, Australia</div>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Selected Works</div>
-      <a href="/work/celestial-bodies.html">Celestial Bodies</a>
-      <a href="/work/the-box.html">The Box</a>
-      <a href="/work/wine.html">Wine</a>
-      <a href="/work/live-orchestra-ep.html">Live Orchestra EP</a>
-      <a href="/work/fingertips.html">Fingertips</a>
-      <a href="/work/the-hills.html">The Hills</a>
+      <div class="footer-col-title">Services</div>
+      <a href="services/video-production.html">Video Production</a>
+      <a href="services/social-media-management.html">Social Media Management</a>
+      <a href="services/seo-web-development.html">SEO &amp; Web Development</a>
+      <a href="services/paid-social-meta-ads.html">Paid Social &amp; Meta Ads</a>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Craft</div>
-      <a href="#work">Directing &amp; Writing</a>
-      <a href="#work">Cinematography</a>
-      <a href="#work">Editing &amp; Colour</a>
-      <a href="#work">VFX &amp; Motion</a>
-      <a href="#work">Photography</a>
+      <div class="footer-col-title">Work</div>
+      <a href="case-studies/tpd-claim-support.html">TPD Claim Support</a>
+      <a href="case-studies/music-videos.html">Music Video Direction</a>
+      <a href="photography.html">Photography</a>
+      <a href="contact.html">Contact</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Connect</div>
       <a href="https://www.instagram.com/sammwalcroft/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/in/sam-walcroft-328462216/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://www.imdb.com/name/nm14596615/" target="_blank" rel="noopener">IMDb</a>
     </div>
   </div>
-  <div class="footer-stripe">
-    <div class="footer-name">Sam Walcroft</div>
-    <div class="footer-social">Film Director &amp; Artist</div>
-  </div>
+  <div class="footer-bottom">Sam Walcroft — Brisbane, Australia</div>
 </footer>
-
-<div class="scroll-indicator">
-  <div class="scroll-shine">Scroll</div>
-  <div class="scroll-pct" id="scroll-pct">0%</div>
-</div>
 
 <script>
 // Shared lightbox gallery — works for both director and commercial sites
@@ -561,63 +570,114 @@
 
 </script>
 <script>
-  initLightbox('.lb-work', [
-    { title:'Celestial Bodies', tag:'Director, Writer — Sci-Fi Romance', img:'images/celestial-bodies.webp' },
-    { title:'Wine', tag:'Director, Videographer — Music Video', img:'images/wine.webp' },
-    { title:'The Box', tag:'Director, Writer — Short Film', img:'images/the-box.webp' },
-    { title:'Live Orchestra EP', tag:'Director — 6 videos shot in one day', placeholderColor:'linear-gradient(160deg,#c9a227,#7a5f14)' },
-    { title:'Fingertips', tag:'Director, Editor, Colourist — Music Video', placeholderColor:'linear-gradient(160deg,#7a3a48,#33151c)' },
-    { title:'The Hills', tag:'Director, Videographer, Editor', img:'images/the-hills.webp' }
-  ]);
-  initLightbox('.lb-photo', [
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#8a3b52,#3c1a24)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#c9a227,#7a5f14)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#2f6b73,#12333a)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#5c6b3f,#28311a)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#cf8567,#7a3a26)' },
-    { title:'Photography', placeholderColor:'linear-gradient(160deg,#7a3a48,#33151c)' }
-  ]);
   initHoverPreview('.media-card');
 
-  const cursor = document.getElementById('cursor');
-  window.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-  });
-
-  // fixed background swaps to match whichever work item is hovered
-  const workBg = document.getElementById('work-bg');
-  document.querySelectorAll('[data-bg]').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      workBg.style.background = el.getAttribute('data-bg');
-      workBg.classList.add('active');
+  // photography row: each slot independently rotates through the full photography-page set,
+  // crossfading (fade out, swap image, fade back in) on a staggered timer
+  (function initPhotoRow(){
+    const items = document.querySelectorAll('.photo-row-item');
+    if (!items.length) return;
+    const pool = Array.from({length: 20}, (_, i) => `photography/seavibes/seavibes-${String(i + 1).padStart(2, '0')}.webp`);
+    let cursor = items.length;
+    items.forEach((el, i) => {
+      setInterval(() => {
+        el.style.opacity = '0';
+        setTimeout(() => {
+          el.style.backgroundImage = `url('${pool[cursor % pool.length]}')`;
+          cursor++;
+          el.style.opacity = '1';
+        }, 620);
+      }, 4200 + i * 850);
     });
-    el.addEventListener('mouseleave', () => workBg.classList.remove('active'));
-  });
+  })();
 
-  // scroll percentage indicator
-  const scrollPct = document.getElementById('scroll-pct');
-  window.addEventListener('scroll', () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 0;
-    scrollPct.textContent = pct + '%';
-  });
+  // showreel: autoplays muted on load and keeps looping while in view; click to pause/resume,
+  // separate button to restart. The "SHOWREEL" title fades out a couple of seconds after load,
+  // and the video pauses once you've scrolled past it (resuming if you scroll back up).
+  (function initShowreel(){
+    const section = document.getElementById('showreel');
+    const frame = document.getElementById('showreelFrame');
+    const video = document.getElementById('showreelVideo');
+    const restartBtn = document.getElementById('showreelRestartBtn');
+    const muteBtn = document.getElementById('showreelMuteBtn');
+    const title = document.getElementById('showreelTitle');
+    if (!frame || !video) return;
 
-  // cinematic reel: all panels stack in the same spot. As you scroll, the current
-  // panel grows past full size and fades ("disappears forward", toward camera)
-  // while the next one grows in from small/faint behind it ("revealed from behind").
-  const reelScroll = document.getElementById('reel');
-  const reelPanels = document.querySelectorAll('.reel-panel');
-  const reelBlobs = document.querySelectorAll('.reel-blob');
+    function syncState(){ frame.classList.toggle('is-playing', !video.paused && !video.ended); }
+    function syncMute(){ if (muteBtn) muteBtn.classList.toggle('is-unmuted', !video.muted); }
+
+    frame.addEventListener('click', () => {
+      if (video.paused || video.ended) { video.play().catch(()=>{}); }
+      else { video.pause(); }
+    });
+    restartBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.currentTime = 0;
+      video.play().catch(()=>{});
+    });
+    if (muteBtn) {
+      muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        syncMute();
+      });
+    }
+    video.addEventListener('play', syncState);
+    video.addEventListener('pause', syncState);
+    video.addEventListener('ended', syncState);
+    syncState();
+    syncMute();
+
+    if (title) setTimeout(() => title.classList.add('faded'), 2600);
+
+    if (section && 'IntersectionObserver' in window) {
+      let userPaused = false;
+      frame.addEventListener('click', () => { userPaused = video.paused; });
+      new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!userPaused) video.play().catch(()=>{});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0 }).observe(section);
+    }
+  })();
+
+  const DATA = [
+    { title:'TPD Claim Support', cat:'', role:'Video Production & Digital Marketing', link:'reels/tpd-claim-support.html' },
+    { title:'Wine', cat:'Music Video', role:'Director, Videographer', link:'reels/wine.html' },
+    { title:'The Good Intns Club', cat:'', role:'TVC — Videographer', link:'reels/good-intns-club.html' },
+    { title:'Live Orchestra EP', cat:'Music Video', role:'Director', link:'reels/live-orchestra-ep.html' },
+    { title:'Fingertips', cat:'Music Video', role:'Director, Editor, Colourist', link:'reels/fingertips.html' },
+    { title:"Nanna Fitty's Fruitcake Cycling Club", cat:'Documentary', role:'Videographer & Editor', link:'reels/nffcc.html' }
+  ];
+  const IMG_SRC = [
+    'images/tpd.webp', 'images/wine.webp', 'images/good-intns-club.webp', 'images/live-orchestra-ep.webp', 'images/fingertips.webp',
+    'images/nffcc.webp'
+  ];
+  const FALLBACK_HEX = ['#1f8f5f','#c81d5c','#ff6a3d','#ffb92e','#11a8b5','#1f8f5f'];
+
+  const reelScroll = document.getElementById('reel-scroll');
+  const reelViewerEl = document.getElementById('work-viewer');
+  const reelWorkTitle = document.getElementById('reelWorkTitle');
+  const reelStageInfo = document.querySelector('.reel-stage-info');
+  const caseStudy = document.querySelector('.case-study');
+  const photoRow = document.querySelector('.photo-row');
+  const stageItems = document.querySelectorAll('.reel-stage-item');
+  const stageTitle = document.getElementById('stage-title');
+  const stageRole = document.getElementById('stage-role');
+  const stageLink = document.getElementById('stage-link');
   const pageBg = document.getElementById('page-bg');
-  const numPanels = reelPanels.length;
-  const BEIGE = [244, 239, 228];
-  const panelColors = new Array(numPanels).fill([201, 162, 39]); // temp fallback until sampled
-  let smoothContinuous = 0; // eased/lagged scroll position so panel motion glides instead of tracking the scrollbar 1:1
+  const pageBg2 = document.getElementById('page-bg-2');
+  if (pageBg2) pageBg2.style.backgroundImage = "url('photography/seavibes/seavibes-01.webp')";
+  const numPanels = stageItems.length;
+  let activeIdx = 0;
+  let userScrolling = false;
+  let userScrollTimer = null;
+  const BEIGE = [250, 249, 245];
+  const INK = [17, 17, 16];
 
   function hexOrRgbToArr(str){
     if (!str) return [201,162,39];
@@ -625,93 +685,187 @@
       const n = parseInt(str.slice(1), 16);
       return [(n>>16)&255, (n>>8)&255, n&255];
     }
-    const m = str.match(/\d+/g);
-    return m ? m.slice(0,3).map(Number) : [201,162,39];
+    return [201,162,39];
   }
   function lerp(a, b, t){ return a + (b - a) * t; }
-  function lerpColor(c1, c2, t){
-    return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)];
+  function lerpColor(c1, c2, t){ return [lerp(c1[0],c2[0],t), lerp(c1[1],c2[1],t), lerp(c1[2],c2[2],t)]; }
+  const panelColors = FALLBACK_HEX.map(hexOrRgbToArr);
+
+  // auto-advance: each panel's video plays through twice, then we move to the next.
+  // panels with no video (e.g. Live Orchestra EP) fall back to a fixed timer instead.
+  const stagePlayCounts = new Map();
+  let noVideoFallbackTimer = null;
+  function clearNoVideoFallback(){
+    if (noVideoFallbackTimer) { clearTimeout(noVideoFallbackTimer); noVideoFallbackTimer = null; }
+  }
+  function advanceReel(){
+    if (userScrolling) return;
+    activeIdx = (activeIdx + 1) % numPanels;
+  }
+  stageItems.forEach(el => {
+    const vid = el.querySelector('video');
+    if (!vid) return;
+    stagePlayCounts.set(vid, 0);
+    vid.addEventListener('ended', () => {
+      const count = (stagePlayCounts.get(vid) || 0) + 1;
+      if (count < 2) {
+        stagePlayCounts.set(vid, count);
+        vid.currentTime = 0;
+        vid.play().catch(()=>{});
+      } else {
+        stagePlayCounts.set(vid, 0);
+        advanceReel();
+      }
+    });
+  });
+
+  let currentPanelIdx = -1;
+  function setActive(idx){
+    if (idx === currentPanelIdx) return; // this runs every animation frame — only act on a real change
+    const outgoingIdx = currentPanelIdx;
+    currentPanelIdx = idx;
+    clearNoVideoFallback();
+    stageItems.forEach(el => {
+      const elIdx = Number(el.dataset.idx);
+      const isActive = elIdx === idx;
+      // slide transition: incoming panel rises up from below (.active), the one it replaced
+      // slides up and out above (.prev), everything else resets to its off-stage starting point
+      el.classList.remove('prev');
+      el.classList.toggle('active', isActive);
+      if (!isActive && elIdx === outgoingIdx) el.classList.add('prev');
+      const vid = el.querySelector('video');
+      if (vid) {
+        if (isActive) {
+          stagePlayCounts.set(vid, 0);
+          vid.currentTime = 0;
+          vid.play().catch(()=>{});
+        } else {
+          vid.pause();
+        }
+      }
+    });
+    const d = DATA[idx];
+    stageTitle.textContent = d.title;
+    stageRole.textContent = d.cat ? (d.role + ' — ' + d.cat) : d.role;
+    if (stageLink) stageLink.href = d.link;
+
+    // no video on this panel — advance on a timed fallback (roughly two "loops" worth)
+    const activeItem = document.querySelector(`.reel-stage-item[data-idx="${idx}"]`);
+    const activeVid = activeItem ? activeItem.querySelector('video') : null;
+    if (!activeVid) {
+      noVideoFallbackTimer = setTimeout(advanceReel, 7000);
+    }
   }
 
-  function updateReel(){
-    const rect = reelScroll.getBoundingClientRect();
+  window.addEventListener('scroll', () => {
+    userScrolling = true;
+    clearTimeout(userScrollTimer);
+    userScrollTimer = setTimeout(() => { userScrolling = false; }, 1200);
+  }, { passive: true });
+
+  function rgbaStr(arr, a){ return `rgba(${arr[0].toFixed(0)}, ${arr[1].toFixed(0)}, ${arr[2].toFixed(0)}, ${a.toFixed(2)})`; }
+
+  function buildMesh(baseColor, blobs){
+    // blobs: array of { color:[r,g,b], alpha, x, y, size }
+    const layers = blobs.map(b =>
+      `radial-gradient(circle at ${b.x}% ${b.y}%, ${rgbaStr(b.color, b.alpha)}, transparent ${b.size}%)`
+    );
+    layers.push(`rgb(${baseColor.map(v=>v.toFixed(0)).join(',')})`);
+    return layers.join(', ');
+  }
+
+  function updatePage(){
     const vh = window.innerHeight;
-    const span = rect.height - vh;
-    const overall = span > 0 ? Math.min(Math.max(-rect.top / span, 0), 1) : 0;
-    const continuous = overall * numPanels;
-    smoothContinuous += (continuous - smoothContinuous) * 0.12; // glide toward the scroll target instead of snapping straight to it
 
-    let blendedColor = [0,0,0];
-    let weightSum = 0;
+    // ----- reel: which work is current — scroll position while actively scrolling, else the auto-cycle timer -----
+    const reelRect = reelScroll.getBoundingClientRect();
+    const reelSpan = reelRect.height - vh;
+    if (userScrolling && reelSpan > 0) {
+      const reelProgress = Math.min(Math.max(-reelRect.top / reelSpan, 0), 1);
+      activeIdx = Math.min(numPanels - 1, Math.floor(reelProgress * numPanels));
+    }
+    setActive(activeIdx);
 
-    reelPanels.forEach((panel, i) => {
-      const local = smoothContinuous - i; // <0 = approaching from a distant point, 0 = centred/current, >0 = departed
-      const side = i % 2 === 0 ? -1 : 1; // alternate exit direction panel to panel: left, right, left, right...
-      const cl = Math.max(-4, Math.min(numPanels + 2, local)); // ceiling always beyond any reachable local, so exit growth never caps out early
-
-      // one continuous curve for the whole lifecycle, no branching, no plateau at the centre.
-      // approach is steep and holds small right up until dead centre, so it reads purely as "growing
-      // toward the viewer" — fully centred, no drift at all — and stays hidden behind the current slide
-      // until that slide actually leaves. The exit then grows fast and hard — much bigger than the
-      // approach — getting bigger and bigger the whole way out, as if heading off toward infinity.
-      const scale = cl < 0 ? Math.pow(2, cl * 6.5) : Math.pow(2, cl * 2.4);
-
-      // horizontal-only: virtually zero drift while arriving/centred (so it comes straight at the
-      // viewer with no sideways lean), then opens up smoothly right after centre into a sweep off to
-      // its alternating side — no vertical movement at all, the "lift off the page" is entirely the
-      // scale getting huge. Because the sweep scales with the panel's own current size it always
-      // outruns its own growth, clears the screen right as the next slide takes over, and never drifts
-      // back into frame.
-      const gate = (1 + Math.tanh((cl - 0.75) * 3.5)) / 2; // ~0 through the centre, ramps to ~1 just after
-      const xOff = side * scale * gate * 900;
-
-      panel.style.transform = `translateX(${xOff.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-      panel.style.opacity = 1; // no fade — panels stay fully visible, revealed purely by scale/position/stacking
-      panel.style.zIndex = numPanels - i; // earlier panels always sit above later ones as they pass in front on their way out
-
-      const dominance = Math.max(0, 1 - Math.abs(local)); // peaks at 1 when panel is fully "current"
-      if (reelBlobs[i]) reelBlobs[i].style.opacity = (0.25 + dominance * 0.55).toFixed(3);
-
-      blendedColor[0] += panelColors[i][0] * dominance;
-      blendedColor[1] += panelColors[i][1] * dominance;
-      blendedColor[2] += panelColors[i][2] * dominance;
-      weightSum += dominance;
-    });
-
-    if (weightSum > 0) {
-      blendedColor = blendedColor.map(v => v / weightSum);
-    } else {
-      blendedColor = panelColors[0];
+    // caption sits back on top of the video, inset from its own edges — measured live
+    // off the active card's actual rendered box so it always lines up with it exactly
+    if (reelStageInfo && reelViewerEl) {
+      const activeCard = document.querySelector('.reel-stage-item.active .reel-stage-card');
+      if (activeCard) {
+        const cardRect = activeCard.getBoundingClientRect();
+        const viewerRect = reelViewerEl.getBoundingClientRect();
+        reelStageInfo.style.left = (cardRect.left - viewerRect.left) + 'px';
+        reelStageInfo.style.width = cardRect.width + 'px';
+        reelStageInfo.style.top = 'auto';
+        reelStageInfo.style.bottom = (viewerRect.bottom - cardRect.bottom + 40) + 'px';
+      }
     }
 
-    // ease the whole page's background between beige and the reel's blended
-    // colour as the reel approaches and departs, rather than a hard cut
-    let mix;
-    if (rect.top > 0) {
-      mix = Math.max(0, 1 - rect.top / (vh * 0.8));
-    } else if (rect.bottom < vh) {
-      mix = Math.max(0, rect.bottom / (vh * 0.8));
-    } else {
-      mix = 1;
-    }
-    const pageColor = lerpColor(BEIGE, blendedColor, mix);
-    pageBg.style.background = `rgb(${pageColor[0].toFixed(0)}, ${pageColor[1].toFixed(0)}, ${pageColor[2].toFixed(0)})`;
+    // "My Work" title sits over the blurred backdrop the moment the carousel pins, then
+    // fades out as soon as you scroll a little further into it
+    const scrolledIntoReel = Math.max(0, -reelRect.top);
+    if (reelWorkTitle) reelWorkTitle.classList.toggle('faded', scrolledIntoReel > 60);
 
-    requestAnimationFrame(updateReel);
+    // the video starts pushed down to clear the title, then eases up to sit truly
+    // vertically centred as you keep scrolling past that point — same motion, no jump
+    if (reelViewerEl) {
+      const centreProgress = Math.min(1, scrolledIntoReel / 140);
+      reelViewerEl.style.setProperty('--stage-pad-top', (20 * (1 - centreProgress)) + 'vh');
+    }
+
+    // ----- page-wide mesh-gradient background, blended by scroll position -----
+    if (reelRect.top > -1 && reelRect.bottom > vh) {
+      // approaching or inside the reel: mesh built from this work's colour and its neighbours
+      pageBg.style.backgroundImage = 'none';
+      pageBg.style.filter = 'none';
+      const approach = reelRect.top > 0 ? Math.max(0, 1 - reelRect.top / (vh * 0.8)) : 1;
+      const prevIdx = Math.max(0, activeIdx - 1);
+      const nextIdx = Math.min(numPanels - 1, activeIdx + 1);
+      const base = lerpColor(BEIGE, panelColors[activeIdx], approach * 0.5);
+      pageBg.style.background = buildMesh(base, [
+        { color: panelColors[activeIdx], alpha: 0.55 * approach, x: 20, y: 25, size: 65 },
+        { color: panelColors[nextIdx],    alpha: 0.40 * approach, x: 82, y: 30, size: 60 },
+        { color: panelColors[prevIdx],    alpha: 0.35 * approach, x: 35, y: 85, size: 60 },
+        { color: panelColors[activeIdx], alpha: 0.30 * approach, x: 75, y: 80, size: 55 }
+      ]);
+    } else {
+      const caseRect = caseStudy.getBoundingClientRect();
+      // widened lead-in so the colourful blur carries straight through the marquee with no flat
+      // beige gap — it should feel like the same backdrop continuing, not a new section starting.
+      // No fade-in on the way in — it's already fully on the blur the moment this zone begins.
+      if (caseRect.top < vh * 1.4 && caseRect.bottom > 0) {
+        // TPD case study — same soft-focus photo treatment as the photography row,
+        // using the actual team photo, instead of the abstract colour mesh
+        pageBg.style.background = 'none';
+        pageBg.style.backgroundImage = "url('images/tpd-team-photo.webp')";
+        pageBg.style.backgroundSize = 'cover';
+        pageBg.style.backgroundPosition = 'center';
+        pageBg.style.filter = 'blur(55px) brightness(0.5) saturate(1.2)';
+      } else {
+        pageBg.style.backgroundImage = 'none';
+        pageBg.style.filter = 'none';
+        pageBg.style.background = `rgb(${BEIGE.join(',')})`;
+      }
+    }
+
+    // photography row photo crossfades in over whatever's on the base layer (the case
+    // study photo) as you scroll into it, then crossfades back out as you leave it —
+    // a real dissolve between the two blurred photos, not a hard cut
+    if (pageBg2 && photoRow) {
+      const photoRect = photoRow.getBoundingClientRect();
+      let photoBlend = 0;
+      if (photoRect.top < vh * 1.3 && photoRect.bottom > -vh * 0.4) {
+        if (photoRect.top > 0) photoBlend = Math.min(1, Math.max(0, 1 - photoRect.top / vh));
+        else if (photoRect.bottom < vh) photoBlend = Math.min(1, Math.max(0, (photoRect.bottom + vh * 0.4) / (vh * 0.4)));
+        else photoBlend = 1;
+      }
+      pageBg2.style.opacity = photoBlend;
+    }
+
+    requestAnimationFrame(updatePage);
   }
-  requestAnimationFrame(updateReel);
+  requestAnimationFrame(updatePage);
 
-  // reveal the About section as it scrolls into view
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in-view');
-    });
-  }, { threshold: 0.2 });
-  revealEls.forEach(el => revealObserver.observe(el));
-
-  // sample each reel image's average colour so the blurred background wash
-  // (and the page-wide blend above) is built from the real footage, not guessed hex values
+  // sample real image colours so the blend above uses actual footage, not guessed hex
   function sampleAverageColor(src, callback){
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -725,22 +879,35 @@
         let r=0,g=0,b=0,n=0;
         for (let p = 0; p < data.length; p += 4) { r+=data[p]; g+=data[p+1]; b+=data[p+2]; n++; }
         callback([Math.round(r/n), Math.round(g/n), Math.round(b/n)]);
-      } catch(e){ /* fails on file:// in some browsers — falls back to placeholder colour below */ }
+      } catch(e){}
     };
     img.src = src;
   }
-  reelPanels.forEach((panel, i) => {
-    const src = panel.getAttribute('data-img');
-    const blob = reelBlobs[i];
-    const fallback = hexOrRgbToArr(panel.getAttribute('data-bg-fallback'));
-    panelColors[i] = fallback;
-    if (blob) blob.style.background = `rgb(${fallback[0]},${fallback[1]},${fallback[2]})`;
-    if (src) {
-      sampleAverageColor(src, (rgbArr) => {
-        panelColors[i] = rgbArr;
-        if (blob) blob.style.background = `rgb(${rgbArr[0]},${rgbArr[1]},${rgbArr[2]})`;
-      });
-    }
+  IMG_SRC.forEach((src, i) => {
+    if (src) sampleAverageColor(src, (rgbArr) => { panelColors[i] = rgbArr; });
+  });
+
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  document.querySelectorAll('.btn-magnetic, .btn-pop').forEach((magnetic) => {
+    const scaleUp = magnetic.classList.contains('btn-pop') ? ' scale(1.03)' : '';
+    magnetic.addEventListener('mousemove', (e) => {
+      const rect = magnetic.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      magnetic.style.transform = `translate(${x * 0.25}px, ${y * 0.4}px)${scaleUp}`;
+    });
+    magnetic.addEventListener('mouseleave', () => {
+      magnetic.style.transform = 'translate(0,0)';
+    });
   });
 </script>
 
