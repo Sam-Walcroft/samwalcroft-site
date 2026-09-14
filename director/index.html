@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/wga5psq.css">
 <style>
 #lb-overlay{
@@ -52,6 +53,7 @@
     --accent:#ff6a3d; --terracotta:#ff6a3d; --gold:#ffb92e; --teal:#11a8b5; --wine:#c81d5c;
     --display:'adobe-caslon-pro', Georgia, serif;
     --sans:'Inter Tight', system-ui, sans-serif;
+    --serif-old:'Libre Caslon Display', Georgia, serif;
 
     /* duotone palette — every coloured/stroked word on the page picks a light+deep pair from
        this same set, so it all reads as one cohesive colour language rather than one-offs */
@@ -191,7 +193,7 @@
     position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center;
     filter:blur(55px) brightness(0.55) saturate(1.25); opacity:0; pointer-events:none;
   }
-  .reel-scroll{ height:525vh; position:relative; }
+  .reel-scroll{ height:900vh; position:relative; }
   .reel-viewer{ height:100vh; position:sticky; top:0; overflow:hidden; color:#f4efe4; }
   .reel-work-title{
     position:absolute; top:4%; left:50%; transform:translateX(-50%); z-index:4;
@@ -201,32 +203,41 @@
   .reel-work-title img{
     width:min(38vw, 440px); height:auto; display:inline-block; mix-blend-mode:overlay;
   }
-  .reel-stage-item{
-    /* starts pushed down to clear the title, then eases up to true vertical centre as
-       you keep scrolling (padding-top is driven live in JS via --stage-pad-top) */
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    padding-top:var(--stage-pad-top, 20vh); padding-bottom:2vh; opacity:0; pointer-events:none; transform:translateY(7%);
-    transition:opacity 0.85s ease, transform 0.85s cubic-bezier(.22,.68,.24,1);
-  }
-  .reel-stage-item.active{ opacity:1; pointer-events:auto; transform:translateY(0); z-index:2; }
-  .reel-stage-item.prev{ opacity:0; transform:translateY(-7%); z-index:1; }
+  /* backdrop is its own static, full-bleed layer — it only ever crossfades (opacity),
+     it never slides. Only the video cards move */
+  .reel-bg-stack{ position:absolute; inset:0; z-index:0; }
   .reel-stage-bg{
     position:absolute; inset:-6%; z-index:0; background-size:cover; background-position:center;
     filter:blur(42px) brightness(0.55) saturate(1.45) contrast(1.08); transform:scale(1.14);
+    opacity:0; transition:opacity 0.8s ease;
   }
-  .reel-stage-item::after{
+  .reel-stage-bg.active{ opacity:1; }
+  .reel-bg-stack::after{
     content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
     background:linear-gradient(to top, rgba(0,0,0,0.62), transparent 48%);
   }
+  .reel-stage-item{
+    /* the active card fills the frame at full size, with a clear sliver of the next one
+       peeking in at the bottom edge. Everything moves in ONE consistent direction (up):
+       queued panels wait below, the outgoing one continues up and off the top, so the
+       motion always reads as one continuous reel rather than pieces going both ways */
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    padding-top:var(--stage-pad-top, 20vh); padding-bottom:2vh;
+    opacity:0; pointer-events:none; transform:translateY(100%); z-index:1;
+    transition:transform 0.8s cubic-bezier(.65,0,.35,1), opacity 0.4s ease;
+  }
+  .reel-stage-item.active{ opacity:1; pointer-events:auto; transform:translateY(0); z-index:3; }
+  .reel-stage-item.next{ opacity:1; transform:translateY(78%); z-index:2; }
+  .reel-stage-item.prev{ opacity:0; transform:translateY(-100%); z-index:2; }
   .reel-stage-card{
-    /* fills as much of the frame as it can below the title's own band — the largest
-       16:9 box that fits inside a 90vw x 76vh area, so nothing crops or distorts */
-    position:relative; z-index:2; width:min(90vw, calc(76vh * 16 / 9));
+    /* fills as much of the frame as it can — the largest 16:9 box that fits inside a
+       94vw x 92vh area, so it reads as close to full-screen as possible, nothing crops */
+    position:relative; z-index:2; width:min(94vw, calc(92vh * 16 / 9));
     aspect-ratio:16/9; height:auto;
-    border-radius:14px; overflow:hidden; background:#000;
+    overflow:hidden; background:#000;
     box-shadow:0 60px 130px -40px rgba(0,0,0,0.7), 0 0 0 1px rgba(244,239,228,0.09);
   }
-  @media(max-width:820px){ .reel-stage-card{ width:min(94vw, calc(60vh * 16 / 9)); } }
+  @media(max-width:820px){ .reel-stage-card{ width:min(96vw, calc(70vh * 16 / 9)); } }
   .reel-stage-card video{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; }
   /* caption sits back on top of the video (it now fills most of the screen) — measured
      live to match the card's own left/right/bottom edges, name bottom-left, role bottom-right */
@@ -237,7 +248,7 @@
   }
   .reel-stage-info .stage-info-left{ text-align:left; }
   .reel-stage-info .stage-info-right{ text-align:right; }
-  .reel-stage-info .title{ font-family:var(--sans); font-style:normal; font-weight:500; font-size:clamp(1.3rem,2.6vw,2rem); }
+  .reel-stage-info .title{ font-family:var(--serif-old); font-style:italic; font-weight:400; font-size:clamp(1.3rem,2.6vw,2rem); }
   .reel-stage-info .role{ font-family:var(--display); font-style:italic; font-size:0.9rem; opacity:0.85; }
   .reel-stage-info .watch-full{
     display:inline-flex; align-items:center; gap:8px; margin-top:12px;
@@ -367,28 +378,33 @@
 <section class="reel-viewer" id="work-viewer">
   <div class="reel-work-title" id="reelWorkTitle"><img src="images/my-work-title.webp" alt="My Work"></div>
 
+  <!-- backdrop is its own fixed layer — it crossfades, it never slides. only the
+       video cards below move -->
+  <div class="reel-bg-stack">
+    <div class="reel-stage-bg active" data-idx="0" style="background-image:url('images/tpd.webp');"></div>
+    <div class="reel-stage-bg" data-idx="1" style="background-image:url('images/wine.webp');"></div>
+    <div class="reel-stage-bg" data-idx="2" style="background-image:url('images/good-intns-club.webp');"></div>
+    <div class="reel-stage-bg" data-idx="3" style="background-image:url('images/live-orchestra-ep.webp');"></div>
+    <div class="reel-stage-bg" data-idx="4" style="background-image:url('images/fingertips.webp');"></div>
+    <div class="reel-stage-bg" data-idx="5" style="background-image:url('images/nffcc.webp');"></div>
+  </div>
+
   <div class="reel-stage-item active" data-idx="0">
-    <div class="reel-stage-bg" style="background-image:url('images/tpd.webp');"></div>
     <div class="reel-stage-card"><video autoplay muted playsinline src="videos/tpd.mp4"></video></div>
   </div>
   <div class="reel-stage-item" data-idx="1">
-    <div class="reel-stage-bg" style="background-image:url('images/wine.webp');"></div>
     <div class="reel-stage-card"><video autoplay muted playsinline src="videos/wine.mp4"></video></div>
   </div>
   <div class="reel-stage-item" data-idx="2">
-    <div class="reel-stage-bg" style="background-image:url('images/good-intns-club.webp');"></div>
     <div class="reel-stage-card"><video autoplay muted playsinline src="videos/good-intns-club.mp4"></video></div>
   </div>
   <div class="reel-stage-item" data-idx="3">
-    <div class="reel-stage-bg" style="background-image:url('images/live-orchestra-ep.webp');"></div>
     <div class="reel-stage-card"><video autoplay muted playsinline src="videos/live-orchestra-ep.mp4"></video></div>
   </div>
   <div class="reel-stage-item" data-idx="4">
-    <div class="reel-stage-bg" style="background-image:url('images/fingertips.webp');"></div>
     <div class="reel-stage-card"><video autoplay muted playsinline src="videos/fingertips.mp4"></video></div>
   </div>
   <div class="reel-stage-item" data-idx="5">
-    <div class="reel-stage-bg" style="background-image:url('images/nffcc.webp');"></div>
     <div class="reel-stage-card"><video autoplay muted playsinline src="videos/nffcc.mp4"></video></div>
   </div>
 
@@ -666,6 +682,7 @@
   const caseStudy = document.querySelector('.case-study');
   const photoRow = document.querySelector('.photo-row');
   const stageItems = document.querySelectorAll('.reel-stage-item');
+  const stageBgs = document.querySelectorAll('.reel-stage-bg');
   const stageTitle = document.getElementById('stage-title');
   const stageRole = document.getElementById('stage-role');
   const stageLink = document.getElementById('stage-link');
@@ -674,6 +691,9 @@
   if (pageBg2) pageBg2.style.backgroundImage = "url('photography/seavibes/seavibes-01.webp')";
   const numPanels = stageItems.length;
   let activeIdx = 0;
+  let lastAdvanceTime = 0;
+  const ADVANCE_COOLDOWN = 550; // ms — minimum gap between panel changes, so a big fast
+                                 // scroll steps through them one at a time instead of skipping
   let userScrolling = false;
   let userScrollTimer = null;
   const BEIGE = [250, 249, 245];
@@ -722,17 +742,23 @@
   let currentPanelIdx = -1;
   function setActive(idx){
     if (idx === currentPanelIdx) return; // this runs every animation frame — only act on a real change
-    const outgoingIdx = currentPanelIdx;
     currentPanelIdx = idx;
     clearNoVideoFallback();
+    // the backdrop is a separate, static layer — just crossfade to the active work's
+    // image, completely independent of the cards sliding above it
+    stageBgs.forEach(bg => { bg.classList.toggle('active', Number(bg.dataset.idx) === idx); });
     stageItems.forEach(el => {
       const elIdx = Number(el.dataset.idx);
-      const isActive = elIdx === idx;
-      // slide transition: incoming panel rises up from below (.active), the one it replaced
-      // slides up and out above (.prev), everything else resets to its off-stage starting point
-      el.classList.remove('prev');
+      // stacked cards: work out this panel's position relative to the active one,
+      // wrapping around the ends — 0 is active, +1 peeks in at the bottom edge,
+      // everything else waits just off-screen below, ready for its turn
+      let diff = elIdx - idx;
+      if (diff > numPanels / 2) diff -= numPanels;
+      if (diff < -numPanels / 2) diff += numPanels;
+      const isActive = diff === 0;
       el.classList.toggle('active', isActive);
-      if (!isActive && elIdx === outgoingIdx) el.classList.add('prev');
+      el.classList.toggle('next', diff === 1);
+      el.classList.toggle('prev', diff === -1);
       const vid = el.querySelector('video');
       if (vid) {
         if (isActive) {
@@ -782,7 +808,15 @@
     const reelSpan = reelRect.height - vh;
     if (userScrolling && reelSpan > 0) {
       const reelProgress = Math.min(Math.max(-reelRect.top / reelSpan, 0), 1);
-      activeIdx = Math.min(numPanels - 1, Math.floor(reelProgress * numPanels));
+      const desiredIdx = Math.min(numPanels - 1, Math.floor(reelProgress * numPanels));
+      // step one panel at a time, on a cooldown — a big fast scroll gesture can jump the
+      // scroll position past several panels at once, but the carousel still advances
+      // through them one by one so every transition actually gets seen
+      const now = performance.now();
+      if (desiredIdx !== activeIdx && now - lastAdvanceTime > ADVANCE_COOLDOWN) {
+        activeIdx += desiredIdx > activeIdx ? 1 : -1;
+        lastAdvanceTime = now;
+      }
     }
     setActive(activeIdx);
 
